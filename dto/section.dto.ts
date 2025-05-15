@@ -20,9 +20,6 @@ export class LocalizedField {
 
   
   export class CreateSectionDto {
-	@ValidateNested({ message: 'Section name must be a valid object with "en" and "ar"' })
-	@Type(() => LocalizedField)
-	section_name: LocalizedField;
   
 	@ValidateNested({ message: 'Title must be a valid object with "en" and "ar"' })
 	@Type(() => LocalizedField)
@@ -38,22 +35,7 @@ export class LocalizedField {
 	@IsString({ message: 'Image alt must be a string' })
 	@IsNotEmpty({ message: 'Image alt is required' })
 	image_alt: string;
-  
-	@ValidateNested({ message: 'Meta title must be a valid object with "en" and "ar"' })
-	@Type(() => LocalizedField)
-	@IsOptional()
-	meta_title?: LocalizedField;
-  
-	@ValidateNested({ message: 'Meta description must be a valid object with "en" and "ar"' })
-	@Type(() => LocalizedField)
-	@IsOptional()
-	meta_description?: LocalizedField;
-  
-	@IsArray({ message: 'Meta keywords must be an array of strings' })
-	@IsString({ each: true, message: 'Each keyword must be a string' })
-	@IsOptional()
-	meta_keywords?: string[];
-  
+	
 	@IsString({ message: 'Slug must be a string' })
 	@IsOptional()
 	slug?: string;

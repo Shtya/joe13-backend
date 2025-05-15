@@ -10,12 +10,14 @@ import { Image } from 'entities/images.entity';
 import { Contact } from 'entities/contact-us.entity';
 import { OffersEntity } from 'entities/offers.entity';
 import { Partner } from 'entities/partners.entity';
+import { PageMeta } from 'entities/page-meta.entity';
 
 export class Seeder {
   private blogRepository: Repository<Blog>;
   private careerRepository: Repository<Career>;
   private teamMembersRepository: Repository<TeamMember>;
   private sectionRepo: Repository<Section>;
+  private pageMetaReop: Repository<PageMeta>;
   private projectRepo: Repository<Project>;
   private departmentRepo: Repository<Department>;
   private imageRepo: Repository<Image>;
@@ -28,6 +30,7 @@ export class Seeder {
     this.careerRepository = this.dataSource.getRepository(Career);
     this.teamMembersRepository = this.dataSource.getRepository(TeamMember);
     this.sectionRepo = this.dataSource.getRepository(Section);
+    this.pageMetaReop = this.dataSource.getRepository(PageMeta);
     this.projectRepo = this.dataSource.getRepository(Project);
     this.departmentRepo = this.dataSource.getRepository(Department);
     this.imageRepo = this.dataSource.getRepository(Image);
@@ -40,12 +43,137 @@ export class Seeder {
     // await this.seedBlogs();
     // await this.seedCareers();
     // await this.seedteamMembers();
-    // await this.seedSections();
     // await this.seedDepartments();
     // await this.seedProjects();
     // await this.seedContacts();
     // await this.seedOffers();
-    await this.seedPartners();
+    // await this.seedPartners();
+    // await this.seedSections();
+    await this.seedPageMeta();
+  }
+
+  private async seedPageMeta() {
+    const data = [
+      {
+        slug: 'home',
+        keywords: ['home', 'landing', 'website', 'meta'],
+        custom_head_script: '<style>body { background-color: #f0f0f0; }</style>',
+        custom_body_script: "<script>console.log('Welcome to the homepage');</script>",
+        og_tags: {
+          title: 'Home - MySite',
+          description: 'The homepage of MySite',
+          image: 'https://example.com/images/og-home.jpg',
+          url: 'https://example.com/home',
+          type: 'website',
+        },
+        translations: {
+          en: {
+            title: 'Welcome to Our Website',
+            description: 'This is the home page of our amazing website.',
+          },
+          ar: {
+            title: 'مرحبًا بكم في موقعنا',
+            description: 'هذه هي الصفحة الرئيسية لموقعنا الرائع.',
+          },
+        },
+      },
+      {
+        slug: 'about',
+        keywords: ['about', 'company', 'info'],
+        custom_head_script: '',
+        custom_body_script: '',
+        og_tags: {
+          title: 'About Us - MySite',
+          description: 'Learn more about our company and team.',
+          image: 'https://example.com/images/og-about.jpg',
+          url: 'https://example.com/about',
+          type: 'article',
+        },
+        translations: {
+          en: {
+            title: 'About Us',
+            description: 'Learn more about our company and what we do.',
+          },
+          ar: {
+            title: 'من نحن',
+            description: 'تعرف على المزيد عن شركتنا وما نقوم به.',
+          },
+        },
+      },
+      {
+        slug: 'contact',
+        keywords: ['contact', 'support', 'help'],
+        custom_head_script: '',
+        custom_body_script: '',
+        og_tags: {
+          title: 'Contact Us - MySite',
+          description: 'Get in touch with us for support or inquiries.',
+          image: 'https://example.com/images/og-contact.jpg',
+          url: 'https://example.com/contact',
+          type: 'website',
+        },
+        translations: {
+          en: {
+            title: 'Contact Us',
+            description: 'Reach out to our team for help and support.',
+          },
+          ar: {
+            title: 'اتصل بنا',
+            description: 'ابقَ على تواصل – نحن هنا للمساعدة!',
+          },
+        },
+      },
+      {
+        slug: 'join-us',
+        keywords: ['contact', 'support', 'help'],
+        custom_head_script: '',
+        custom_body_script: '',
+        og_tags: {
+          title: 'Join Us - MySite',
+          description: 'Get in touch with us for support or inquiries.',
+          image: 'https://example.com/images/og-contact.jpg',
+          url: 'https://example.com/contact',
+          type: 'website',
+        },
+        translations: {
+          en: {
+            title: 'Join us',
+            description: 'Reach out to our team for help and support.',
+          },
+          ar: {
+            title: 'Join us',
+            description: 'ابقَ على تواصل – نحن هنا للمساعدة!',
+          },
+        },
+      },
+      {
+        slug: 'terms',
+        keywords: ['terms', 'conditions', 'legal'],
+        custom_head_script: '',
+        custom_body_script: '',
+        og_tags: {
+          title: 'Terms and Conditions - MySite',
+          description: 'Please read our terms and conditions carefully.',
+          image: 'https://example.com/images/og-terms.jpg',
+          url: 'https://example.com/terms',
+          type: 'article',
+        },
+        translations: {
+          en: {
+            title: 'Terms and Conditions',
+            description: 'Please read our terms and conditions carefully before using our website.',
+          },
+          ar: {
+            title: 'الشروط والأحكام',
+            description: 'يرجى قراءة الشروط والأحكام بعناية قبل استخدام موقعنا.',
+          },
+        },
+      },
+    ];
+    
+    await this.pageMetaReop.clear(); // Clears the table
+    const dataEntities = this.pageMetaReop.create(data as any);
+    await this.pageMetaReop.save(dataEntities); // Save all blog posts at once
   }
 
   private async seedBlogs() {
@@ -303,6 +431,8 @@ export class Seeder {
         },
       },
     ];
+    
+    await this.blogRepository.clear(); // Clears the table
     const dataEntities = this.blogRepository.create(data as any);
     await this.blogRepository.save(dataEntities); // Save all blog posts at once
   }
@@ -435,6 +565,8 @@ export class Seeder {
       },
     ];
 
+    
+    await this.careerRepository.clear(); // Clears the table
     const dataEntities = this.careerRepository.create(data as any);
     await this.careerRepository.save(dataEntities); // Save all blog posts at once
   }
@@ -446,9 +578,9 @@ export class Seeder {
         position: { en: 'CEO', ar: 'الرئيس التنفيذي' },
         bio: {
           en: 'CEO with a vision to drive success.',
-          ar: 'الرئيس التنفيذي برؤية لقيادة النجاح.',
+          ar: 'مع أكثر من 20 عامًا في المبيعات والتجزئة والتسويق، قاد يوسف النمو في شركات بارزة مثل أكسيوم تليكوم وسامسونج وJoe13. رؤيته الاستراتيجية ونهجه العملي يعززان ظهور العلامات التجارية ويشجعان النمو المستدام بفضل خبرته في تحليل السوق والتفاعل مع العملاء.',
         },
-        image_url: '/uploads/yousef-kamal.jpeg',
+        image_url: '/uploads/website-images/about-us/person1.png',
         image_alt: 'Yousef Kamal Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -458,9 +590,9 @@ export class Seeder {
         position: { en: 'GM of Joe13th', ar: 'المدير العام لـ Joe13th' },
         bio: {
           en: 'General Manager at Joe13th.',
-          ar: 'المدير العام في Joe13th.',
+          ar: 'متخصص في العمليات والتسويق لأكثر من 15 عامًا. منذ عام 2019، قاد عدنان Joe13، حيث قاد مبادرات استراتيجية للنمو. يشمل خبرته أدوارًا في Advance Core Technology وشركة Yes Arabia للإنتاج، وشارك في تأسيس مركز Wisdom of Knowledge للتدريب في دبي.',
         },
-        image_url: '/uploads/adnan-obaid.jpeg',
+        image_url: '/uploads/website-images/about-us/person2.png',
         image_alt: 'Adnan Obaid Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -470,10 +602,25 @@ export class Seeder {
         position: { en: 'CFO', ar: 'المدير المالي' },
         bio: {
           en: 'Chief Financial Officer with strategic insight.',
-          ar: 'المدير المالي ذو رؤية استراتيجية.',
+          ar: 'خبير في الإدارة المالية، وتنفيذ نظم ERP، والتخطيط الاستراتيجي لأكثر من 20 عامًا. قاد تحويلات مالية، وأدار استثمارات، وأشرف على مشاريع الأتمتة. حاصل على شهادات CPA وCMA وCFA.',
         },
-        image_url: '/uploads/ahmed-refaat.jpeg',
+        image_url: '/uploads/website-images/about-us/person3.png',
         image_alt: 'Ahmed Refaat Image',
+        created_at: '2025-04-01T10:00:00Z',
+        updated_at: '2025-04-02T12:00:00Z',
+      },
+      {
+        name: { en: 'Eng. Mohammed Kamal', ar: 'م. محمد كمال' },
+        position: {
+          en: 'Country Operation Manager',
+          ar: 'مدير العمليات في الدولة',
+        },
+        bio: {
+          en: 'Oversees country operations efficiently.',
+          ar: 'يركز على الحوكمة المؤسسية لأكثر من 5 سنوات، متخصصًا في تطوير الهياكل التنظيمية والأطر الفعالة. يلتزم بتحقيق الشفافية والكفاءة داخل الشركة.',
+        },
+        image_url: '/uploads/website-images/about-us/person4.png',
+        image_alt: 'Mohammed Kamal Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
       },
@@ -484,23 +631,8 @@ export class Seeder {
           en: 'Leads the business department with excellence.',
           ar: 'يقود قسم الأعمال بامتياز.',
         },
-        image_url: '/uploads/ahmad-alkashakri.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Ahmad Alkashakri Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
-      },
-      {
-        name: { en: 'Mohammed Kamal', ar: 'محمد كمال' },
-        position: {
-          en: 'Country Operation Manager',
-          ar: 'مدير العمليات في الدولة',
-        },
-        bio: {
-          en: 'Oversees country operations efficiently.',
-          ar: 'يشرف على العمليات داخل الدولة بكفاءة.',
-        },
-        image_url: '/uploads/mohammed-kamal.jpeg',
-        image_alt: 'Mohammed Kamal Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
       },
@@ -511,7 +643,7 @@ export class Seeder {
           en: 'Manages software projects and teams.',
           ar: 'يدير مشاريع البرمجيات والفرق.',
         },
-        image_url: '/uploads/nour-eldien-mohamed.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Nour Eldien Mohamed Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -523,7 +655,7 @@ export class Seeder {
           en: 'Leading the marketing initiatives.',
           ar: 'يقود مبادرات التسويق.',
         },
-        image_url: '/uploads/faisel.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Faisel Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -535,7 +667,7 @@ export class Seeder {
           en: 'Supervises HR operations and employee relations.',
           ar: 'تشرف على عمليات الموارد البشرية وعلاقات الموظفين.',
         },
-        image_url: '/uploads/somaya-abdullah.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Somaya Abdullah Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -547,7 +679,7 @@ export class Seeder {
           en: 'Builds smart systems using AI technology.',
           ar: 'يبني أنظمة ذكية باستخدام تقنيات الذكاء الاصطناعي.',
         },
-        image_url: '/uploads/abdulaziz.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Abdulaziz Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -559,7 +691,7 @@ export class Seeder {
           en: 'Ensures smooth coordination across teams.',
           ar: 'تضمن التنسيق السلس بين الفرق.',
         },
-        image_url: '/uploads/lamis-saadoun.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Lamis Saadoun Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -571,7 +703,7 @@ export class Seeder {
           en: 'Handles all financial and accounting matters.',
           ar: 'يتولى جميع الأمور المالية والمحاسبية.',
         },
-        image_url: '/uploads/hani-darwish.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Hani Darwish Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -581,9 +713,9 @@ export class Seeder {
         position: { en: 'Project Manager', ar: 'مدير مشروع' },
         bio: {
           en: 'Plans and oversees projects from start to finish.',
-          ar: 'يخطط ويشرف على المشاريع من البداية إلى النهاية.',
+          ar: 'بأكثر من 4 سنوات من الخبرة، يُعرف م/محمد الأهدل ببناء علاقات عملاء طويلة الأمد وتقديم حلول مخصصة.',
         },
-        image_url: '/uploads/mohammed-alahdal.jpeg',
+        image_url: '/uploads/website-images/about-us/person7.png',
         image_alt: 'Mohammed Alahdal Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
@@ -595,13 +727,15 @@ export class Seeder {
           en: 'Handles complex logistics and supply chains.',
           ar: 'يتعامل مع العمليات اللوجستية وسلاسل التوريد المعقدة.',
         },
-        image_url: '/uploads/rahim-ghafoor.jpeg',
+        image_url: '/uploads/website-images/about-us/unknown-person.png',
         image_alt: 'Rahim Ghafoor Image',
         created_at: '2025-04-01T10:00:00Z',
         updated_at: '2025-04-02T12:00:00Z',
       },
     ];
 
+    
+    await this.teamMembersRepository.clear(); // Clears the table
     const dataEntities = this.teamMembersRepository.create(data as any);
     await this.teamMembersRepository.save(dataEntities); // Save all blog posts at once
   }
@@ -609,39 +743,70 @@ export class Seeder {
   private async seedSections() {
     const data = [
       {
-        section_name: {
-          en: 'About Us',
-          ar: 'معلومات عنا',
-        },
         title: {
-          en: 'Discover Our Mission',
-          ar: 'اكتشف مهمتنا',
-        },
-        content: {
-          en: 'We are committed to providing top-quality services to our clients across various industries.',
-          ar: 'نلتزم بتقديم خدمات عالية الجودة لعملائنا في مختلف الصناعات.',
-        },
-        image_url: '/upload/section-1.png',
-        image_alt: 'Team working together',
-        meta_title: {
-          en: 'Who We Are',
+          en: '',
           ar: 'من نحن',
         },
-        meta_description: {
-          en: 'Learn about our company mission, values, and team.',
-          ar: 'تعرف على مهمة شركتنا وقيمها وفريقها.',
+        content: {
+          en: '',
+          ar: 'شركة JOE13 هي شركة تسويق وتطوير برمجيات تأسست في عام 2013 لاستثمار سنوات من الخبرات في مجالات مختلفة لمساعدة الشركات على تحقيق قيمتها المقترحة المثلى. على مدار السنوات، اكتسبت JOE13 ثقة عملائها من خلال تكوين فريق من الخبراء الذين مكنوهم من تحقيق المعادلة الصحيحة بين كفاءة تكنولوجيا المعلومات والابتكار في الأعمال.',
         },
-        meta_keywords: ['about', 'company', 'mission', 'team'],
-        slug: 'about-us',
+        image_url: '/uploads/website-images/about-us/1.png',
+        image_alt: 'Team working together',
+        slug: 'about-who-are-you',
         is_active: true,
         created_at: new Date('2025-04-01T10:00:00Z'),
         updated_at: new Date('2025-04-01T10:00:00Z'),
       },
       {
-        section_name: {
-          en: 'Services',
-          ar: 'خدماتنا',
+        title: {
+          en: '',
+          ar: 'رؤيتنا',
         },
+        content: {
+          en: '',
+          ar: 'JOE13 هي شركة تسويق وتطوير برمجيات تم تأسيسها في عام 2013 لاستثمار سنوات من الخبرات في مجالات مختلفة لمساعدة الشركات على الوصول إلى عرض القيمة النهائية، وعلى مر السنين اكتسبت JOE13 ثقة عملائها من خلال الجمع بين فريق يتمتع بالخبرة التي ومكنتهم من تحقيق المعادلة الصحيحة بين كفاءة تكنولوجيا المعلومات والابتكار في مجال الأعمال.',
+        },
+        image_url: '/uploads/website-images/about-us/2.png',
+        image_alt: 'Team working together',
+        slug: 'about-our-vission',
+        is_active: true
+      },
+      {
+        title: {
+          en: '',
+          ar: 'مهمتنا',
+        },
+        content: {
+          en: '',
+          ar: 'إن عامل نجاحنا القيم هو ما يستطيع فريقنا تحقيقه وما هو قادر على تحقيقه، وتركيزنا الخاص على تطوير رؤية عملائنا هو نتيجة محتملة للاستثمار في فريقنا في جميع المجالات مما يثبت أن مستقبلنا يميل إلى أن يكون الأول في منطقة الشرق الأوسط وشمال أفريقيا وفي جميع أنحاء العالم. نحن ننخرط في العمل الجماعي ونشجعه كعملية تجارية من خلال الاجتماعات والمؤتمرات وغيرها من الطرق التفاعلية "فريق كبير، عقل واحد.',
+        },
+        image_url: '/uploads/website-images/about-us/3.png',
+        image_alt: 'Team working together',
+        slug: 'about-our-mission',
+        is_active: true,
+        created_at: new Date('2025-04-01T10:00:00Z'),
+        updated_at: new Date('2025-04-01T10:00:00Z'),
+      },
+      {
+        slug : 'contact',
+        title: {
+          en: '',
+          ar: 'تواصل معنا',
+        },
+        content: {
+          en: '',
+          ar: 'ابقَ على تواصل – نحن هنا للمساعدة!',
+        },
+        image_url: '/uploads/website-images/contact-us/contact-us.png',
+        image_alt: 'Contact us form',
+        is_active: true,
+        created_at: new Date('2025-04-05T09:00:00Z'),
+        updated_at: new Date('2025-04-05T09:00:00Z'),
+      },
+
+      {
+        
         title: {
           en: 'What We Offer',
           ar: 'ما نقدمه',
@@ -650,111 +815,18 @@ export class Seeder {
           en: 'Explore a wide range of professional services tailored to your needs.',
           ar: 'استكشف مجموعة واسعة من الخدمات المهنية المصممة لتلبية احتياجاتك.',
         },
-        image_url: '/upload/section-2.png',
+        image_url: '/uploads/website-images/about-us/3.png',
         image_alt: 'Professional services',
-        meta_title: {
-          en: 'Our Services',
-          ar: 'خدماتنا',
-        },
-        meta_description: {
-          en: 'Comprehensive solutions for your business challenges.',
-          ar: 'حلول شاملة لتحديات عملك.',
-        },
-        meta_keywords: ['services', 'solutions', 'business'],
         slug: 'services',
         is_active: true,
         created_at: new Date('2025-04-02T11:15:00Z'),
         updated_at: new Date('2025-04-02T11:15:00Z'),
       },
-      {
-        section_name: {
-          en: 'Careers',
-          ar: 'الوظائف',
-        },
-        title: {
-          en: 'Join Our Team',
-          ar: 'انضم إلى فريقنا',
-        },
-        content: {
-          en: 'We’re always looking for talented individuals to grow with us.',
-          ar: 'نبحث دائمًا عن أفراد موهوبين للنمو معنا.',
-        },
-        image_url: '/upload/section-3.png',
-        image_alt: 'Join our team',
-        meta_title: {
-          en: 'Careers at Our Company',
-          ar: 'الوظائف في شركتنا',
-        },
-        meta_description: {
-          en: 'Explore current job openings and opportunities.',
-          ar: 'استكشف الوظائف الشاغرة والفرص المتاحة.',
-        },
-        meta_keywords: ['careers', 'jobs', 'team'],
-        slug: 'careers',
-        is_active: true,
-        created_at: new Date('2025-04-03T14:30:00Z'),
-        updated_at: new Date('2025-04-03T14:30:00Z'),
-      },
-      {
-        section_name: {
-          en: 'Testimonials',
-          ar: 'آراء العملاء',
-        },
-        title: {
-          en: 'What Our Clients Say',
-          ar: 'ماذا يقول عملاؤنا',
-        },
-        content: {
-          en: 'Read reviews and feedback from satisfied customers.',
-          ar: 'اقرأ آراء وتعليقات العملاء الراضين.',
-        },
-        image_url: '/upload/section-4.png',
-        image_alt: 'Client feedback',
-        meta_title: {
-          en: 'Customer Testimonials',
-          ar: 'آراء العملاء',
-        },
-        meta_description: {
-          en: 'See how we’ve made an impact with our clients.',
-          ar: 'اطلع على تأثيرنا على عملائنا.',
-        },
-        meta_keywords: ['testimonials', 'feedback', 'reviews'],
-        slug: 'testimonials',
-        is_active: true,
-        created_at: new Date('2025-04-04T16:45:00Z'),
-        updated_at: new Date('2025-04-04T16:45:00Z'),
-      },
-      {
-        section_name: {
-          en: 'Contact',
-          ar: 'اتصل بنا',
-        },
-        title: {
-          en: 'Get in Touch',
-          ar: 'تواصل معنا',
-        },
-        content: {
-          en: 'Have questions? Our team is here to help you 24/7.',
-          ar: 'هل لديك أسئلة؟ فريقنا هنا لمساعدتك على مدار الساعة.',
-        },
-        image_url: '/upload/section-5.png',
-        image_alt: 'Contact us form',
-        meta_title: {
-          en: 'Contact Information',
-          ar: 'معلومات الاتصال',
-        },
-        meta_description: {
-          en: 'Reach out to us through email, phone, or our support form.',
-          ar: 'تواصل معنا عبر البريد الإلكتروني أو الهاتف أو نموذج الدعم.',
-        },
-        meta_keywords: ['contact', 'support', 'help'],
-        slug: 'contact',
-        is_active: true,
-        created_at: new Date('2025-04-05T09:00:00Z'),
-        updated_at: new Date('2025-04-05T09:00:00Z'),
-      },
+     
     ];
 
+    
+    await this.sectionRepo.clear(); // Clears the table
     const dataEntities = this.sectionRepo.create(data as any);
     await this.sectionRepo.save(dataEntities);
   }
@@ -826,6 +898,7 @@ export class Seeder {
       },
     ];
 
+    await this.departmentRepo.clear(); // Clears the table
     const departments = this.departmentRepo.create(departmentsData as any);
     await this.departmentRepo.save(departments);
   }
@@ -936,6 +1009,7 @@ export class Seeder {
       department: departments[i % departments.length],
     }));
 
+    await this.projectRepo.clear(); // Clears the table
     const projects = this.projectRepo.create(fullData as any);
     await this.projectRepo.save(projects);
   }
@@ -1109,6 +1183,8 @@ export class Seeder {
       },
     ];
 
+    
+    await this.contactsReop.clear(); // Clears the table
     const projects = this.contactsReop.create(data as any);
     await this.contactsReop.save(projects);
   }
@@ -1300,6 +1376,8 @@ export class Seeder {
       },
     ];
 
+    
+    await this.offersReop.clear(); // Clears the table
     const entity = this.offersReop.create(data as any);
     await this.offersReop.save(entity);
   }
@@ -1332,6 +1410,7 @@ export class Seeder {
       },
     ];
 
+    await this.partnerRepository.clear(); // Clears the table
     const data = this.partnerRepository.create(partners);
     await this.partnerRepository.save(data);
   }

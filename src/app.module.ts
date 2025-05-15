@@ -28,6 +28,7 @@ import { ContactsModule } from './contacts/contacts.module';
 import { OffersModule } from './offers/offers.module';
 import { PartnersModule } from './partners/partners.module';
 import { SettingsModule } from './settings/settings.module';
+import { PageMetaModule } from './page-meta/page-meta.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { SettingsModule } from './settings/settings.module';
     OffersModule,
     PartnersModule,
     SettingsModule,
+    PageMetaModule,
   ],
   controllers: [AppController],
   providers: [AppService, LoggingValidationPipe , QueryFailedErrorFilter ],

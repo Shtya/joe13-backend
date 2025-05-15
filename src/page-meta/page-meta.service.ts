@@ -1,21 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { BaseService } from 'common/base/base.service';
-import { Section } from 'entities/sections.entity';
+import { PageMeta } from 'entities/page-meta.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class SectionsService extends BaseService<Section> {
+export class PageMetaService   extends BaseService<PageMeta> {
   constructor(
-    @InjectRepository(Section) private sectionRepo: Repository<Section>,
+    @InjectRepository(PageMeta) private pageMetaRepo: Repository<PageMeta>,
   ) {
-    super(sectionRepo);
+    super(pageMetaRepo);
   }
 
 
 
   async findOneBySlug(slug: string) {
-    return this.sectionRepo.findOne({
+    return this.pageMetaRepo.findOne({
       where: { slug },
     });
   }

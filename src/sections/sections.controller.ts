@@ -25,7 +25,7 @@ export class SectionController {
 
   @Get()
   async findAll(@Query() query) {
-    const { page, limit, search, sortBy, sortOrder, ...restQueryParams } = query;
+    const { page, limit, search, slug , sortBy, sortOrder, ...restQueryParams } = query;
 
     return this.sectionService.findAll(
       'sections',
@@ -36,7 +36,7 @@ export class SectionController {
       sortOrder,
       [], // exclude some fields
       [], // Relations
-      ['name'], // search parameters
+      ['name' , "slug" ], // search parameters
       restQueryParams, // search with fields
     );
   }
@@ -45,6 +45,13 @@ export class SectionController {
   findOne(@Param('id') id: number) {
     return this.sectionService.findOne(+id);
   }
+
+
+  @Get('by-slug/:slug')
+  findOneBySlug(@Param('slug') slug: string) {
+    return this.sectionService.findOneBySlug(slug);
+  }
+
 
 
   @Patch(':id')

@@ -16,6 +16,7 @@ export class QueryFailedErrorFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
+
     if (exception.driverError?.code   === '23503') {
       response.status(HttpStatus.BAD_REQUEST).json({
         statusCode: HttpStatus.BAD_REQUEST,
@@ -23,7 +24,15 @@ export class QueryFailedErrorFilter implements ExceptionFilter {
         error:  exception.driverError?.error || 'Foreign Key Constraint Violation',
         details: exception.driverError?.detail,
       });
-    } 
+    } else if (exception.driverError?.code === '23505') {
+      // Unique constraint violation (e.g. slug already exists)
+      response.status(HttpStatus.CONFLICT).json({
+        statusCode: HttpStatus.CONFLICT,
+        message: this.i18n.t('events.duplicate_value'), // You can define this in your translation files
+        error: 'Unique Constraint Violation',
+        details: exception.driverError?.detail,
+      });
+    }
     else if (exception.code === '42P01') {
       response.status(HttpStatus.BAD_REQUEST).json({
         statusCode: HttpStatus.BAD_REQUEST,

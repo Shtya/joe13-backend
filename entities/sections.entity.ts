@@ -6,9 +6,6 @@ export class Section {
   id: number;
 
   @Column({ type: 'jsonb' })
-  section_name: { en: string; ar: string };
-
-  @Column({ type: 'jsonb' })
   title: { en: string; ar: string };
 
   @Column({ type: 'jsonb' })
@@ -20,16 +17,7 @@ export class Section {
   @Column()
   image_alt: string;
 
-  @Column({ type: 'jsonb', nullable: true })
-  meta_title: { en: string; ar: string };
-
-  @Column({ type: 'jsonb', nullable: true })
-  meta_description: { en: string; ar: string };
-
-  @Column('text', { array: true, nullable: true })
-  meta_keywords: string[];
-
-  @Column({ nullable: true })
+  @Column({ unique : true , nullable: true })
   slug: string;
 
   @Column({ default: true })
