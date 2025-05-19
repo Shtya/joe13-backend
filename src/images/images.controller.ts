@@ -1,34 +1,66 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
-import { ImagesService } from './images.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+  ParseIntPipe,
+  UseInterceptors,
+  UploadedFile,
+  UploadedFiles,
+  Query,
+} from '@nestjs/common';
+import { CreateImageDto, UpdateImageDto } from 'dto/images.dto';
 import { Image } from 'entities/images.entity';
+import ImageService from './images.service';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { multerOptions } from 'common/multer.config';
 
 @Controller('images')
-export class ImagesController {
-  constructor(private readonly imagesService: ImagesService) {}
+export class ImageController {
+  constructor(private readonly imageService: ImageService) {}
 
-  @Patch('image/:id')
-  updateImage(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() data: Partial<Image>,
-  ) {
-    return this.imagesService.updateImage(id, data);
+  @Get()
+  findAll(@Query() query) {
+     const { page, limit, search, sortBy, sortOrder, ...restQueryParams } = query;
+
+    return this.imageService.findAll(
+      'image',
+      search,
+      page,
+      limit,
+      sortBy,
+      sortOrder,
+      [], // exclude some fields
+      [], // Relations
+      ['name'], // search parameters
+      restQueryParams, // search with fields
+    );;
   }
 
-  @Delete('image/:id')
-  deleteImage(@Param('id', ParseIntPipe) id: number) {
-    return this.imagesService.deleteImage(id);
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.imageService.findOne(id);
   }
 
-  
-  
-  @Post('image')
-  createImage(@Body() body: Partial<Image>) {
-    return this.imagesService.createImage(body);
+  @Post('')
+  @UseInterceptors(FilesInterceptor('files', 10, multerOptions))
+  async uploadImages( @UploadedFiles() files: any[], @Body() dto: any, ) {
+
+    const images: CreateImageDto[] = (files || []).map((file, i) => ({
+      url: `/uploads/${file.filename}`,
+      name: file.originalname,
+      alt: dto?.alt?.[i] || `Image ${i + 1}`,
+    }));
+
+    return this.imageService.createMany(images);
   }
 
-  @Get('images')
-  getAllImages() {
-    return this.imagesService.getAllImages();
-  }
 
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.imageService.customRemove(id);
+  }
 }

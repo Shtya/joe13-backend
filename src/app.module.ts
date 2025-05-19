@@ -23,12 +23,13 @@ import { LoggingValidationPipe } from 'common/translationPipe';
 import { QueryFailedErrorFilter } from 'common/QueryFailedErrorFilter';
 import { SectionsModule } from './sections/sections.module';
 import { DepartmentModule } from './department/department.module';
-import { ImagesModule } from './images/images.module';
+import { ImageModule } from './images/images.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { OffersModule } from './offers/offers.module';
 import { PartnersModule } from './partners/partners.module';
 import { SettingsModule } from './settings/settings.module';
 import { PageMetaModule } from './page-meta/page-meta.module';
+import { PagesModule } from './pages/pages.module';
 
 @Module({
   imports: [
@@ -65,12 +66,13 @@ import { PageMetaModule } from './page-meta/page-meta.module';
     TeamMembersModule,
     SectionsModule,
     DepartmentModule,
-    ImagesModule,
+    ImageModule,
     ContactsModule,
     OffersModule,
     PartnersModule,
     SettingsModule,
     PageMetaModule,
+    PagesModule,
   ],
   controllers: [AppController],
   providers: [AppService, LoggingValidationPipe , QueryFailedErrorFilter ],

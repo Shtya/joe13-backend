@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, Logger, ValidationPipe } from '@nestjs/common';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { LoggingValidationPipe } from 'common/translationPipe';
@@ -28,7 +28,22 @@ async function bootstrap() {
 
   const loggingValidationPipe = app.get(LoggingValidationPipe);
   app.useGlobalPipes(loggingValidationPipe);
-  app.useGlobalPipes(new ValidationPipe({ disableErrorMessages: false , transform: true}));
+  app.useGlobalPipes(new ValidationPipe({ 
+    disableErrorMessages: false , 
+    transform: true,
+  exceptionFactory: (errors) => {
+        const formattedErrors = errors.map((err) => ({
+          property: err.property,
+          constraints: err.constraints,
+        }));
+        return new BadRequestException({
+          statusCode: 400,
+          message: 'Validation failed',
+          errors: formattedErrors,
+        });
+      },
+  }));
+
 
   Logger.log(`🚀 server is running on port ${port}`);
 

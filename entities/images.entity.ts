@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Project } from './projects.entity'; // Adjust the import path if necessary
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('images')
 export class Image {
@@ -7,14 +6,13 @@ export class Image {
   id: number;
 
   @Column()
-  image_url: string;
+  url: string;  // رابط الصورة
+
+  @Column({ nullable: true })
+  alt?: string;  // نص بديل للصورة (للـ SEO والوصولية)
 
   @Column()
-  image_alt: string;
-
-  @ManyToMany(() => Project, (project) => project.images)
-  @JoinTable() 
-  projects: Project[];
+  name: string;  // اسم الملف أو اسم الصورة
 
   @CreateDateColumn()
   created_at: Date;

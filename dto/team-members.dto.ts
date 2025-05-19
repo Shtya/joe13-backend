@@ -22,8 +22,8 @@ export class CreateTeamMemberDto {
   @IsObject({ message: 'Bio must be an object with en and ar fields' })
   bio: LocalizedField;
 
-  @IsUrl({}, { message: 'Image URL must be a valid URL' })
-  image_url: string;
+  // @IsString({ message: 'Image URL must be a valid URL' })
+  image_url: any;
 
   @IsString({ message: 'Image alt must be a string' })
   @IsNotEmpty({ message: 'Image alt is required' })

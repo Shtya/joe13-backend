@@ -9,7 +9,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Image } from './images.entity';
 import { Department } from './departments.entity';
 
 
