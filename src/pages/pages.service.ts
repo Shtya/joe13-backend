@@ -15,7 +15,15 @@ export class PageService extends BaseService<Page> {
     super(pageRepository);
   }
 
-  async customCreate(createPageDto: CreatePageDto): Promise<Page> {
+
+  async findBySlug(slug: string): Promise<Page> {
+  return this.pageRepository.findOne({
+    where: { slug },
+  });
+}
+
+
+  async customCreate(createPageDto: CreatePageDto) {
     const { meta, sections } = createPageDto;
 
 

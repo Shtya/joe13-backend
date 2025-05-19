@@ -11,9 +11,11 @@ import { Contact } from 'entities/contact-us.entity';
 import { OffersEntity } from 'entities/offers.entity';
 import { Partner } from 'entities/partners.entity';
 import { PageMeta } from 'entities/page-meta.entity';
+import { Page } from 'entities/pages.entity';
 
 export class Seeder {
   private blogRepository: Repository<Blog>;
+  private pageRepository: Repository<Page>;
   private careerRepository: Repository<Career>;
   private teamMembersRepository: Repository<TeamMember>;
   private sectionRepo: Repository<Section>;
@@ -27,6 +29,7 @@ export class Seeder {
 
   constructor(private dataSource: DataSource) {
     this.blogRepository = this.dataSource.getRepository(Blog);
+    this.pageRepository = this.dataSource.getRepository(Page);
     this.careerRepository = this.dataSource.getRepository(Career);
     this.teamMembersRepository = this.dataSource.getRepository(TeamMember);
     this.sectionRepo = this.dataSource.getRepository(Section);
@@ -49,16 +52,520 @@ export class Seeder {
     // await this.seedOffers();
     // await this.seedPartners();
     // await this.seedSections();
-    await this.seedPageMeta();
+    // await this.seedPageMeta();
+    await this.seedPages();
   }
+
+
+
+
+  // sudo nano /etc/nginx/sites-available/api.joe-13-backend.com
+  private async seedPages() {
+    const data = [
+      {
+        slug: 'home-page',
+        title : "home page",
+        meta: {
+          title: 'Joe13 - 360° Business Solutions with 11+ Years of Impact',
+          description:
+            'Explore Joe13, a comprehensive solutions company offering marketing, software, telecom, HR, and event services. Over 180 successful projects, 100+ clients, and 70 skilled team members across 47 cities.',
+          keywords: [
+            'Joe13',
+            'Marketing Solutions',
+            'Digital Marketing',
+            'HR Solutions',
+            'Software and AI',
+            'Event Management',
+            'Telecom Services',
+            'Business Consulting',
+            'Brand Activation',
+            'ERP Solutions',
+            'Web Development',
+            'Promoters Management',
+          ],
+          canonicalUrl: 'https://yourdomain.com/home-page',
+          ogTitle:
+            'Joe13 - Your Partner in Growth Across Marketing, Tech, HR & Events',
+          ogDescription:
+            'Discover Joe13’s 360° business solutions trusted by 100+ clients in 47 cities. From digital marketing to AI software, HR outsourcing, and more.',
+          ogImage: {
+            url: '/uploads/joe-13/logo.png',
+            alt: 'Joe13 Logo',
+          },
+          ogUrl: 'https://yourdomain.com/home-page',
+          ogType: 'website',
+          structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Joe13',
+            url: 'https://yourdomain.com/home-page',
+          },
+          headScript: "<script>console.log('Head script loaded');</script>",
+          bodyScript: "<script>console.log('Body script loaded');</script>",
+        },
+
+        sections: [
+          {
+            id: 'sec1',
+            image: {
+              url: '/uploads/joe-13/logo.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: '360 solutions company with +11 years of experience in the market',
+              ar: 'شركة حلول شاملة بخبرة تزيد عن 11 عامًا في السوق',
+            },
+            content: {
+              en: '',
+              ar: '',
+            },
+            list: [],
+            objectData: {},
+            position: 1,
+            visible: true,
+          },
+          {
+            id: 'sec2',
+            image: {
+              url: '/uploads/joe-13/section2.jpeg',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Our Success in Numbers, Driving Impact Across Industries',
+              ar: 'نجاحنا بالأرقام، نُحدث تأثيرًا عبر مختلف الصناعات',
+            },
+            content: {
+              en: '',
+              ar: '',
+            },
+            list: [],
+            objectData: {
+              en: {
+                Cities: '47',
+                'Successful Projects': '180',
+                Clients: '100',
+                'Team Members': '70',
+                Growth: '31%',
+              },
+              ar: {
+                المدن: '٤٧',
+                'المشاريع الناجحة': '١٨٠',
+                العملاء: '١٠٠',
+                'أعضاء الفريق': '٧٠',
+                النمو: '٣١٪',
+              },
+            },
+            position: 2,
+            visible: true,
+          },
+          {
+            id: 'sec3',
+            image: {
+              url: '/uploads/joe-13/section3.jpeg',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Our Partners',
+              ar: 'شركاؤنا',
+            },
+            content: {
+              en: '',
+              ar: '',
+            },
+            list: [
+              { alt: 'Brand 1', url: '/uploads/joe-13/brands/1.png' },
+              { alt: 'Brand 2', url: '/uploads/joe-13/brands/2.png' },
+              { alt: 'Brand 3', url: '/uploads/joe-13/brands/3.png' },
+              { alt: 'Brand 4', url: '/uploads/joe-13/brands/4.png' },
+              { alt: 'Brand 5', url: '/uploads/joe-13/brands/5.png' },
+              { alt: 'Brand 6', url: '/uploads/joe-13/brands/6.png' },
+              { alt: 'Brand 7', url: '/uploads/joe-13/brands/7.png' },
+              { alt: 'Brand 8', url: '/uploads/joe-13/brands/8.png' },
+              { alt: 'Brand 9', url: '/uploads/joe-13/brands/9.png' },
+              { alt: 'Brand 10', url: '/uploads/joe-13/brands/10.png' },
+              { alt: 'Brand 11', url: '/uploads/joe-13/brands/11.png' },
+              { alt: 'Brand 12', url: '/uploads/joe-13/brands/12.png' },
+              { alt: 'Brand 13', url: '/uploads/joe-13/brands/13.png' },
+              { alt: 'Brand 14', url: '/uploads/joe-13/brands/14.png' },
+              { alt: 'Brand 15', url: '/uploads/joe-13/brands/15.png' },
+              { alt: 'Brand 16', url: '/uploads/joe-13/brands/16.png' },
+            ],
+            objectData: {},
+            position: 3,
+            visible: true,
+          },
+          {
+            id: 'sec4',
+            image: {
+              url: '/uploads/joe-13/section4.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Check out our Business Units and their services',
+              ar: 'تعرّف على وحدات أعمالنا وخدماتها',
+            },
+            content: {
+              en: '',
+              ar: '',
+            },
+            list: [],
+            objectData: {},
+            position: 4,
+            visible: true,
+          },
+          {
+            id: 'sec5',
+            image: {
+              url: '/uploads/joe-13/section5.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Marketing',
+              ar: 'التسويق',
+            },
+            content: {
+              en: 'Driving Growth and Engagement with Strategic Digital Marketing Solutions',
+              ar: 'دفع عجلة النمو والتفاعل من خلال حلول التسويق الرقمي الاستراتيجية',
+            },
+            list: {
+              en: [
+                'Offline Marketing',
+                'Print Advertising.',
+                'Physical Product Placement.',
+                'Digital Marketing',
+                'Social media management',
+                'SEO',
+                'Content Creation',
+                'Media production',
+                'Branding',
+                'Graphics',
+                'Motion graphic and visual',
+                'Brand Promotion and Activation',
+                'Bloggers & Influencers Management',
+                'User Generated Content (UGC)',
+                'Bloggers Campaign',
+                'Influencers Management',
+              ],
+              ar: [
+                'التسويق التقليدي',
+                'الإعلانات المطبوعة',
+                'وضع المنتج في الأماكن الفعلية',
+                'التسويق الرقمي',
+                'إدارة وسائل التواصل الاجتماعي',
+                'تحسين محركات البحث',
+                'إنشاء المحتوى',
+                'إنتاج الوسائط',
+                'بناء العلامة التجارية',
+                'الرسومات',
+                'الرسوم المتحركة والمرئية',
+                'تنشيط العلامة التجارية',
+                'إدارة المدونين والمؤثرين',
+                'المحتوى الذي ينشئه المستخدمون',
+                'حملات المدونين',
+                'إدارة المؤثرين',
+              ],
+            },
+            objectData: {},
+            position: 5,
+            visible: true,
+          },
+          {
+            id: 'sec6',
+            image: {
+              url: '/uploads/joe-13/section6.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Software & AI',
+              ar: 'البرمجيات والذكاء الاصطناعي',
+            },
+            content: {
+              en: 'Manage your business needs and put them into practice to deliver you the best quality available. Our Technology department is a trusted partner for businesses seeking innovative solutions',
+              ar: 'نلبي احتياجات عملك ونحولها إلى حلول عملية لنقدم لك أعلى مستويات الجودة. قسم التكنولوجيا لدينا هو شريك موثوق للشركات التي تبحث عن حلول مبتكرة.',
+            },
+            list: {
+              en: [
+                'Web Hosting and Website Design Services.',
+                'Online store (E-commerce).',
+                'Create mobile applications',
+                'Managing and maintaining websites and applications',
+                'Content management systems (CMS)',
+                'Customer relationship management (CRM)',
+                'A business process automation system.',
+                'Automated invoicing.',
+                'Company-facing or customer-facing web portals.',
+                'Bug tracking software.',
+              ],
+              ar: [
+                'استضافة المواقع وخدمات تصميم المواقع.',
+                'متجر إلكتروني (التجارة الإلكترونية).',
+                'إنشاء تطبيقات الجوال',
+                'إدارة وصيانة المواقع والتطبيقات',
+                'أنظمة إدارة المحتوى',
+                'إدارة علاقات العملاء',
+                'نظام أتمتة العمليات التجارية',
+                'الفوترة الآلية',
+                'بوابات إلكترونية للشركات أو العملاء',
+                'برامج تتبع الأخطاء',
+              ],
+            },
+            objectData: {},
+            position: 6,
+            visible: true,
+          },
+          {
+            id: 'sec7',
+            image: {
+              url: '/uploads/joe-13/section7.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Masanadah',
+              ar: 'مساندة',
+            },
+            content: {
+              en: 'We are insisting on success, insisting on providing a high quality',
+              ar: 'نُصر على النجاح، ونُصر على تقديم جودة عالية',
+            },
+            list: {
+              en: [
+                'Finance Consulting Service',
+                'Strategic guidance to businesses of all sizes',
+                'Sustainable Growth',
+                'Risk Management',
+                'Financial Planning',
+                'Investment Strategies',
+                'Business Expansion',
+              ],
+              ar: [
+                'خدمة الاستشارات المالية',
+                'توجيه استراتيجي للشركات من جميع الأحجام',
+                'نمو مستدام',
+                'إدارة المخاطر',
+                'التخطيط المالي',
+                'استراتيجيات الاستثمار',
+                'توسيع الأعمال',
+              ],
+            },
+            objectData: {},
+            position: 7,
+            visible: true,
+          },
+          {
+            id: 'sec8',
+            image: {
+              url: '/uploads/joe-13/section8.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Telecoms',
+              ar: 'الاتصالات',
+            },
+            content: {
+              en: 'A talented and professionally-trained sales team',
+              ar: 'فريق مبيعات موهوب ومدرب باحترافية عالية',
+            },
+            list: {
+              en: [
+                'Direct Sales',
+                'current partners: (Virgin - Red Bull mobile -Zain - Mobily)',
+                'Modern trade - current clients:(Virgin, Red Bull, Zain)',
+                'Haj & Umrah sales - with (Virgin, Mobily, Red Bull, Non-telecom sales)',
+                'B2B Sales - current partners: (Zain)',
+                'Non-telecom sales',
+                'B2C Sales - (Flexible Card)',
+                'B2B Sales - partners: (Motorola - Arab computer - In Home)',
+              ],
+              ar: [
+                'المبيعات المباشرة',
+                'الشركاء الحاليون: (فيرجن - ريد بول موبايل - زين - موبايلي)',
+                'التجارة الحديثة - العملاء الحاليون: (فيرجن، ريد بول، زين)',
+                'مبيعات الحج والعمرة - مع (فيرجن، موبايلي، ريد بول، مبيعات غير اتصالات)',
+                'مبيعات B2B - الشركاء الحاليون: (زين)',
+                'مبيعات غير اتصالات',
+                'مبيعات B2C - (بطاقة فلكسيبل)',
+                'مبيعات B2B - شركاء: (موتورولا - الكمبيوتر العربي - إن هوم)',
+              ],
+            },
+            objectData: {},
+            position: 8,
+            visible: true,
+          },
+          {
+            id: 'sec9',
+            image: {
+              url: '/uploads/joe-13/section9.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Manpower & HR Solutions',
+              ar: 'حلول الموارد البشرية والقوى العاملة',
+            },
+            content: {
+              en: 'Streamlining Workforce Solutions for Optimal Business Success',
+              ar: 'تبسيط حلول القوى العاملة لتحقيق نجاح تجاري أمثل',
+            },
+            list: [],
+            objectData: {
+              en: {
+                'HR Outsourcing service':
+                  'Sponsorship transfer, Visa Issuing, Administration, Management, Payroll, Training, Hiring, Recruiting, Operate benefit plans, and Saudi Gosi registrations',
+                'Governmental affairs':
+                  'Iqama processing, Visa processing, Legal matters, Passport services, GOSI services, Medical insurance services',
+                'HR Management':
+                  'Temporary work visa, Permits, Employee transfer, Nationalisation plan',
+              },
+              ar: {
+                'خدمة التوظيف الخارجي':
+                  'نقل الكفالة، إصدار التأشيرات، الإدارة، الرواتب، التدريب، التوظيف، إدارة خطط المزايا، تسجيلات التأمينات الاجتماعية السعودية',
+                'الشؤون الحكومية':
+                  'معالجة الإقامة، معالجة التأشيرات، الأمور القانونية، خدمات الجوازات، خدمات التأمينات، خدمات التأمين الطبي',
+                'إدارة الموارد البشرية':
+                  'تأشيرة العمل المؤقتة، التصاريح، نقل الموظفين، خطة التوطين',
+              },
+            },
+            position: 9,
+            visible: true,
+          },
+          {
+            id: 'sec10',
+            image: {
+              url: '/uploads/joe-13/section10.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Merchandising, Activation and Event Management',
+              ar: 'الترويج، التفعيل، وإدارة الفعاليات',
+            },
+            content: {
+              en: 'Increase client awareness of your brand by marketing it utilizing contemporary techniques and growin',
+              ar: 'زيادة الوعي بعلامتك التجارية من خلال تسويقها باستخدام الأساليب والتقنيات الحديثة',
+            },
+            list: [],
+            objectData: {},
+            list_Object: {
+              en: [
+                {
+                  title: 'Merchandising',
+                  desc: 'A holistic approach to presenting and promoting goods to drive sales and shape brand identity.',
+                  list: [],
+                },
+                {
+                  title: 'Activation',
+                  desc: 'Increase client awareness of your brand through contemporary marketing techniques.',
+                  list: [
+                    'Events competitions',
+                    'Sales promotion',
+                    'Telemarketing',
+                    'Free product samples',
+                    'In-store promotions',
+                    'Trade shows',
+                    'Targeted advertisements',
+                  ],
+                },
+                {
+                  title: 'Event Management',
+                  desc: 'Complete event planning and execution from logistics to post-event analysis.',
+                  list: [
+                    'Planning: Concept to execution.',
+                    'Logistics: Venue, transport, equipment.',
+                    'Design: Visual consistency.',
+                    'Vendors: Service quality.',
+                    'On-site: Supervision.',
+                    'Analysis: Evaluations.',
+                  ],
+                },
+              ],
+              ar: [
+                {
+                  title: 'الترويج',
+                  desc: 'نهج شامل لعرض وترويج المنتجات بطريقة تعزز المبيعات وتقوي الهوية التجارية.',
+                  list: [],
+                },
+                {
+                  title: 'التنشيط',
+                  desc: 'زيادة الوعي بالعلامة التجارية باستخدام تقنيات تسويقية حديثة.',
+                  list: [
+                    'المسابقات والفعاليات',
+                    'العروض الترويجية',
+                    'الاتصال الهاتفي التسويقي',
+                    'عينات المنتجات المجانية',
+                    'العروض داخل المتاجر',
+                    'المعارض التجارية',
+                    'الإعلانات المستهدفة',
+                  ],
+                },
+                {
+                  title: 'إدارة الفعاليات',
+                  desc: 'إدارة متكاملة للفعاليات من التخطيط حتى التحليل بعد الحدث.',
+                  list: [
+                    'التخطيط: من الفكرة إلى التنفيذ',
+                    'اللوجستيات: المكان، النقل، المعدات',
+                    'التصميم: التناسق البصري',
+                    'الموردين: جودة الخدمات',
+                    'في الموقع: الإشراف على الحدث',
+                    'التحليل: التقييم بعد الحدث',
+                  ],
+                },
+              ],
+            },
+            position: 10,
+            visible: true,
+          },
+          {
+            id: 'sec11',
+            image: {
+              url: '/uploads/joe-13/section11.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Our Products',
+              ar: 'منتجاتنا',
+            },
+            content: {
+              en: 'We Create, Innovate and Serve',
+              ar: 'نبتكر ونُبدع ونُقدم الأفضل',
+            },
+            list: {
+              en: [
+                'JOE MI: Streamlines workflow and enhances sales operations for field promoters.',
+                'ERP (powered by Odoo): Integrates business functions into one automated platform.',
+                'Nos Wazeefa: A job-matching app with personalized recommendations.',
+                'Elite Academy: Professional football training for youth.',
+                'JoeX: App for managing merchandisers and promoters with real-time tracking.',
+              ],
+              ar: [
+                'جو مي: يحسن إدارة العمل ويوفر تتبعاً فورياً لمندوبي المبيعات.',
+                'نظام ERP (مدعوم من أودو): يدمج وظائف الأعمال في منصة واحدة مؤتمتة.',
+                'نص وظيفة: تطبيق ذكي للربط بين الوظائف والمتقدمين المناسبين.',
+                'أكاديمية إيليت: برامج تدريب احترافية في كرة القدم لتطوير المواهب.',
+                'جو إكس: تطبيق لإدارة المروجين يتيح تتبع الحضور والمبيعات والمخزون بالموقع.',
+              ],
+            },
+            objectData: {},
+            list_Object: [],
+            position: 11,
+            visible: true,
+          },
+        ],
+      },
+    ];
+
+    await this.pageRepository.clear(); 
+    const dataEntities = this.pageRepository.create(data as any);
+    await this.pageRepository.save(dataEntities); 
+  }
+
 
   private async seedPageMeta() {
     const data = [
       {
         slug: 'home',
         keywords: ['home', 'landing', 'website', 'meta'],
-        custom_head_script: '<style>body { background-color: #f0f0f0; }</style>',
-        custom_body_script: "<script>console.log('Welcome to the homepage');</script>",
+        custom_head_script:
+          '<style>body { background-color: #f0f0f0; }</style>',
+        custom_body_script:
+          "<script>console.log('Welcome to the homepage');</script>",
         og_tags: {
           title: 'Home - MySite',
           description: 'The homepage of MySite',
@@ -161,16 +668,18 @@ export class Seeder {
         translations: {
           en: {
             title: 'Terms and Conditions',
-            description: 'Please read our terms and conditions carefully before using our website.',
+            description:
+              'Please read our terms and conditions carefully before using our website.',
           },
           ar: {
             title: 'الشروط والأحكام',
-            description: 'يرجى قراءة الشروط والأحكام بعناية قبل استخدام موقعنا.',
+            description:
+              'يرجى قراءة الشروط والأحكام بعناية قبل استخدام موقعنا.',
           },
         },
       },
     ];
-    
+
     await this.pageMetaReop.clear(); // Clears the table
     const dataEntities = this.pageMetaReop.create(data as any);
     await this.pageMetaReop.save(dataEntities); // Save all blog posts at once
@@ -431,7 +940,7 @@ export class Seeder {
         },
       },
     ];
-    
+
     await this.blogRepository.clear(); // Clears the table
     const dataEntities = this.blogRepository.create(data as any);
     await this.blogRepository.save(dataEntities); // Save all blog posts at once
@@ -565,7 +1074,6 @@ export class Seeder {
       },
     ];
 
-    
     await this.careerRepository.clear(); // Clears the table
     const dataEntities = this.careerRepository.create(data as any);
     await this.careerRepository.save(dataEntities); // Save all blog posts at once
@@ -734,7 +1242,6 @@ export class Seeder {
       },
     ];
 
-    
     await this.teamMembersRepository.clear(); // Clears the table
     const dataEntities = this.teamMembersRepository.create(data as any);
     await this.teamMembersRepository.save(dataEntities); // Save all blog posts at once
@@ -770,7 +1277,7 @@ export class Seeder {
         image_url: '/uploads/website-images/about-us/2.png',
         image_alt: 'Team working together',
         slug: 'about-our-vission',
-        is_active: true
+        is_active: true,
       },
       {
         title: {
@@ -789,7 +1296,7 @@ export class Seeder {
         updated_at: new Date('2025-04-01T10:00:00Z'),
       },
       {
-        slug : 'contact',
+        slug: 'contact',
         title: {
           en: '',
           ar: 'تواصل معنا',
@@ -806,7 +1313,6 @@ export class Seeder {
       },
 
       {
-        
         title: {
           en: 'What We Offer',
           ar: 'ما نقدمه',
@@ -822,10 +1328,8 @@ export class Seeder {
         created_at: new Date('2025-04-02T11:15:00Z'),
         updated_at: new Date('2025-04-02T11:15:00Z'),
       },
-     
     ];
 
-    
     await this.sectionRepo.clear(); // Clears the table
     const dataEntities = this.sectionRepo.create(data as any);
     await this.sectionRepo.save(dataEntities);
@@ -1183,7 +1687,6 @@ export class Seeder {
       },
     ];
 
-    
     await this.contactsReop.clear(); // Clears the table
     const projects = this.contactsReop.create(data as any);
     await this.contactsReop.save(projects);
@@ -1376,7 +1879,6 @@ export class Seeder {
       },
     ];
 
-    
     await this.offersReop.clear(); // Clears the table
     const entity = this.offersReop.create(data as any);
     await this.offersReop.save(entity);

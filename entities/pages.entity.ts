@@ -54,8 +54,18 @@ export class Page {
     };
     title?: { ar?: any; en?: any };
     content?: { ar?: any; en?: any };
-    list?: string[];
-    objectData?: Record<string, any>;
+    list?: {
+      ar?: string[];
+      en?: string[];
+    };
+    list_Object?: {
+      ar?: any[];
+      en?: any[];
+    };
+    objectData?: {
+      ar?: Record<string, any>;
+      en?: Record<string, any>;
+    };
     position?: number;
     visible?: boolean;
   }[];

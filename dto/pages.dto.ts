@@ -46,14 +46,21 @@ class SectionDto {
   @IsObject()
   content?: Record<string, any>;
 
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  list?: string[];
+  list?: {
+  ar?: string[];
+  en?: string[];
+};
 
-  @IsOptional()
-  @IsObject()
-  objectData?: Record<string, any>;
+list_Object?: {
+  ar?: string[];
+  en?: string[];
+};
+
+objectData?: {
+  ar?: Record<string, any>;
+  en?: Record<string, any>;
+};
+
 
   @IsOptional()
   @IsNumber()

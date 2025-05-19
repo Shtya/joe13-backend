@@ -44,13 +44,13 @@ export class PageController {
     );
   }
 
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<Page> {
-    return this.pageService.findOne(id);
+  @Get(':slug')
+  findBySlug(@Param('slug') slug: string): Promise<Page> {
+    return this.pageService.findBySlug(slug);
   }
 
   @Post()
-  create(@Body() createPageDto: CreatePageDto): Promise<Page> {
+  create(@Body() createPageDto: CreatePageDto) {
     return this.pageService.customCreate(createPageDto);
   }
 
@@ -168,7 +168,7 @@ export class PageController {
     @Param('sectionId') sectionId: string,
   ) {
     const page = await this.pageService.findOne(id);
-    console.log(page)
+    console.log(page);
     if (!page) throw new NotFoundException('Page not found');
 
     if (!page.sections) throw new NotFoundException('Sections not found');
