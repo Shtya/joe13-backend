@@ -5,8 +5,7 @@ export class CreatePartnerDto {
   @IsNotEmpty()
   name: { en: string; ar: string };
 
-  @IsString()
-  @IsNotEmpty()
+
   logo_url: string;
 
   @IsString()
