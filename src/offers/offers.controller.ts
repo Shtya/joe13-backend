@@ -20,13 +20,13 @@ export class OffersController {
   // Create Offer
   @Post()
   @UseInterceptors(FileInterceptor('file', multerOptions))
-  async create(@Body() dto: CreateOfferDto , @UploadedFile() file: any) {
+  async create(@Body() dto: any , @UploadedFile() file: any) {
 
     const department = await this.departmentRepository.findOne({ where: { id: dto.department_id }, });
     if (!department) throw new BadRequestException( `Department with id ${dto.department_id} does not exist`, );
     
-    console.log(department)
     dto.department_id  = department 
+    
     if (file) {
       dto.image_url = `/uploads/${file.filename}`;
       if(!dto.image_alt) dto.image_alt = dto.name?.en || dto.name?.ar;

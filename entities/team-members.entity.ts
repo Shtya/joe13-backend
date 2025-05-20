@@ -20,6 +20,9 @@ export class TeamMember {
   @Column()
   image_alt: string;
 
+  @Column({nullable : true , default : 0})
+  order: number;
+
   @CreateDateColumn()
   created_at: Date;
 

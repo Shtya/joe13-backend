@@ -45,7 +45,6 @@ export class Seeder {
   async run() {
     // await this.seedBlogs();
     // await this.seedCareers();
-    // await this.seedteamMembers();
     // await this.seedDepartments();
     // await this.seedProjects();
     // await this.seedContacts();
@@ -53,18 +52,130 @@ export class Seeder {
     // await this.seedPartners();
     // await this.seedSections();
     // await this.seedPageMeta();
-    await this.seedPages();
+    // await this.seedPages();
+    await this.seedteamMembers();
   }
 
-
-
-
-  // sudo nano /etc/nginx/sites-available/api.joe-13-backend.com
   private async seedPages() {
     const data = [
       {
+        slug: 'about-us',
+        title: 'about us',
+        meta: {
+          title: 'About Joe13 - Our Story, Vision & Mission',
+          description:
+            'Learn about Joe13, a marketing and software company founded in 2013. Discover our journey, values, and how we innovate through technology and teamwork.',
+          keywords: [
+            'About Joe13',
+            'Joe13 Company',
+            'Marketing Company',
+            'Software Development',
+            'Innovation',
+            'Teamwork',
+            'IT Solutions',
+            'Company Vision',
+            'Mission Statement',
+          ],
+          canonicalUrl: 'https://yourdomain.com/about-us',
+          ogTitle: 'About Joe13 - Our Story, Vision & Mission',
+          ogDescription:
+            'Get to know Joe13, a leader in marketing and software solutions. Learn about our foundation, core values, and commitment to innovation.',
+          ogImage: {
+            url: '/uploads/joe-13/logo.png',
+            alt: 'Joe13 Logo',
+          },
+          ogUrl: 'https://yourdomain.com/about-us',
+          ogType: 'website',
+          structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Joe13',
+            url: 'https://yourdomain.com/about-us',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://yourdomain.com/uploads/joe-13/logo.png',
+              caption: 'Joe13 Logo',
+            },
+            description:
+              'Joe13 is a marketing and software development company founded in 2013. We empower businesses with innovative IT solutions and strong teamwork.',
+            sameAs: [
+              'https://www.linkedin.com/company/joe13',
+              'https://www.facebook.com/joe13',
+              'https://www.instagram.com/joe13',
+            ],
+          },
+          headScript: "<script>console.log('Head script loaded');</script>",
+          bodyScript: "<script>console.log('Body script loaded');</script>",
+        },
+        sections: [
+          {
+            id: 'sec1',
+            image: {
+              url: '/uploads/joe-13/about-us/1.png',
+              alt: 'Team working together',
+            },
+            title: {
+              en: 'Who We Are',
+              ar: 'من نحن',
+            },
+            content: {
+              en: 'JOE13 is a marketing and software development company founded in 2013 to leverage years of expertise across various industries to help companies realize their optimal value proposition...',
+              ar: 'شركة JOE13 هي شركة تسويق وتطوير برمجيات تأسست في عام 2013...',
+            },
+
+            list: [],
+            objectData: {},
+            list_Object: {},
+            position: 1,
+            visible: true,
+          },
+          {
+            id: 'sec2',
+            image: {
+              url: '/uploads/joe-13/about-us/2.png',
+              alt: 'Team working together',
+            },
+            title: {
+              en: 'Our Vision',
+              ar: 'رؤيتنا',
+            },
+            content: {
+              en: 'Our vision is to be the leading force in the MENA region and globally by combining innovation and IT efficiency, empowering businesses to reach their full potential...',
+              ar: 'JOE13 هي شركة تسويق وتطوير برمجيات تم تأسيسها في عام 2013...',
+            },
+
+            list: [],
+            objectData: {},
+            list_Object: {},
+            position: 1,
+            visible: true,
+          },
+          {
+            id: 'sec3',
+            image: {
+              url: '/uploads/joe-13/about-us/3.png',
+              alt: 'Team working together',
+            },
+            title: {
+              en: 'Our Mission',
+              ar: 'مهمتنا',
+            },
+            content: {
+              en: 'Our success lies in what our team can and will achieve. By investing in our people across all disciplines, we strive to elevate our clients’ vision and position ourselves as pioneers across the MENA region and beyond...',
+              ar: 'إن عامل نجاحنا القيم هو ما يستطيع فريقنا تحقيقه...',
+            },
+
+            list: [],
+            objectData: {},
+            list_Object: {},
+            position: 1,
+            visible: true,
+          },
+        ],
+      },
+      {
         slug: 'home-page',
-        title : "home page",
+        title: 'home page',
         meta: {
           title: 'Joe13 - 360° Business Solutions with 11+ Years of Impact',
           description:
@@ -549,140 +660,96 @@ export class Seeder {
           },
         ],
       },
-    ];
-
-    await this.pageRepository.clear(); 
-    const dataEntities = this.pageRepository.create(data as any);
-    await this.pageRepository.save(dataEntities); 
-  }
-
-
-  private async seedPageMeta() {
-    const data = [
-      {
-        slug: 'home',
-        keywords: ['home', 'landing', 'website', 'meta'],
-        custom_head_script:
-          '<style>body { background-color: #f0f0f0; }</style>',
-        custom_body_script:
-          "<script>console.log('Welcome to the homepage');</script>",
-        og_tags: {
-          title: 'Home - MySite',
-          description: 'The homepage of MySite',
-          image: 'https://example.com/images/og-home.jpg',
-          url: 'https://example.com/home',
-          type: 'website',
-        },
-        translations: {
-          en: {
-            title: 'Welcome to Our Website',
-            description: 'This is the home page of our amazing website.',
-          },
-          ar: {
-            title: 'مرحبًا بكم في موقعنا',
-            description: 'هذه هي الصفحة الرئيسية لموقعنا الرائع.',
-          },
-        },
-      },
-      {
-        slug: 'about',
-        keywords: ['about', 'company', 'info'],
-        custom_head_script: '',
-        custom_body_script: '',
-        og_tags: {
-          title: 'About Us - MySite',
-          description: 'Learn more about our company and team.',
-          image: 'https://example.com/images/og-about.jpg',
-          url: 'https://example.com/about',
-          type: 'article',
-        },
-        translations: {
-          en: {
-            title: 'About Us',
-            description: 'Learn more about our company and what we do.',
-          },
-          ar: {
-            title: 'من نحن',
-            description: 'تعرف على المزيد عن شركتنا وما نقوم به.',
-          },
-        },
-      },
-      {
-        slug: 'contact',
-        keywords: ['contact', 'support', 'help'],
-        custom_head_script: '',
-        custom_body_script: '',
-        og_tags: {
-          title: 'Contact Us - MySite',
-          description: 'Get in touch with us for support or inquiries.',
-          image: 'https://example.com/images/og-contact.jpg',
-          url: 'https://example.com/contact',
-          type: 'website',
-        },
-        translations: {
-          en: {
-            title: 'Contact Us',
-            description: 'Reach out to our team for help and support.',
-          },
-          ar: {
-            title: 'اتصل بنا',
-            description: 'ابقَ على تواصل – نحن هنا للمساعدة!',
-          },
-        },
-      },
       {
         slug: 'join-us',
-        keywords: ['contact', 'support', 'help'],
-        custom_head_script: '',
-        custom_body_script: '',
-        og_tags: {
-          title: 'Join Us - MySite',
-          description: 'Get in touch with us for support or inquiries.',
-          image: 'https://example.com/images/og-contact.jpg',
-          url: 'https://example.com/contact',
-          type: 'website',
-        },
-        translations: {
-          en: {
-            title: 'Join us',
-            description: 'Reach out to our team for help and support.',
+        title: 'join-us',
+        meta: {
+          title: 'Join Joe13 - Grow with Us',
+          description:
+            'Be part of Joe13’s dynamic and inclusive team. Explore career opportunities in a culture of innovation, collaboration, and personal growth.',
+          keywords: [
+            'Join Joe13',
+            'Careers',
+            'Jobs at Joe13',
+            'Work Culture',
+            'HR',
+            'Innovation',
+            'Teamwork',
+            'Flexible Work',
+          ],
+          canonicalUrl: 'https://yourdomain.com/join-us',
+          ogTitle: 'Join Joe13 - Where Talent Meets Opportunity',
+          ogDescription:
+            'Looking to make an impact? Join Joe13 and thrive in an innovative and inclusive work environment.',
+          ogImage: {
+            url: '/uploads/joe-13/logo.png',
+            alt: 'Joe13 Logo',
           },
-          ar: {
-            title: 'Join us',
-            description: 'ابقَ على تواصل – نحن هنا للمساعدة!',
+          ogUrl: 'https://yourdomain.com/join-us',
+          ogType: 'website',
+          structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Joe13',
+            url: 'https://yourdomain.com/join-us',
           },
+          headScript: "<script>console.log('Head script loaded');</script>",
+          bodyScript: "<script>console.log('Body script loaded');</script>",
         },
-      },
-      {
-        slug: 'terms',
-        keywords: ['terms', 'conditions', 'legal'],
-        custom_head_script: '',
-        custom_body_script: '',
-        og_tags: {
-          title: 'Terms and Conditions - MySite',
-          description: 'Please read our terms and conditions carefully.',
-          image: 'https://example.com/images/og-terms.jpg',
-          url: 'https://example.com/terms',
-          type: 'article',
-        },
-        translations: {
-          en: {
-            title: 'Terms and Conditions',
-            description:
-              'Please read our terms and conditions carefully before using our website.',
+
+        sections: [
+          {
+            id: 'sec1',
+            image: {
+              url: '/uploads/joe-13/joinus.png',
+              alt: 'alt image 1',
+            },
+            title: {
+              en: 'Join Us',
+              ar: 'انضم إلينا',
+            },
+            content: {
+              en: "At Joe13th, we are committed to creating a dynamic and inclusive work environment where innovation, collaboration, and personal growth are at the heart of everything we do. We're looking for talented individuals who are passionate about making a difference and ready to contribute to a company that values their unique vision and skills.",
+              ar: 'في Joe13th، نحن ملتزمون بخلق بيئة عمل ديناميكية وشاملة حيث تكون الابتكار، التعاون، والنمو الشخصي في صميم كل ما نقوم به. نحن نبحث عن أفراد موهوبين شغوفين بصنع الفرق ومستعدين للمساهمة في شركة تقدر رؤاهم ومهاراتهم الفريدة.',
+            },
+            list: [],
+            objectData: {},
+            list_Object: {
+              ar: [
+                {
+                  title: 'لماذا تختار Joe13th؟ ثقافة',
+                  list: [
+                    'ثقافة الابتكار: كن جزءًا من فريق يحتضن الإبداع ويشجع التفكير المبتكر.',
+                    'نمو مهني: نحن نستثمر في تطوير موظفينا المهني من خلال فرص التعلم المستمر.',
+                    'بيئة تعاونية: اعمل بجانب خبراء الصناعة وتعاون في مشاريع ذات تأثير حقيقي.',
+                    'التوازن بين العمل والحياة: نحن نؤمن بالحفاظ على توازن صحي بين العمل والحياة ونوفر ترتيبات عمل مرنة.',
+                    'مكان عمل شامل: نحن نحتفل بالتنوع ونسعى لخلق بيئة شاملة يشعر فيها الجميع بالتقدير والاحترام.',
+                  ],
+                },
+              ],
+              en: [
+                {
+                  title: 'Why Choose Joe13th? Culture',
+                  list: [
+                    'Culture of Innovation: Be part of a team that embraces creativity and encourages innovative thinking.',
+                    'Career Growth: We invest in our employees’ professional development through continuous learning opportunities.',
+                    'Collaborative Environment: Work alongside industry experts and contribute to impactful projects.',
+                    'Work-Life Balance: We believe in maintaining a healthy balance and offer flexible work arrangements.',
+                    'Inclusive Workplace: We celebrate diversity and strive to create an inclusive environment where everyone feels valued and respected.',
+                  ],
+                },
+              ],
+            },
+            position: 1,
+            visible: true,
           },
-          ar: {
-            title: 'الشروط والأحكام',
-            description:
-              'يرجى قراءة الشروط والأحكام بعناية قبل استخدام موقعنا.',
-          },
-        },
+        ],
       },
     ];
 
-    await this.pageMetaReop.clear(); // Clears the table
-    const dataEntities = this.pageMetaReop.create(data as any);
-    await this.pageMetaReop.save(dataEntities); // Save all blog posts at once
+    await this.pageRepository.clear();
+    const dataEntities = this.pageRepository.create(data as any);
+    await this.pageRepository.save(dataEntities);
   }
 
   private async seedBlogs() {
@@ -976,8 +1043,6 @@ export class Seeder {
           en: 'software, engineer, developer, coding, remote',
           ar: 'برمجيات، مهندس، مطور، ترميز، عن بُعد',
         },
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
       },
       {
         title: { en: 'Product Manager', ar: 'مدير منتج' },
@@ -1088,10 +1153,9 @@ export class Seeder {
           en: 'CEO with a vision to drive success.',
           ar: 'مع أكثر من 20 عامًا في المبيعات والتجزئة والتسويق، قاد يوسف النمو في شركات بارزة مثل أكسيوم تليكوم وسامسونج وJoe13. رؤيته الاستراتيجية ونهجه العملي يعززان ظهور العلامات التجارية ويشجعان النمو المستدام بفضل خبرته في تحليل السوق والتفاعل مع العملاء.',
         },
-        image_url: '/uploads/website-images/about-us/person1.png',
+        image_url: '/uploads/joe-13/about-us/person1.png',
         image_alt: 'Yousef Kamal Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 1 
       },
       {
         name: { en: 'Adnan Obaid', ar: 'عدنان عبيد' },
@@ -1100,10 +1164,9 @@ export class Seeder {
           en: 'General Manager at Joe13th.',
           ar: 'متخصص في العمليات والتسويق لأكثر من 15 عامًا. منذ عام 2019، قاد عدنان Joe13، حيث قاد مبادرات استراتيجية للنمو. يشمل خبرته أدوارًا في Advance Core Technology وشركة Yes Arabia للإنتاج، وشارك في تأسيس مركز Wisdom of Knowledge للتدريب في دبي.',
         },
-        image_url: '/uploads/website-images/about-us/person2.png',
+        image_url: '/uploads/joe-13/about-us/person2.png',
         image_alt: 'Adnan Obaid Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 2 
       },
       {
         name: { en: 'Ahmed Refaat', ar: 'أحمد رفعت' },
@@ -1112,10 +1175,9 @@ export class Seeder {
           en: 'Chief Financial Officer with strategic insight.',
           ar: 'خبير في الإدارة المالية، وتنفيذ نظم ERP، والتخطيط الاستراتيجي لأكثر من 20 عامًا. قاد تحويلات مالية، وأدار استثمارات، وأشرف على مشاريع الأتمتة. حاصل على شهادات CPA وCMA وCFA.',
         },
-        image_url: '/uploads/website-images/about-us/person3.png',
+        image_url: '/uploads/joe-13/about-us/person3.png',
         image_alt: 'Ahmed Refaat Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 3 
       },
       {
         name: { en: 'Eng. Mohammed Kamal', ar: 'م. محمد كمال' },
@@ -1127,10 +1189,9 @@ export class Seeder {
           en: 'Oversees country operations efficiently.',
           ar: 'يركز على الحوكمة المؤسسية لأكثر من 5 سنوات، متخصصًا في تطوير الهياكل التنظيمية والأطر الفعالة. يلتزم بتحقيق الشفافية والكفاءة داخل الشركة.',
         },
-        image_url: '/uploads/website-images/about-us/person4.png',
+        image_url: '/uploads/joe-13/about-us/person4.png',
         image_alt: 'Mohammed Kamal Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 4 
       },
       {
         name: { en: 'Ahmad Alkashakri', ar: 'أحمد الكشاكري' },
@@ -1139,10 +1200,9 @@ export class Seeder {
           en: 'Leads the business department with excellence.',
           ar: 'يقود قسم الأعمال بامتياز.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-Alkashakri.png',
         image_alt: 'Ahmad Alkashakri Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 5 
       },
       {
         name: { en: 'Nour Eldien Mohamed', ar: 'نور الدين محمد' },
@@ -1151,10 +1211,9 @@ export class Seeder {
           en: 'Manages software projects and teams.',
           ar: 'يدير مشاريع البرمجيات والفرق.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-nour.png',
         image_alt: 'Nour Eldien Mohamed Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 6 
       },
       {
         name: { en: 'Faisel', ar: 'فيصل' },
@@ -1163,10 +1222,9 @@ export class Seeder {
           en: 'Leading the marketing initiatives.',
           ar: 'يقود مبادرات التسويق.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-faisel.png',
         image_alt: 'Faisel Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 7 
       },
       {
         name: { en: 'Somaya Abdullah', ar: 'سمية عبدالله' },
@@ -1175,10 +1233,9 @@ export class Seeder {
           en: 'Supervises HR operations and employee relations.',
           ar: 'تشرف على عمليات الموارد البشرية وعلاقات الموظفين.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-somaya.png',
         image_alt: 'Somaya Abdullah Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 8 
       },
       {
         name: { en: 'Abdulaziz', ar: 'عبدالعزيز' },
@@ -1187,10 +1244,9 @@ export class Seeder {
           en: 'Builds smart systems using AI technology.',
           ar: 'يبني أنظمة ذكية باستخدام تقنيات الذكاء الاصطناعي.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-abdulaziz.png',
         image_alt: 'Abdulaziz Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 9 
       },
       {
         name: { en: 'Lamis Saadoun', ar: 'لميس سعدون' },
@@ -1199,10 +1255,9 @@ export class Seeder {
           en: 'Ensures smooth coordination across teams.',
           ar: 'تضمن التنسيق السلس بين الفرق.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-lamis.png',
         image_alt: 'Lamis Saadoun Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 10 
       },
       {
         name: { en: 'Hani Darwish', ar: 'هاني درويش' },
@@ -1211,10 +1266,9 @@ export class Seeder {
           en: 'Handles all financial and accounting matters.',
           ar: 'يتولى جميع الأمور المالية والمحاسبية.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-hani.png',
         image_alt: 'Hani Darwish Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 11 
       },
       {
         name: { en: 'Mohammed Alahdal', ar: 'محمد الأهدل' },
@@ -1223,10 +1277,9 @@ export class Seeder {
           en: 'Plans and oversees projects from start to finish.',
           ar: 'بأكثر من 4 سنوات من الخبرة، يُعرف م/محمد الأهدل ببناء علاقات عملاء طويلة الأمد وتقديم حلول مخصصة.',
         },
-        image_url: '/uploads/website-images/about-us/person7.png',
+        image_url: '/uploads/joe-13/about-us/person7.png',
         image_alt: 'Mohammed Alahdal Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 12 
       },
       {
         name: { en: 'Rahim Ghafoor', ar: 'رحيم غفور' },
@@ -1235,10 +1288,9 @@ export class Seeder {
           en: 'Handles complex logistics and supply chains.',
           ar: 'يتعامل مع العمليات اللوجستية وسلاسل التوريد المعقدة.',
         },
-        image_url: '/uploads/website-images/about-us/unknown-person.png',
+        image_url: '/uploads/joe-13/about-us/person-rahim.png',
         image_alt: 'Rahim Ghafoor Image',
-        created_at: '2025-04-01T10:00:00Z',
-        updated_at: '2025-04-02T12:00:00Z',
+        order : 13 
       },
     ];
 
@@ -1250,52 +1302,6 @@ export class Seeder {
   private async seedSections() {
     const data = [
       {
-        title: {
-          en: '',
-          ar: 'من نحن',
-        },
-        content: {
-          en: '',
-          ar: 'شركة JOE13 هي شركة تسويق وتطوير برمجيات تأسست في عام 2013 لاستثمار سنوات من الخبرات في مجالات مختلفة لمساعدة الشركات على تحقيق قيمتها المقترحة المثلى. على مدار السنوات، اكتسبت JOE13 ثقة عملائها من خلال تكوين فريق من الخبراء الذين مكنوهم من تحقيق المعادلة الصحيحة بين كفاءة تكنولوجيا المعلومات والابتكار في الأعمال.',
-        },
-        image_url: '/uploads/website-images/about-us/1.png',
-        image_alt: 'Team working together',
-        slug: 'about-who-are-you',
-        is_active: true,
-        created_at: new Date('2025-04-01T10:00:00Z'),
-        updated_at: new Date('2025-04-01T10:00:00Z'),
-      },
-      {
-        title: {
-          en: '',
-          ar: 'رؤيتنا',
-        },
-        content: {
-          en: '',
-          ar: 'JOE13 هي شركة تسويق وتطوير برمجيات تم تأسيسها في عام 2013 لاستثمار سنوات من الخبرات في مجالات مختلفة لمساعدة الشركات على الوصول إلى عرض القيمة النهائية، وعلى مر السنين اكتسبت JOE13 ثقة عملائها من خلال الجمع بين فريق يتمتع بالخبرة التي ومكنتهم من تحقيق المعادلة الصحيحة بين كفاءة تكنولوجيا المعلومات والابتكار في مجال الأعمال.',
-        },
-        image_url: '/uploads/website-images/about-us/2.png',
-        image_alt: 'Team working together',
-        slug: 'about-our-vission',
-        is_active: true,
-      },
-      {
-        title: {
-          en: '',
-          ar: 'مهمتنا',
-        },
-        content: {
-          en: '',
-          ar: 'إن عامل نجاحنا القيم هو ما يستطيع فريقنا تحقيقه وما هو قادر على تحقيقه، وتركيزنا الخاص على تطوير رؤية عملائنا هو نتيجة محتملة للاستثمار في فريقنا في جميع المجالات مما يثبت أن مستقبلنا يميل إلى أن يكون الأول في منطقة الشرق الأوسط وشمال أفريقيا وفي جميع أنحاء العالم. نحن ننخرط في العمل الجماعي ونشجعه كعملية تجارية من خلال الاجتماعات والمؤتمرات وغيرها من الطرق التفاعلية "فريق كبير، عقل واحد.',
-        },
-        image_url: '/uploads/website-images/about-us/3.png',
-        image_alt: 'Team working together',
-        slug: 'about-our-mission',
-        is_active: true,
-        created_at: new Date('2025-04-01T10:00:00Z'),
-        updated_at: new Date('2025-04-01T10:00:00Z'),
-      },
-      {
         slug: 'contact',
         title: {
           en: '',
@@ -1305,7 +1311,7 @@ export class Seeder {
           en: '',
           ar: 'ابقَ على تواصل – نحن هنا للمساعدة!',
         },
-        image_url: '/uploads/website-images/contact-us/contact-us.png',
+        image_url: '/uploads/joe-13/contact-us/contact-us.png',
         image_alt: 'Contact us form',
         is_active: true,
         created_at: new Date('2025-04-05T09:00:00Z'),
@@ -1321,7 +1327,7 @@ export class Seeder {
           en: 'Explore a wide range of professional services tailored to your needs.',
           ar: 'استكشف مجموعة واسعة من الخدمات المهنية المصممة لتلبية احتياجاتك.',
         },
-        image_url: '/uploads/website-images/about-us/3.png',
+        image_url: '/uploads/joe-13/about-us/3.png',
         image_alt: 'Professional services',
         slug: 'services',
         is_active: true,

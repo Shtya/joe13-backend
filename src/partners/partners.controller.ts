@@ -18,6 +18,7 @@ export class PartnersController {
       dto.logo_url = `/uploads/${file.filename}`;
       if(!dto.logo_alt) dto.logo_alt = dto.name?.en 
     }
+    
     return this.partnerService.create(dto);
   }
 

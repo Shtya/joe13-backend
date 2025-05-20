@@ -2,9 +2,7 @@ import { Controller, Get, Post, Body, Param, Put, Delete, Patch, UseInterceptors
 import { TeamMembersService } from './team-members.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'common/multer.config';
-import { slugify } from 'utils/slugify';
 import { CreateTeamMemberDto, UpdateTeamMemberDto } from 'dto/team-members.dto';
-import { parseJsonFields } from 'utils/parseJsonFields';
 
 @Controller('team-members')
 export class TeamMembersController {

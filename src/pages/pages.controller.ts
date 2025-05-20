@@ -57,7 +57,7 @@ export class PageController {
   @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updatePageDto: UpdatePageDto,
+    @Body() updatePageDto: any,
   ): Promise<Page> {
     if (updatePageDto.sections) {
       const sectionIds = updatePageDto.sections.map((s) => s.id);
