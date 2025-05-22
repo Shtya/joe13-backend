@@ -20,20 +20,11 @@ import { IsObject, IsOptional, ValidateNested, IsArray, IsNumber, IsString, } fr
 	@Type(() => LocalizedString)
 	description: LocalizedString;
   
-	@IsObject({ message: 'Meta title must be a JSON object with en and ar' })
-	@ValidateNested()
-	@Type(() => LocalizedString)
-	meta_title: LocalizedString;
-  
-	@IsObject({ message: 'Meta description must be a JSON object with en and ar' })
-	@ValidateNested()
-	@Type(() => LocalizedString)
-	meta_description: LocalizedString;
-  
-	@IsObject({ message: 'Meta keywords must be a JSON object with en and ar' })
-	@ValidateNested()
-	@Type(() => LocalizedString)
-	meta_keywords: LocalizedString;
+	@IsOptional() @IsString() slug?: string;
+	@IsOptional() @IsString() meta_title?: string;
+  	@IsOptional() @IsString() meta_description?: string;
+	@IsOptional() @IsArray() @IsString({ each: true }) meta_keywords?: string[];
+
   
 	@IsString({ message: 'Department ID must be a string' })
 	department_id: string;

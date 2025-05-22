@@ -42,22 +42,96 @@ export class Seeder {
     this.partnerRepository = this.dataSource.getRepository(Partner);
   }
 
+  // await this.seedSections();
+  // await this.seedPageMeta();
+  // await this.seedPartners();
   async run() {
     // await this.seedBlogs();
     // await this.seedCareers();
-    // await this.seedDepartments();
-    // await this.seedProjects();
     // await this.seedContacts();
-    // await this.seedOffers();
-    // await this.seedPartners();
-    // await this.seedSections();
-    // await this.seedPageMeta();
     // await this.seedPages();
-    await this.seedteamMembers();
+    // await this.seedteamMembers();
+    // await this.seedDepartments();
+    // await this.seedOffers();
+    await this.seedProjects();
   }
 
   private async seedPages() {
     const data = [
+      {
+        slug: 'projects',
+        title: 'projects',
+        meta: {
+          title:
+            'Joe13 Projects - Delivering 180+ Success Stories Across 47 Cities',
+          description:
+            'Explore the diverse projects executed by Joe13 across marketing, technology, HR, and event management. Trusted by over 100 clients in 47 cities.',
+          keywords: [
+            'Joe13 Projects',
+            'Marketing Campaigns',
+            'Software Projects',
+            'Event Management Portfolio',
+            'Telecom Solutions',
+            'HR Outsourcing Projects',
+            'ERP Implementations',
+            'Digital Transformation',
+            'Business Success Stories',
+          ],
+          canonicalUrl: 'https://yourdomain.com/projects',
+          ogTitle:
+            'Joe13 Projects - 180+ Successful Projects in Tech, Marketing & HR',
+          ogDescription:
+            'Discover Joe13’s portfolio of 180+ successful projects spanning marketing, software, HR, and event management across 47 cities.',
+          ogImage: {
+            url: '/uploads/joe-13/logo.png',
+            alt: 'Joe13 Logo',
+          },
+          ogUrl: 'https://yourdomain.com/projects',
+          ogType: 'website',
+          structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Joe13',
+            url: 'https://yourdomain.com/projects',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://yourdomain.com/uploads/joe-13/logo.png',
+              caption: 'Joe13 Logo',
+            },
+            description:
+              'A marketing and software development company empowering innovation through technology and teamwork.',
+            sameAs: [
+              'https://www.linkedin.com/company/joe13',
+              'https://www.facebook.com/joe13',
+              'https://www.instagram.com/joe13',
+            ],
+          },
+          headScript: "<script>console.log('Head script loaded');</script>",
+          bodyScript: "<script>console.log('Body script loaded');</script>",
+        },
+        sections: [
+          {
+            id: 'sec1',
+            image: {
+              url: '/uploads/joe-13/projects.png',
+              alt: 'Showcase of Joe13 Projects',
+            },
+            title: {
+              en: 'Our Projects',
+              ar: 'مشاريعنا',
+            },
+            content: {
+              en: 'Joe13 takes pride in over 180 successful projects across diverse sectors including digital marketing, AI software development, HR outsourcing, event management, and telecom. Our commitment to excellence and innovation has made us a trusted partner for 100+ clients in 47 cities.',
+              ar: 'تفخر شركة Joe13 بأكثر من 180 مشروعًا ناجحًا في مجالات متنوعة تشمل التسويق الرقمي، تطوير البرمجيات بالذكاء الاصطناعي، تعهيد الموارد البشرية، إدارة الفعاليات، وخدمات الاتصالات. لقد جعلنا التزامنا بالتميز والابتكار شريكًا موثوقًا لأكثر من 100 عميل في 47 مدينة.',
+            },
+            list: [],
+            objectData: {},
+            list_Object: {},
+            position: 1,
+            visible: true,
+          },
+        ],
+      },
       {
         slug: 'about-us',
         title: 'about us',
@@ -1155,7 +1229,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person1.png',
         image_alt: 'Yousef Kamal Image',
-        order : 1 
+        order: 1,
       },
       {
         name: { en: 'Adnan Obaid', ar: 'عدنان عبيد' },
@@ -1166,7 +1240,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person2.png',
         image_alt: 'Adnan Obaid Image',
-        order : 2 
+        order: 2,
       },
       {
         name: { en: 'Ahmed Refaat', ar: 'أحمد رفعت' },
@@ -1177,7 +1251,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person3.png',
         image_alt: 'Ahmed Refaat Image',
-        order : 3 
+        order: 3,
       },
       {
         name: { en: 'Eng. Mohammed Kamal', ar: 'م. محمد كمال' },
@@ -1191,7 +1265,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person4.png',
         image_alt: 'Mohammed Kamal Image',
-        order : 4 
+        order: 4,
       },
       {
         name: { en: 'Ahmad Alkashakri', ar: 'أحمد الكشاكري' },
@@ -1202,7 +1276,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-Alkashakri.png',
         image_alt: 'Ahmad Alkashakri Image',
-        order : 5 
+        order: 5,
       },
       {
         name: { en: 'Nour Eldien Mohamed', ar: 'نور الدين محمد' },
@@ -1213,7 +1287,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-nour.png',
         image_alt: 'Nour Eldien Mohamed Image',
-        order : 6 
+        order: 6,
       },
       {
         name: { en: 'Faisel', ar: 'فيصل' },
@@ -1224,7 +1298,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-faisel.png',
         image_alt: 'Faisel Image',
-        order : 7 
+        order: 7,
       },
       {
         name: { en: 'Somaya Abdullah', ar: 'سمية عبدالله' },
@@ -1235,7 +1309,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-somaya.png',
         image_alt: 'Somaya Abdullah Image',
-        order : 8 
+        order: 8,
       },
       {
         name: { en: 'Abdulaziz', ar: 'عبدالعزيز' },
@@ -1246,7 +1320,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-abdulaziz.png',
         image_alt: 'Abdulaziz Image',
-        order : 9 
+        order: 9,
       },
       {
         name: { en: 'Lamis Saadoun', ar: 'لميس سعدون' },
@@ -1257,7 +1331,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-lamis.png',
         image_alt: 'Lamis Saadoun Image',
-        order : 10 
+        order: 10,
       },
       {
         name: { en: 'Hani Darwish', ar: 'هاني درويش' },
@@ -1268,7 +1342,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-hani.png',
         image_alt: 'Hani Darwish Image',
-        order : 11 
+        order: 11,
       },
       {
         name: { en: 'Mohammed Alahdal', ar: 'محمد الأهدل' },
@@ -1279,7 +1353,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person7.png',
         image_alt: 'Mohammed Alahdal Image',
-        order : 12 
+        order: 12,
       },
       {
         name: { en: 'Rahim Ghafoor', ar: 'رحيم غفور' },
@@ -1290,7 +1364,7 @@ export class Seeder {
         },
         image_url: '/uploads/joe-13/about-us/person-rahim.png',
         image_alt: 'Rahim Ghafoor Image',
-        order : 13 
+        order: 13,
       },
     ];
 
@@ -1299,116 +1373,84 @@ export class Seeder {
     await this.teamMembersRepository.save(dataEntities); // Save all blog posts at once
   }
 
-  private async seedSections() {
-    const data = [
-      {
-        slug: 'contact',
-        title: {
-          en: '',
-          ar: 'تواصل معنا',
-        },
-        content: {
-          en: '',
-          ar: 'ابقَ على تواصل – نحن هنا للمساعدة!',
-        },
-        image_url: '/uploads/joe-13/contact-us/contact-us.png',
-        image_alt: 'Contact us form',
-        is_active: true,
-        created_at: new Date('2025-04-05T09:00:00Z'),
-        updated_at: new Date('2025-04-05T09:00:00Z'),
-      },
 
-      {
-        title: {
-          en: 'What We Offer',
-          ar: 'ما نقدمه',
-        },
-        content: {
-          en: 'Explore a wide range of professional services tailored to your needs.',
-          ar: 'استكشف مجموعة واسعة من الخدمات المهنية المصممة لتلبية احتياجاتك.',
-        },
-        image_url: '/uploads/joe-13/about-us/3.png',
-        image_alt: 'Professional services',
-        slug: 'services',
-        is_active: true,
-        created_at: new Date('2025-04-02T11:15:00Z'),
-        updated_at: new Date('2025-04-02T11:15:00Z'),
-      },
-    ];
-
-    await this.sectionRepo.clear(); // Clears the table
-    const dataEntities = this.sectionRepo.create(data as any);
-    await this.sectionRepo.save(dataEntities);
-  }
 
   private async seedDepartments() {
     const departmentsData = [
       {
-        name: { en: 'Marketing', ar: 'التسويق' },
+        name: {
+          en: 'IT & Software Development',
+          ar: 'تطوير البرمجيات وتكنولوجيا المعلومات',
+        },
         description: {
-          en: 'Handles branding and campaigns.',
-          ar: 'يتولى العلامة التجارية والحملات.',
+          en: 'Building modern software systems and digital platforms.',
+          ar: 'بناء أنظمة برمجية حديثة ومنصات رقمية.',
         },
         image_url: '/upload/dept-marketing.png',
-        image_alt: 'Marketing team',
+        image_alt: 'IT and Software Department',
       },
       {
-        name: { en: 'Development', ar: 'التطوير' },
+        name: { en: 'Event Management', ar: 'إدارة الفعاليات' },
         description: {
-          en: 'Builds digital products and systems.',
-          ar: 'يبني المنتجات والأنظمة الرقمية.',
+          en: 'Organizing and managing corporate and social events.',
+          ar: 'تنظيم وإدارة الفعاليات والمؤتمرات والاحتفالات.',
         },
-        image_url: '/upload/dept-dev.png',
-        image_alt: 'Developers working',
+        image_url: '/upload/dept-marketing.png',
+        image_alt: 'Event Management Team Planning',
       },
       {
-        name: { en: 'Design', ar: 'التصميم' },
+        name: { en: 'Digital Marketing', ar: 'التسويق الرقمي' },
         description: {
-          en: 'Designs UI/UX for apps.',
-          ar: 'يصمم واجهات المستخدم وتجربة المستخدم.',
+          en: 'Promoting brands and products via digital channels.',
+          ar: 'الترويج للعلامات التجارية والمنتجات عبر القنوات الرقمية.',
         },
-        image_url: '/upload/dept-design.png',
-        image_alt: 'Design sketches',
+        image_url: '/upload/dept-marketing.png',
+        image_alt: 'Digital Marketing Campaign Illustration',
       },
       {
-        name: { en: 'Sales', ar: 'المبيعات' },
+        name: { en: 'Mosanadah', ar: 'المساندة' },
         description: {
-          en: 'Focuses on customer acquisition.',
-          ar: 'يركز على اكتساب العملاء.',
+          en: 'Providing support services for internal operations.',
+          ar: 'تقديم خدمات المساندة والدعم للعمليات الداخلية.',
         },
-        image_url: '/upload/dept-sales.png',
-        image_alt: 'Sales presentation',
+        image_url: '/upload/dept-marketing.png',
+        image_alt: 'Support Services (Mosanadah)',
       },
       {
-        name: { en: 'HR', ar: 'الموارد البشرية' },
+        name: { en: 'telecoms', ar: 'الاتصالات' },
         description: {
-          en: 'Manages hiring and internal affairs.',
-          ar: 'يدير التوظيف والشؤون الداخلية.',
+          en: 'Delivering telecommunication and connectivity solutions.',
+          ar: 'توفير حلول الاتصالات والتواصل.',
         },
-        image_url: '/upload/dept-hr.png',
-        image_alt: 'HR meeting',
+        image_url: '/upload/dept-marketing.png',
+        image_alt: 'Telecom Solutions and Networking',
       },
       {
-        name: { en: 'Support', ar: 'الدعم الفني' },
-        description: {
-          en: 'Helps customers with issues.',
-          ar: 'يساعد العملاء في المشاكل.',
+        name: {
+          en: 'Manpower & HR Solutions',
+          ar: 'الموارد البشرية وحلول القوى العاملة',
         },
-        image_url: '/upload/dept-support.png',
-        image_alt: 'Support team',
+        description: {
+          en: 'Offering staffing and HR management services.',
+          ar: 'تقديم خدمات التوظيف وإدارة الموارد البشرية.',
+        },
+        image_url: '/upload/dept-marketing.png',
+        image_alt: 'HR and Workforce Management Services',
       },
       {
-        name: { en: 'Finance', ar: 'المالية' },
+        name: { en: 'Affiliate Marketing', ar: 'التسويق بالعمولة' },
         description: {
-          en: 'Handles budgeting and expenses.',
-          ar: 'يدير الميزانيات والمصاريف.',
+          en: 'Driving sales through affiliate partnerships.',
+          ar: 'زيادة المبيعات عبر شراكات التسويق بالعمولة.',
         },
-        image_url: '/upload/dept-finance.png',
-        image_alt: 'Financial report',
+        image_url: '/upload/dept-marketing.png',
+        image_alt: 'Affiliate Marketing Collaboration',
       },
     ];
 
-    await this.departmentRepo.clear(); // Clears the table
+    await this.offersReop.delete({}); // حذف جميع العروض
+    await this.departmentRepo.delete({}); // الآن يمكنك حذف الأقسام
+
     const departments = this.departmentRepo.create(departmentsData as any);
     await this.departmentRepo.save(departments);
   }
@@ -1418,108 +1460,1052 @@ export class Seeder {
     if (!departments.length) throw new Error('Departments not seeded.');
 
     const projectData = [
-      {
-        name: { en: 'Company Website', ar: 'موقع الشركة' },
-        description: {
-          en: 'Revamped corporate website.',
-          ar: 'تجديد موقع الشركة.',
+    {
+        "name": {
+            "ar": "أكاديمية النخبة للمهارات الرياضية",
+            "en": "Elite Skills Sport Academy"
         },
-        meta_title: { en: 'Corporate Site', ar: 'الموقع الرسمي' },
-        meta_description: {
-          en: 'Showcase of services and values.',
-          ar: 'عرض الخدمات والقيم.',
+        "slug": "elite-skills-sport-academy",
+        "description": {
+            "en": "Elite Skills Sports Academy is a learning environment designed for boys and girls ages 3-12. We are a private, European-style soccer academy for players and parents who value proper learning of the game at the youngest ages.",
+            "ar": "أكاديمية Elite Skills الرياضية هي بيئة تعليمية مصممة للبنين والبنات الذين تتراوح أعمارهم بين 3 و12 عامًا. نحن أكاديمية خاصة لكرة القدم على الطراز الأوروبي للاعبين وأولياء الأمور الذين يقدرون التعلم السليم للعبة في الأعمار الصغيرة."
         },
-        meta_keywords: { en: ['website', 'branding'], ar: ['موقع', 'هوية'] },
-      },
-      {
-        name: { en: 'Mobile App', ar: 'تطبيق الجوال' },
-        description: {
-          en: 'iOS & Android app.',
-          ar: 'تطبيق على أندرويد وآيفون.',
+        "meta_title": "Elite Skills Sport Academy",
+        "meta_description": "أكاديمية Elite Skills الرياضية هي بيئة تعليمية مصممة للبنين والبنات الذين تتراوح أعمارهم بين 3 و12 عامًا. نحن أكاديمية خاصة لكرة القدم على الطراز الأوروبي للاعبين وأولياء الأمور الذين يقدرون التعلم السليم للعبة في الأعمار الصغيرة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Elite Skills Sport Academy",
+                "url": "/uploads/joe-13/projects/1.png"
+            },
+            {
+                "id": 2,
+                "alt": "Elite Skills Sport Academy",
+                "url": "/uploads/joe-13/projects/2.png"
+            },
+            {
+                "id": 3,
+                "alt": "Elite Skills Sport Academy",
+                "url": "/uploads/joe-13/projects/3.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "خدمة ما بعد البيع",
+            "en": "After Sales Services"
         },
-        meta_title: { en: 'App Development', ar: 'تطوير التطبيق' },
-        meta_description: {
-          en: 'Book services on the go.',
-          ar: 'احجز الخدمات أثناء التنقل.',
+        "slug": "after-sales-services",
+        "description": {
+            "en": "is one of the biggest manufacturing companies in the middle east and was founded in 1975 their core business focused on the manufacture of heating, ventilation, and air conditioning products including air conditioners, actuators, heat exchangers, dampers, chillers, coolers, and air control products, we had the honor to work with them to create a mobile application where customers can book their technician appointment at their doorsteps.",
+            "ar": "العيسى هو أكبر مورد لأجهزة التكييف في الشرق الأوسط أنشئ عام ١٩٧٥م وهو يعمل مع شركة جبسون العالمية وهنا يأتي دور شركة جو١٣ في تسهيل المهام الإدارية وإنشاء تطبيق يخدم عملائها ويمكنهم من حجز موعد صيانة لباب المنزل"
         },
-        meta_keywords: { en: ['mobile', 'app'], ar: ['تطبيق', 'جوال'] },
-      },
-      {
-        name: { en: 'Internal CRM', ar: 'نظام إدارة علاقات العملاء' },
-        description: {
-          en: 'Custom CRM system.',
-          ar: 'نظام علاقات عملاء مخصص.',
+        "meta_title": "After Sales Services",
+        "meta_description": "العيسى هو أكبر مورد لأجهزة التكييف في الشرق الأوسط أنشئ عام ١٩٧٥م وهو يعمل مع شركة جبسون العالمية وهنا يأتي دور شركة جو١٣ في تسهيل المهام الإدارية وإنشاء تطبيق يخدم عملائها ويمكنهم من حجز موعد صيانة لباب المنزل",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "After Sales Services",
+                "url": "/uploads/joe-13/projects/4.png"
+            },
+            {
+                "id": 2,
+                "alt": "After Sales Services",
+                "url": "/uploads/joe-13/projects/5.png"
+            },
+            {
+                "id": 3,
+                "alt": "After Sales Services",
+                "url": "/uploads/joe-13/projects/6.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "الأعمال الإلكترونية",
+            "en": "E-Business"
         },
-        meta_title: { en: 'CRM', ar: 'نظام العملاء' },
-        meta_description: {
-          en: 'Manage clients efficiently.',
-          ar: 'إدارة العملاء بكفاءة.',
+        "slug": "e-business",
+        "description": {
+            "en": "Strengthen your Online presence and reach a wide range of of local and global markets. With the help of Joe13 specialists you can get ready to build your strong online infrastructure until your business is totally online.",
+            "ar": "تعزيز تواجدك على الإنترنت والوصول إلى مجموعة واسعة من الأسواق المحلية والعالمية. بمساعدة متخصصي Joe13 ، يمكنك الاستعداد لبناء بنيتك التحتية القوية عبر الإنترنت حتى يصبح عملك على الإنترنت بالكامل."
         },
-        meta_keywords: { en: ['crm', 'sales'], ar: ['نظام', 'مبيعات'] },
-      },
-      {
-        name: { en: 'Landing Page', ar: 'الصفحة الترويجية' },
-        description: {
-          en: 'Promotional one-pager.',
-          ar: 'صفحة ترويجية واحدة.',
+        "meta_title": "E-Business",
+        "meta_description": "تعزيز تواجدك على الإنترنت والوصول إلى مجموعة واسعة من الأسواق المحلية والعالمية. بمساعدة متخصصي Joe13 ، يمكنك الاستعداد لبناء بنيتك التحتية القوية عبر الإنترنت حتى يصبح عملك على الإنترنت بالكامل.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "E-Business",
+                "url": "/uploads/joe-13/projects/7.png"
+            },
+            {
+                "id": 2,
+                "alt": "E-Business",
+                "url": "/uploads/joe-13/projects/8.png"
+            },
+            {
+                "id": 3,
+                "alt": "E-Business",
+                "url": "/uploads/joe-13/projects/9.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "Energize",
+            "en": "Energize"
         },
-        meta_title: { en: 'Landing', ar: 'الصفحة الأولى' },
-        meta_description: {
-          en: 'Convert visitors to leads.',
-          ar: 'تحويل الزوار إلى عملاء محتملين.',
+        "slug": "energize",
+        "description": {
+            "en": "Energize has succeeded in building and sustaining with the biggest brands in the market. JOE13 created a high-quality web design that build a unique and engaging website with visual appeal for the website users.",
+            "ar": "نجحت شركة Energize في بناء ودعم أكبر العلامات التجارية في السوق. قامت شركة JOE13 بإنشاء تصميم ويب عالي الجودة لبناء موقع ويب فريد وجذاب مع جاذبية بصرية لمستخدمي الموقع."
         },
-        meta_keywords: { en: ['landing', 'conversion'], ar: ['صفحة', 'تحويل'] },
-      },
-      {
-        name: { en: 'Analytics Dashboard', ar: 'لوحة التحكم' },
-        description: { en: 'Interactive dashboard.', ar: 'لوحة تحكم تفاعلية.' },
-        meta_title: { en: 'Dashboard', ar: 'اللوحة' },
-        meta_description: {
-          en: 'Track KPIs in real time.',
-          ar: 'تتبع مؤشرات الأداء.',
+        "meta_title": "Energize",
+        "meta_description": "نجحت شركة Energize في بناء ودعم أكبر العلامات التجارية في السوق. قامت شركة JOE13 بإنشاء تصميم ويب عالي الجودة لبناء موقع ويب فريد وجذاب مع جاذبية بصرية لمستخدمي الموقع.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Energize",
+                "url": "/uploads/joe-13/projects/10.png"
+            },
+            {
+                "id": 2,
+                "alt": "Energize",
+                "url": "/uploads/joe-13/projects/11.png"
+            },
+            {
+                "id": 3,
+                "alt": "Energize",
+                "url": "/uploads/joe-13/projects/12.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "P & G",
+            "en": "P&G"
         },
-        meta_keywords: {
-          en: ['dashboard', 'analytics'],
-          ar: ['تحليلات', 'أداء'],
+        "slug": "p&g",
+        "description": {
+            "en": "P&G’s brands are household names and is used in almost every home in the Arabian Peninsula. We collaborated with them for managing their events and providing them with pleasant and skilled promoters. Our promoters are excelled in attracting new customers for the brand.",
+            "ar": "بروكتر أند جامبل علامة تجارية رائدة تضم الكثير من المنتجات المنزلية الهامة التى يكاد لا يخلو منها بيت فى شبه الجزيرة العربية وقد قامت جو١٣ بالتعاون مع الشركة الرائدة في إدارة الفعاليات والأحداث الخاصة بهم وتزويدهم بفريق من مسئولي الترويج الرائعين المهرة وقد حققت جو13 نجاح متميز فى ارقام المبيعات."
         },
-      },
-      {
-        name: { en: 'Recruitment Portal', ar: 'بوابة التوظيف' },
-        description: {
-          en: 'Job listings and applications.',
-          ar: 'وظائف وتقديمات.',
+        "meta_title": "P&G",
+        "meta_description": "بروكتر أند جامبل علامة تجارية رائدة تضم الكثير من المنتجات المنزلية الهامة التى يكاد لا يخلو منها بيت فى شبه الجزيرة العربية وقد قامت جو١٣ بالتعاون مع الشركة الرائدة في إدارة الفعاليات والأحداث الخاصة بهم وتزويدهم بفريق من مسئولي الترويج الرائعين المهرة وقد حققت جو13 نجاح متميز فى ارقام المبيعات.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 2,
+                "alt": "P&G",
+                "url": "/uploads/joe-13/projects/14.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "بيبسي",
+            "en": "Pepsi"
         },
-        meta_title: { en: 'Jobs Portal', ar: 'بوابة الوظائف' },
-        meta_description: {
-          en: 'Find and apply for jobs.',
-          ar: 'ابحث وقدم على الوظائف.',
+        "slug": "pepsi",
+        "description": {
+            "en": "We powered Pepsi with our event planning and event management experts, the success here exceed the expectations for one of the biggest concerts in Jeddah which got supplied by our talented promoters for their branding.",
+            "ar": "شركة بيبسى اشهر براند فى العالم، وقد قمامت جو١٣ بتعاون مشترك مع بيبسى في واحدة من أكبر الحفلات الموسيقية في جدة، بتزويد هذه الشركة الكبيرة بفريق من أفضل مسئولي الترويج الموهوبين للترويج للعلامات التجارية الخاصة بالشركة وقامت الشركة بتحقيق ما هو مطلوب."
         },
-        meta_keywords: { en: ['jobs', 'portal'], ar: ['وظائف', 'توظيف'] },
-      },
-      {
-        name: { en: 'Support Chatbot', ar: 'روبوت الدعم' },
-        description: {
-          en: 'AI-powered support assistant.',
-          ar: 'مساعد ذكي لخدمة العملاء.',
+        "meta_title": "Pepsi",
+        "meta_description": "شركة بيبسى اشهر براند فى العالم، وقد قمامت جو١٣ بتعاون مشترك مع بيبسى في واحدة من أكبر الحفلات الموسيقية في جدة، بتزويد هذه الشركة الكبيرة بفريق من أفضل مسئولي الترويج الموهوبين للترويج للعلامات التجارية الخاصة بالشركة وقامت الشركة بتحقيق ما هو مطلوب.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Pepsi",
+                "url": "/uploads/joe-13/projects/15.png"
+            },
+            {
+                "id": 2,
+                "alt": "Pepsi",
+                "url": "/uploads/joe-13/projects/16.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "Ice Age",
+            "en": "Ice Age"
         },
-        meta_title: { en: 'AI Chatbot', ar: 'روبوت ذكي' },
-        meta_description: {
-          en: 'Automated customer support.',
-          ar: 'دعم عملاء مؤتمت.',
+        "slug": "ice-age",
+        "description": {
+            "en": "Joe13 team was able to make the fiction come true by bringing Ice Age film characters from Bulgari directly to KSA along with climate simulation",
+            "ar": "فريق جو١٣ قادر على تحويل الخيال إلى حقيقة. فنحن قمنا بإحضار عصر الثلج الفيلم الشهير، من بلغاريا مباشرةً إلى المملكة العربية السعودية بصنع تماثيل حيوانية على درجة عالية من الكفاءة . فريقنا المحترف استطاع تحويل طقس المملكة الحار إلى الاحساس بالبرودة والجليد وجذب انظار الجميع."
         },
-        meta_keywords: { en: ['ai', 'chatbot'], ar: ['ذكاء اصطناعي', 'روبوت'] },
-      },
-    ];
+        "meta_title": "Ice Age",
+        "meta_description": "فريق جو١٣ قادر على تحويل الخيال إلى حقيقة. فنحن قمنا بإحضار عصر الثلج الفيلم الشهير، من بلغاريا مباشرةً إلى المملكة العربية السعودية بصنع تماثيل حيوانية على درجة عالية من الكفاءة . فريقنا المحترف استطاع تحويل طقس المملكة الحار إلى الاحساس بالبرودة والجليد وجذب انظار الجميع.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Ice Age",
+                "url": "/uploads/joe-13/projects/17.png"
+            },
+            {
+                "id": 2,
+                "alt": "Ice Age",
+                "url": "/uploads/joe-13/projects/18.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "الحازمي",
+            "en": "Alhazmi"
+        },
+        "slug": "alhazmi",
+        "description": {
+            "en": "We helped them build their online presence by taking full management of their digital marketing creating the best content and media design for their social media to form a strong meaningful platform. Along with their Google search, display and shopping campaigns. While also increasing their sales, followers and engagement.",
+            "ar": "ساعدناهم في بناء هويتهم اونلاين عن طريق إدارة كاملة لتسويقهم الرقمي بصنع أفضل المحتويات والتصاميم لوسائل التواصل الاجتماعية الخاصة بهم لتشكيل منصة قوية ذات مغزى"
+        },
+        "meta_title": "Alhazmi",
+        "meta_description": "ساعدناهم في بناء هويتهم اونلاين عن طريق إدارة كاملة لتسويقهم الرقمي بصنع أفضل المحتويات والتصاميم لوسائل التواصل الاجتماعية الخاصة بهم لتشكيل منصة قوية ذات مغزى",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Alhazmi",
+                "url": "/uploads/joe-13/projects/19.png"
+            },
+            {
+                "id": 2,
+                "alt": "Alhazmi",
+                "url": "/uploads/joe-13/projects/20.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "شاركس",
+            "en": "Sharks"
+        },
+        "slug": "sharks",
+        "description": {
+            "en": "We worked with shark to power and improve their social media platform from Facebook to Twitter. Planning their marketing strategies, monthly content plan, CPC and much more. In addition to professional google search, display and shopping campaigns.",
+            "ar": "عملنا حصريا مع شاركس لتقوية وتحسين منصة التواصل الاجتماعي الخاصة بهم ابتداء من فيسبوك إلى تويتر. خططنا استراتيجياتهم التسويقية، وخطة المحتوى الشهرية، والتصنيف المركزي للمنتجات وأكثر من ذلك بكثير. بالإضافة إلى حملات بحث، وعرض، والتسويق عبر قوقل."
+        },
+        "meta_title": "Sharks",
+        "meta_description": "عملنا حصريا مع شاركس لتقوية وتحسين منصة التواصل الاجتماعي الخاصة بهم ابتداء من فيسبوك إلى تويتر. خططنا استراتيجياتهم التسويقية، وخطة المحتوى الشهرية، والتصنيف المركزي للمنتجات وأكثر من ذلك بكثير. بالإضافة إلى حملات بحث، وعرض، والتسويق عبر قوقل.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Sharks",
+                "url": "/uploads/joe-13/projects/21.png"
+            },
+            {
+                "id": 2,
+                "alt": "Sharks",
+                "url": "/uploads/joe-13/projects/22.png"
+            },
+            {
+                "id": 3,
+                "alt": "Sharks",
+                "url": "/uploads/joe-13/projects/23.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "بيتاس",
+            "en": "BTAS"
+        },
+        "slug": "btas",
+        "description": {
+            "en": "We helped BTAS with the video contents and design as well as marketing campaigns for google, linked in and twitter. While also taking full control of their mobile app marketing to create competitive creative platforms.",
+            "ar": "ساعدنا بيتاس في محتويات الفيديو والتصميم، وكذلك حملات التسويق لقوقل، وتويتر، ولنكد ان. وفي نفس الوقت عملنا على حملة التسويقية للتطبيق الهاتفي لعمل منصة ابداعية ومنافسة."
+        },
+        "meta_title": "BTAS",
+        "meta_description": "ساعدنا بيتاس في محتويات الفيديو والتصميم، وكذلك حملات التسويق لقوقل، وتويتر، ولنكد ان. وفي نفس الوقت عملنا على حملة التسويقية للتطبيق الهاتفي لعمل منصة ابداعية ومنافسة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 2,
+                "alt": "BTAS",
+                "url": "/uploads/joe-13/projects/25.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "Eya Clean",
+            "en": "Eya Clean"
+        },
+        "slug": "eya-clean",
+        "description": {
+            "en": "Mosanadah provided expert financial consultation to Eya Clean, helping them optimize their financial strategies and achieve sustainable growth",
+            "ar": "قدمت مساندة استشارات مالية متخصصة لـ Eya Clean، مما ساعدهم على تحسين استراتيجياتهم المالية وتحقيق نمو مستدام."
+        },
+        "meta_title": "Eya Clean",
+        "meta_description": "قدمت مساندة استشارات مالية متخصصة لـ Eya Clean، مما ساعدهم على تحسين استراتيجياتهم المالية وتحقيق نمو مستدام.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Eya Clean",
+                "url": "/uploads/joe-13/projects/26.png"
+            }
+        ],
+        "department": 4
+    },
+    {
+        "name": {
+            "ar": "CPC",
+            "en": "CPC"
+        },
+        "slug": "cpc",
+        "description": {
+            "en": "Mosanadah implemented A cutting-edge ERP system for CPC, streamlining their operations, enhancing efficiency, and integrating key business processes. The strategic move empowered CPC to achieve better management and significant growth",
+            "ar": "نفذت مساندة نظام ERP متطور لـ CPC، مما ساهم في تبسيط عملياتهم وزيادة الكفاءة ودمج العمليات التجارية الرئيسية. هذه الخطوة الاستراتيجية مكنت CPC من تحقيق إدارة أفضل ونمو كبير."
+        },
+        "meta_title": "CPC",
+        "meta_description": "نفذت مساندة نظام ERP متطور لـ CPC، مما ساهم في تبسيط عملياتهم وزيادة الكفاءة ودمج العمليات التجارية الرئيسية. هذه الخطوة الاستراتيجية مكنت CPC من تحقيق إدارة أفضل ونمو كبير.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "CPC",
+                "url": "/uploads/joe-13/projects/27.png"
+            }
+        ],
+        "department": 4
+    },
+    {
+        "name": {
+            "ar": "Piva Cafe",
+            "en": "Piva Cafe"
+        },
+        "slug": "piva-cafe",
+        "description": {
+            "en": "Mosanadah provided Piva Café with a fully integrated financial management system, covering comprehensive account management and financial oversight. This collaboration aimed to enhance operational efficiency, streamline financial processes, and support Piva Café in achieving sustainable growth and success.",
+            "ar": "قدمت مساندة نظام إدارة مالية متكامل لـ Piva Café، يشمل إدارة حسابات شاملة ومراقبة مالية دقيقة. هدفت هذه الشراكة إلى تعزيز الكفاءة التشغيلية وتبسيط العمليات المالية ودعم Piva Café في تحقيق نمو مستدام وناجح."
+        },
+        "meta_title": "Piva Cafe",
+        "meta_description": "قدمت مساندة نظام إدارة مالية متكامل لـ Piva Café، يشمل إدارة حسابات شاملة ومراقبة مالية دقيقة. هدفت هذه الشراكة إلى تعزيز الكفاءة التشغيلية وتبسيط العمليات المالية ودعم Piva Café في تحقيق نمو مستدام وناجح.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Piva Cafe",
+                "url": "/uploads/joe-13/projects/28.png"
+            }
+        ],
+        "department": 4
+    },
+    {
+        "name": {
+            "ar": "MCCD",
+            "en": "MCCD"
+        },
+        "slug": "mccd",
+        "description": {
+            "en": "Mosanadah developed and implemented a tailored ERP system for MCCD, designed to streamline operations, optimize project management, and enhance overall efficiency, enabling the company to achieve its goals with precision and scalability",
+            "ar": "طورت ونفذت مساندة نظام ERP مخصص لـ MCCD، مصمم لتبسيط العمليات وتحسين إدارة المشاريع وزيادة الكفاءة العامة، مما مكن الشركة من تحقيق أهدافها بدقة وقابلية للتوسع."
+        },
+        "meta_title": "MCCD",
+        "meta_description": "طورت ونفذت مساندة نظام ERP مخصص لـ MCCD، مصمم لتبسيط العمليات وتحسين إدارة المشاريع وزيادة الكفاءة العامة، مما مكن الشركة من تحقيق أهدافها بدقة وقابلية للتوسع.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "MCCD",
+                "url": "/uploads/joe-13/projects/29.png"
+            }
+        ],
+        "department": 4
+    },
+    {
+        "name": {
+            "ar": "Sara Group",
+            "en": "Sara Group"
+        },
+        "slug": "sara-group",
+        "description": {
+            "en": "In collaboration with Sara Group, a leader in detergents and personal care products, we redefined their retail presence through impactful merchandising. Strategic product placement and captivating displays ensured their products stood out, boosting customer engagement and solidifying their market position",
+            "ar": "في تعاوننا مع Sara Group، الرائدة في منتجات التنظيف والعناية الشخصية، أعادنا تعريف وجودهم في تجارة التجزئة من خلال ترويج فعال. ساعدنا في وضع المنتجات بشكل استراتيجي وعروض جذابة لضمان تميز منتجاتهم وزيادة تفاعل العملاء وتعزيز موقعهم في السوق."
+        },
+        "meta_title": "Sara Group",
+        "meta_description": "في تعاوننا مع Sara Group، الرائدة في منتجات التنظيف والعناية الشخصية، أعادنا تعريف وجودهم في تجارة التجزئة من خلال ترويج فعال. ساعدنا في وضع المنتجات بشكل استراتيجي وعروض جذابة لضمان تميز منتجاتهم وزيادة تفاعل العملاء وتعزيز موقعهم في السوق.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Sara Group",
+                "url": "/uploads/joe-13/projects/30.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "Eya Clean",
+            "en": "Eya Clean"
+        },
+        "slug": "eya-clean-2",
+        "description": {
+            "en": "Eya Clean's journey as a client of JOE13 Activation Services exemplifies the transformative power of experiential marketing. By embracing activation strategies, Eye Clean not only differentiated itself in a competitive market but also forged meaningful connections with its audience",
+            "ar": "Eya Clean's journey as a client of JOE13 Activation Services exemplifies the transformative power of experiential marketing. By embracing activation strategies, Eye Clean not only differentiated itself in a competitive market but also forged meaningful connections with its audience"
+        },
+        "meta_title": "Eya Clean",
+        "meta_description": "Eya Clean's journey as a client of JOE13 Activation Services exemplifies the transformative power of experiential marketing. By embracing activation strategies, Eye Clean not only differentiated itself in a competitive market but also forged meaningful connections with its audience",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Eya Clean",
+                "url": "/uploads/joe-13/projects/31.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "Hersheys",
+            "en": "Hersheys"
+        },
+        "slug": "hersheys",
+        "description": {
+            "en": "Our collaboration with Hersheys, one of the world’s most iconic chocolate brands, showcased the power of creative activations. By designing immersive and engaging experiences, we brought Hershey's essence to life, connecting the brand with its audience in unforgettable ways. From interactive concepts to on-ground activities, every moment celebrated the joy and indulgence Hershey's is known for, creating sweet memories.",
+            "ar": "كان تعاوننا مع Hersheys، واحدة من أشهر علامات الشوكولاتة في العالم، دليلًا على قوة الأنشطة الإبداعية. من خلال تصميم تجارب غامرة وجذابة، جلبنا جوهر Hershey's إلى الحياة، وربطنا العلامة التجارية بجمهورها بطرق لا تُنسى."
+        },
+        "meta_title": "Hersheys",
+        "meta_description": "كان تعاوننا مع Hersheys، واحدة من أشهر علامات الشوكولاتة في العالم، دليلًا على قوة الأنشطة الإبداعية. من خلال تصميم تجارب غامرة وجذابة، جلبنا جوهر Hershey's إلى الحياة، وربطنا العلامة التجارية بجمهورها بطرق لا تُنسى.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Hersheys",
+                "url": "/uploads/joe-13/projects/32.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "Godiva",
+            "en": "Godiva"
+        },
+        "slug": "godiva",
+        "description": {
+            "en": "We supported Godiva’s activation through high-quality production, crafting elegant setups that perfectly captured the brand’s luxurious identity and elevated customer experiences",
+            "ar": "دعمنا أنشطة Godiva من خلال إنتاج عالي الجودة، حيث قمنا بإنشاء إعدادات أنيقة تعكس هوية العلامة التجارية الفاخرة وترفع من تجربة العملاء."
+        },
+        "meta_title": "Godiva",
+        "meta_description": "دعمنا أنشطة Godiva من خلال إنتاج عالي الجودة، حيث قمنا بإنشاء إعدادات أنيقة تعكس هوية العلامة التجارية الفاخرة وترفع من تجربة العملاء.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Godiva",
+                "url": "/uploads/joe-13/projects/33.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "Little Asia Festival at Jeddah City Walk",
+            "en": "Little Asia Festival at Jeddah City Walk"
+        },
+        "slug": "little-asia-festival-at-jeddah-city-walk",
+        "description": {
+            "en": "The Little Asia Festival at Jeddah City Walk came to life with our Entertainment Department managing skilled manpower and seamless operations, ensuring a vibrant celebration of Asian heritage and an unforgettable experience for visitors",
+            "ar": "أحيا مهرجان Little Asia في Jeddah City Walk فريق الترفيه لدينا من خلال إدارة القوى العاملة الماهرة والعمليات السلسة، مما يضمن احتفالًا حيويًا بالتراث الآسيوي وتجربة لا تُنسى للزوار."
+        },
+        "meta_title": "Little Asia Festival at Jeddah City Walk",
+        "meta_description": "أحيا مهرجان Little Asia في Jeddah City Walk فريق الترفيه لدينا من خلال إدارة القوى العاملة الماهرة والعمليات السلسة، مما يضمن احتفالًا حيويًا بالتراث الآسيوي وتجربة لا تُنسى للزوار.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Little Asia Festival at Jeddah City Walk",
+                "url": "/uploads/joe-13/projects/34.png"
+            }
+        ],
+        "department": 2
+    },
+    {
+        "name": {
+            "ar": "Friendi",
+            "en": "Friendi"
+        },
+        "slug": "friendi",
+        "description": {
+            "en": "Through our Direct Sales collaboration with Friendi, we provide innovative B2C solutions designed to deliver exceptional value and flexibility. This partnership enables us to meet customer needs with top-quality telecommunications services and a seamless user experience",
+            "ar": "من خلال تعاوننا المباشر مع Friendi، نقدم حلولًا مبتكرة للعملاء الأفراد (B2C) مصممة لتقديم قيمة استثنائية ومرونة عالية. تمكننا هذه الشراكة من تلبية احتياجات العملاء بخدمات اتصالات عالية الجودة وتجربة مستخدم سلسة."
+        },
+        "meta_title": "Friendi",
+        "meta_description": "من خلال تعاوننا المباشر مع Friendi، نقدم حلولًا مبتكرة للعملاء الأفراد (B2C) مصممة لتقديم قيمة استثنائية ومرونة عالية. تمكننا هذه الشراكة من تلبية احتياجات العملاء بخدمات اتصالات عالية الجودة وتجربة مستخدم سلسة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Friendi",
+                "url": "/uploads/joe-13/projects/35.png"
+            }
+        ],
+        "department": 5
+    },
+    {
+        "name": {
+            "ar": "Zain",
+            "en": "Zain"
+        },
+        "slug": "zain",
+        "description": {
+            "en": "The division specializes in delivering exceptional telecommunications services, working closely with Zain to provide advanced B2B solutions that cater to business needs and support them in achieving their goals efficiently and effectively",
+            "ar": "يتخصص القسم في تقديم خدمات اتصالات استثنائية، بالتعاون الوثيق مع Zain لتقديم حلول متقدمة للشركات (B2B) تلبي احتياجات الأعمال وتساعدها على تحقيق أهدافها بكفاءة وفعالية."
+        },
+        "meta_title": "Zain",
+        "meta_description": "يتخصص القسم في تقديم خدمات اتصالات استثنائية، بالتعاون الوثيق مع Zain لتقديم حلول متقدمة للشركات (B2B) تلبي احتياجات الأعمال وتساعدها على تحقيق أهدافها بكفاءة وفعالية.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Zain",
+                "url": "/uploads/joe-13/projects/36.png"
+            }
+        ],
+        "department": 5
+    },
+    {
+        "name": {
+            "ar": "Mobily",
+            "en": "Mobily"
+        },
+        "slug": "mobily",
+        "description": {
+            "en": "The division provides outstanding telecommunications services, collaborating with Mobily to deliver exceptional B2C solutions during Hajj and Umrah seasons, ensuring seamless connectivity and unmatched customer experience for pilgrims",
+            "ar": "يوفر القسم خدمات اتصالات متميزة، بالتعاون مع Mobily لتقديم حلول استثنائية للعملاء الأفراد (B2C) خلال مواسم الحج والعمرة، مما يضمن اتصالًا سلسًا وتجربة عملاء لا مثيل لها للحجاج."
+        },
+        "meta_title": "Mobily",
+        "meta_description": "يوفر القسم خدمات اتصالات متميزة، بالتعاون مع Mobily لتقديم حلول استثنائية للعملاء الأفراد (B2C) خلال مواسم الحج والعمرة، مما يضمن اتصالًا سلسًا وتجربة عملاء لا مثيل لها للحجاج.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Mobily",
+                "url": "/uploads/joe-13/projects/37.png"
+            }
+        ],
+        "department": 5
+    },
+    {
+        "name": {
+            "ar": "RedBull Mobile",
+            "en": "RedBull Mobile"
+        },
+        "slug": "redbull-mobile",
+        "description": {
+            "en": "We are proud to work with Red Bull Mobile, offering tailored B2C solutions through Modern Trades and Direct Sales. Our approach focuses on delivering top-tier telecommunications products and services that align with customer expectations",
+            "ar": "نفخر بالعمل مع Red Bull Mobile، حيث نقدم حلولًا مخصصة للعملاء الأفراد (B2C) من خلال المبيعات الحديثة والمباشرة. نركز على تقديم منتجات وخدمات اتصالات عالية الجودة تلبي توقعات العملاء."
+        },
+        "meta_title": "RedBull Mobile",
+        "meta_description": "نفخر بالعمل مع Red Bull Mobile، حيث نقدم حلولًا مخصصة للعملاء الأفراد (B2C) من خلال المبيعات الحديثة والمباشرة. نركز على تقديم منتجات وخدمات اتصالات عالية الجودة تلبي توقعات العملاء.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "RedBull Mobile",
+                "url": "/uploads/joe-13/projects/38.png"
+            }
+        ],
+        "department": 5
+    },
+    {
+        "name": {
+            "ar": "Virgin Mobile",
+            "en": "Virgin Mobile"
+        },
+        "slug": "virgin-mobile",
+        "description": {
+            "en": "Our team specializes in Modern Trades and Direct Sales, working with Virgin Mobile to deliver outstanding B2C solutions. We ensure customers enjoy high-quality telecommunications products and services that meet their expectations",
+            "ar": "يتخصص فريقنا في المبيعات الحديثة والمباشرة، بالتعاون مع Virgin Mobile لتقديم حلول استثنائية للعملاء الأفراد (B2C). نضمن للعملاء الاستمتاع بمنتجات وخدمات اتصالات عالية الجودة تلبي توقعاتهم."
+        },
+        "meta_title": "Virgin Mobile",
+        "meta_description": "يتخصص فريقنا في المبيعات الحديثة والمباشرة، بالتعاون مع Virgin Mobile لتقديم حلول استثنائية للعملاء الأفراد (B2C). نضمن للعملاء الاستمتاع بمنتجات وخدمات اتصالات عالية الجودة تلبي توقعاتهم.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Virgin Mobile",
+                "url": "/uploads/joe-13/projects/39.png"
+            }
+        ],
+        "department": 5
+    },
+    {
+        "name": {
+            "ar": "Salam Mobile",
+            "en": "Salam Mobile"
+        },
+        "slug": "salam-mobile",
+        "description": {
+            "en": "The division offers exceptional direct sales services, partnering with Salam to deliver B2C solutions that focus on providing customers with high-quality telecommunications products and services",
+            "ar": "يقدم القسم خدمات مبيعات مباشرة استثنائية، بالشراكة مع Salam لتقديم حلول للعملاء الأفراد (B2C) تركز على تزويد العملاء بمنتجات وخدمات اتصالات عالية الجودة."
+        },
+        "meta_title": "Salam Mobile",
+        "meta_description": "يقدم القسم خدمات مبيعات مباشرة استثنائية، بالشراكة مع Salam لتقديم حلول للعملاء الأفراد (B2C) تركز على تزويد العملاء بمنتجات وخدمات اتصالات عالية الجودة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Salam Mobile",
+                "url": "/uploads/joe-13/projects/40.png"
+            }
+        ],
+        "department": 5
+    },
+    {
+        "name": {
+            "ar": "NOKIA",
+            "en": "NOKIA"
+        },
+        "slug": "nokia",
+        "description": {
+            "en": "NOKIA When seeing this logo we remember first held phone and many digital solution made in Finland the oldest and pioneer telecom and informational techs experts through various products like phones, application and other multimedia services and devices covering widely the whole planet.",
+            "ar": "عند رؤية شعار NOKIA، نتذكر أول هاتف محمول والعديد من الحلول الرقمية التي تم تطويرها في فنلندا. تُعد NOKIA من أقدم الشركات الرائدة في مجال الاتصالات وتقنية المعلومات، حيث تقدم منتجات متنوعة مثل الهواتف والتطبيقات وأجهزة الوسائط المتعددة التي تغطي احتياجات العالم بأكمله."
+        },
+        "meta_title": "NOKIA",
+        "meta_description": "عند رؤية شعار NOKIA، نتذكر أول هاتف محمول والعديد من الحلول الرقمية التي تم تطويرها في فنلندا. تُعد NOKIA من أقدم الشركات الرائدة في مجال الاتصالات وتقنية المعلومات، حيث تقدم منتجات متنوعة مثل الهواتف والتطبيقات وأجهزة الوسائط المتعددة التي تغطي احتياجات العالم بأكمله.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "NOKIA",
+                "url": "/uploads/joe-13/projects/41.png"
+            }
+        ],
+        "department": 6
+    },
+    {
+        "name": {
+            "ar": "SAMSUNG",
+            "en": "SAMSUNG"
+        },
+        "slug": "samsung",
+        "description": {
+            "en": "SAMSUNG The biggest electric devices vendor worldwide starting with media devices, monitors, home appliances and mobile smart phones. Since 1938 samsung is a leader of innovations such as pc parts and other softwares provided to make life easy and always helping humanity to have the latest technologies allowed by everyone",
+            "ar": "تُعد SAMSUNG أكبر مورد للأجهزة الإلكترونية في العالم، حيث تبدأ بأجهزة الوسائط والشاشات والأجهزة المنزلية والهواتف الذكية. منذ عام 1938، تُعد SAMSUNG رائدة في الابتكارات مثل أجزاء الكمبيوتر والبرمجيات التي تسهل الحياة وتساعد البشرية في الوصول إلى أحدث التقنيات."
+        },
+        "meta_title": "SAMSUNG",
+        "meta_description": "تُعد SAMSUNG أكبر مورد للأجهزة الإلكترونية في العالم، حيث تبدأ بأجهزة الوسائط والشاشات والأجهزة المنزلية والهواتف الذكية. منذ عام 1938، تُعد SAMSUNG رائدة في الابتكارات مثل أجزاء الكمبيوتر والبرمجيات التي تسهل الحياة وتساعد البشرية في الوصول إلى أحدث التقنيات.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "SAMSUNG",
+                "url": "/uploads/joe-13/projects/42.png"
+            }
+        ],
+        "department": 6
+    },
+    {
+        "name": {
+            "ar": "HADDAD",
+            "en": "HADDAD"
+        },
+        "slug": "haddad",
+        "description": {
+            "en": "HADDAD is one of the leading retailers of telecommunication giants in the Kingdom. We provided them with quality customer surveys at different branches all around the Kingdom",
+            "ar": "تُعد HADDAD واحدة من أكبر تجار التجزئة لعمالقة الاتصالات في المملكة. قدمنا لهم استطلاعات رأي عملاء عالية الجودة في فروع مختلفة في جميع أنحاء المملكة."
+        },
+        "meta_title": "HADDAD",
+        "meta_description": "تُعد HADDAD واحدة من أكبر تجار التجزئة لعمالقة الاتصالات في المملكة. قدمنا لهم استطلاعات رأي عملاء عالية الجودة في فروع مختلفة في جميع أنحاء المملكة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "HADDAD",
+                "url": "/uploads/joe-13/projects/43.png"
+            }
+        ],
+        "department": 6
+    },
+    {
+        "name": {
+            "ar": "VIVO",
+            "en": "VIVO"
+        },
+        "slug": "vivo",
+        "description": {
+            "en": "Vivo, a global leader in smartphone innovation and technology, collaborates with us to achieve greater market reach and enhanced brand visibility. Our partnership reflects a shared commitment to excellence, driving unparalleled customer engagement and setting new standards in the consumer electronics sector",
+            "ar": "تعاونت VIVO، الرائدة عالميًا في ابتكارات الهواتف الذكية والتقنية، معنا لتحقيق وصول أكبر إلى الأسواق وزيادة ظهور العلامة التجارية. تعكس شراكتنا التزامًا مشتركًا بالتميز، مما يؤدي إلى تفاعل عملاء غير مسبوق ووضع معايير جديدة في قطاع الإلكترونيات الاستهلاكية."
+        },
+        "meta_title": "VIVO",
+        "meta_description": "تعاونت VIVO، الرائدة عالميًا في ابتكارات الهواتف الذكية والتقنية، معنا لتحقيق وصول أكبر إلى الأسواق وزيادة ظهور العلامة التجارية. تعكس شراكتنا التزامًا مشتركًا بالتميز، مما يؤدي إلى تفاعل عملاء غير مسبوق ووضع معايير جديدة في قطاع الإلكترونيات الاستهلاكية.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "VIVO",
+                "url": "/uploads/joe-13/projects/44.png"
+            }
+        ],
+        "department": 6
+    },
+    {
+        "name": {
+            "ar": "TCL",
+            "en": "TCL"
+        },
+        "slug": "tcl",
+        "description": {
+            "en": "TCL, a leader in the electronics sector, partnered with our HR Outsourcing Department to optimize workforce management and drive operational efficiency. Through tailored HR solutions, we supported their efforts in streamlining processes, ensuring compliance, and enhancing productivity. This collaboration allowed TCL to focus on innovation while maintaining their competitive edge in the global market",
+            "ar": "تعاونت TCL، الرائدة في قطاع الإلكترونيات، مع قسمنا لتوظيف الحلول البشرية لتحسين إدارة القوى العاملة وزيادة الكفاءة التشغيلية. من خلال حلول موارد بشرية مخصصة، دعمنا جهودهم في تبسيط العمليات وضمان الامتثال وتعزيز الإنتاجية."
+        },
+        "meta_title": "TCL",
+        "meta_description": "تعاونت TCL، الرائدة في قطاع الإلكترونيات، مع قسمنا لتوظيف الحلول البشرية لتحسين إدارة القوى العاملة وزيادة الكفاءة التشغيلية. من خلال حلول موارد بشرية مخصصة، دعمنا جهودهم في تبسيط العمليات وضمان الامتثال وتعزيز الإنتاجية.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "TCL",
+                "url": "/uploads/joe-13/projects/45.png"
+            }
+        ],
+        "department": 6
+    },
+    {
+        "name": {
+            "ar": "MIDEA",
+            "en": "MIDEA"
+        },
+        "slug": "midea",
+        "description": {
+            "en": "Midea, recognized for its innovation in home appliances and advanced technologies, collaborated with our HR Outsourcing Department to elevate their workforce strategies and optimize HR processes. By crafting innovative approaches, we supported their operational growth and strengthened their competitive position in the global market",
+            "ar": "تعاونت MIDEA، المعروفة بابتكاراتها في الأجهزة المنزلية والتقنيات المتقدمة، مع قسمنا لتوظيف الحلول البشرية لتحسين استراتيجيات القوى العاملة وتبسيط عمليات الموارد البشرية. من خلال نهج مبتكر، دعمنا نموهم التشغيلي وعززنا موقعهم التنافسي في السوق العالمية."
+        },
+        "meta_title": "MIDEA",
+        "meta_description": "تعاونت MIDEA، المعروفة بابتكاراتها في الأجهزة المنزلية والتقنيات المتقدمة، مع قسمنا لتوظيف الحلول البشرية لتحسين استراتيجيات القوى العاملة وتبسيط عمليات الموارد البشرية. من خلال نهج مبتكر، دعمنا نموهم التشغيلي وعززنا موقعهم التنافسي في السوق العالمية.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "MIDEA",
+                "url": "/uploads/joe-13/projects/46.png"
+            }
+        ],
+        "department": 6
+    },
+    {
+        "name": {
+            "ar": "KIA",
+            "en": "KIA"
+        },
+        "slug": "kia",
+        "description": {
+            "en": "Our collaboration with KIA brought their vision to life through professional photography, digital marketing strategies, and account management. By creating compelling visuals and managing their online presence, we helped KIA connect with their audience and reinforce their brand identity",
+            "ar": "جلب تعاوننا مع KIA رؤيتهم إلى الحياة من خلال التصوير الفوتوغرافي المحترف واستراتيجيات التسويق الرقمي وإدارة الحسابات. من خلال إنشاء مرئيات جذابة وإدارة وجودهم عبر الإنترنت، ساعدناهم في التواصل مع جمهورهم وتعزيز هوية علامتهم التجارية."
+        },
+        "meta_title": "KIA",
+        "meta_description": "جلب تعاوننا مع KIA رؤيتهم إلى الحياة من خلال التصوير الفوتوغرافي المحترف واستراتيجيات التسويق الرقمي وإدارة الحسابات. من خلال إنشاء مرئيات جذابة وإدارة وجودهم عبر الإنترنت، ساعدناهم في التواصل مع جمهورهم وتعزيز هوية علامتهم التجارية.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "KIA",
+                "url": "/uploads/joe-13/projects/47.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "Jetour",
+            "en": "Jetour"
+        },
+        "slug": "jetour",
+        "description": {
+            "en": "In collaboration with JETOUR, our marketing team delivered professional photography and media production that highlighted their automotive excellence. Through creative visuals, we showcased the brand’s innovation and strengthened its market presence",
+            "ar": "في تعاوننا مع JETOUR، قدم فريق التسويق لدينا تصويرًا فوتوغرافيًا وإنتاجًا إعلاميًا محترفًا سلط الضوء على تميزهم في صناعة السيارات. من خلال المرئيات الإبداعية، عرضنا ابتكارات العلامة التجارية وقوينا حضورها في السوق."
+        },
+        "meta_title": "Jetour",
+        "meta_description": "في تعاوننا مع JETOUR، قدم فريق التسويق لدينا تصويرًا فوتوغرافيًا وإنتاجًا إعلاميًا محترفًا سلط الضوء على تميزهم في صناعة السيارات. من خلال المرئيات الإبداعية، عرضنا ابتكارات العلامة التجارية وقوينا حضورها في السوق.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "Jetour",
+                "url": "/uploads/joe-13/projects/48.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "My Phone",
+            "en": "My Phone"
+        },
+        "slug": "my-phone",
+        "description": {
+            "en": "We work closely with MyPhone to develop tailored marketing strategies, manage campaigns, and create engaging content. Our goal is to enhance their brand presence, reach a wider audience, and support their business growth through effective marketing solutions",
+            "ar": "نعمل عن كثب مع MyPhone لتطوير استراتيجيات تسويقية مخصصة وإدارة الحملات وإنشاء محتوى جذاب. هدفنا هو تعزيز حضور علامتهم التجارية ووصولهم إلى جمهور أوسع ودعم نمو أعمالهم من خلال حلول تسويقية فعالة."
+        },
+        "meta_title": "My Phone",
+        "meta_description": "نعمل عن كثب مع MyPhone لتطوير استراتيجيات تسويقية مخصصة وإدارة الحملات وإنشاء محتوى جذاب. هدفنا هو تعزيز حضور علامتهم التجارية ووصولهم إلى جمهور أوسع ودعم نمو أعمالهم من خلال حلول تسويقية فعالة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "My Phone",
+                "url": "/uploads/joe-13/projects/49.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "HASHI BASHA RESTAURANTS",
+            "en": "HASHI BASHA RESTAURANTS"
+        },
+        "slug": "hashi-basha-restaurants",
+        "description": {
+            "en": "We worked closely with Hashi Basha Restaurants to manage their digital marketing and account operations. By implementing customized strategies and driving consistent online interactions, we helped elevate their brand identity and expand their reach to a broader audience",
+            "ar": "عملنا عن كثب مع مطاعم Hashi Basha لإدارة تسويقهم الرقمي وعمليات الحسابات. من خلال تنفيذ استراتيجيات مخصصة ودفع التفاعلات المستمرة عبر الإنترنت، ساعدناهم في تعزيز هوية علامتهم التجارية وتوسيع وصولهم إلى جمهور أوسع."
+        },
+        "meta_title": "HASHI BASHA RESTAURANTS",
+        "meta_description": "عملنا عن كثب مع مطاعم Hashi Basha لإدارة تسويقهم الرقمي وعمليات الحسابات. من خلال تنفيذ استراتيجيات مخصصة ودفع التفاعلات المستمرة عبر الإنترنت، ساعدناهم في تعزيز هوية علامتهم التجارية وتوسيع وصولهم إلى جمهور أوسع.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "HASHI BASHA RESTAURANTS",
+                "url": "/uploads/joe-13/projects/50.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "AL ANOUD UNITED",
+            "en": "AL ANOUD UNITED"
+        },
+        "slug": "al-anoud-united",
+        "description": {
+            "en": "Through our Branding Services, we partnered with Al Anoud United Contracting to create a distinctive and professional identity. From designing their logo and ID cards to crafting a compelling portfolio, we ensured every detail aligned with their vision and industry standards. This collaboration demonstrated our expertise in delivering branding solutions that stand out and leave a lasting impression",
+            "ar": "من خلال خدمات العلامة التجارية، تعاونا مع Al Anoud United Contracting لإنشاء هوية مميزة ومحترفة. من تصميم الشعار وبطاقات الهوية إلى إنشاء محفظة أعمال جذابة، تأكدنا من أن كل التفاصيل تتماشى مع رؤيتهم ومعايير الصناعة."
+        },
+        "meta_title": "AL ANOUD UNITED",
+        "meta_description": "من خلال خدمات العلامة التجارية، تعاونا مع Al Anoud United Contracting لإنشاء هوية مميزة ومحترفة. من تصميم الشعار وبطاقات الهوية إلى إنشاء محفظة أعمال جذابة، تأكدنا من أن كل التفاصيل تتماشى مع رؤيتهم ومعايير الصناعة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "AL ANOUD UNITED",
+                "url": "/uploads/joe-13/projects/51.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "AUTOONO",
+            "en": "AUTOONO"
+        },
+        "slug": "autoono",
+        "description": {
+            "en": "We created a comprehensive brand identity for Autoono, including logo design, content creation, and ID card designs. This ensured a professional image that reflects the company’s vision and strengthens its presence in the marke",
+            "ar": "أنشأنا هوية علامة تجارية شاملة لـ Autoono، بما في ذلك تصميم الشعار وإنشاء المحتوى وتصميم بطاقات الهوية. هذا يضمن صورة محترفة تعكس رؤية الشركة وتعزز حضورها في السوق."
+        },
+        "meta_title": "AUTOONO",
+        "meta_description": "أنشأنا هوية علامة تجارية شاملة لـ Autoono، بما في ذلك تصميم الشعار وإنشاء المحتوى وتصميم بطاقات الهوية. هذا يضمن صورة محترفة تعكس رؤية الشركة وتعزز حضورها في السوق.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "AUTOONO",
+                "url": "/uploads/joe-13/projects/52.png"
+            }
+        ],
+        "department": 3
+    },
+    {
+        "name": {
+            "ar": "BESMART",
+            "en": "BESMART"
+        },
+        "slug": "besmart",
+        "description": {
+            "en": "A smart educational platform that streamlines communication between teachers and students, offering various content types like video lessons, educational clips, and detailed notes.",
+            "ar": "منصة تعليمية ذكية تعمل على تبسيط التواصل بين المعلمين والطلاب، وتقدم أنواعًا مختلفة من المحتوى مثل الدروس بالفيديو والمقاطع التعليمية والملاحظات التفصيلية."
+        },
+        "meta_title": "BESMART",
+        "meta_description": "منصة تعليمية ذكية تعمل على تبسيط التواصل بين المعلمين والطلاب، وتقدم أنواعًا مختلفة من المحتوى مثل الدروس بالفيديو والمقاطع التعليمية والملاحظات التفصيلية.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "BESMART",
+                "url": "/uploads/joe-13/projects/53.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "SUHAR",
+            "en": "SUHAR"
+        },
+        "slug": "suhar",
+        "description": {
+            "en": "Delivers a seamless shopping experience, offering a wide range of products from electronics to household items. Enjoy easy ordering from anywhere in Iraq, with fast and reliable delivery for all your essentials",
+            "ar": "توفر تجربة تسوق سلسة، مع مجموعة واسعة من المنتجات من الإلكترونيات إلى الأدوات المنزلية. استمتع بالطلب السهل من أي مكان في العراق، مع توصيل سريع وموثوق لجميع احتياجاتك."
+        },
+        "meta_title": "SUHAR",
+        "meta_description": "توفر تجربة تسوق سلسة، مع مجموعة واسعة من المنتجات من الإلكترونيات إلى الأدوات المنزلية. استمتع بالطلب السهل من أي مكان في العراق، مع توصيل سريع وموثوق لجميع احتياجاتك.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "SUHAR",
+                "url": "/uploads/joe-13/projects/54.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "AJEEB EDUCATION",
+            "en": "AJEEB EDUCATION"
+        },
+        "slug": "ajeeb-education",
+        "description": {
+            "en": "A comprehensive educational app providing valuable content across all educational levels and business sectors",
+            "ar": "تطبيق تعليمي شامل يوفر محتوى قيمًا عبر جميع المستويات التعليمية وقطاعات الأعمال."
+        },
+        "meta_title": "AJEEB EDUCATION",
+        "meta_description": "تطبيق تعليمي شامل يوفر محتوى قيمًا عبر جميع المستويات التعليمية وقطاعات الأعمال.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "AJEEB EDUCATION",
+                "url": "/uploads/joe-13/projects/55.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "JOE MI",
+            "en": "JOE MI"
+        },
+        "slug": "joe-mi",
+        "description": {
+            "en": "A comprehensive educational app providing valuable content across all educational levels and business sectors",
+            "ar": "تطبيق تعليمي شامل يوفر محتوى قيمًا عبر جميع المستويات التعليمية وقطاعات الأعمال."
+        },
+        "meta_title": "JOE MI",
+        "meta_description": "تطبيق تعليمي شامل يوفر محتوى قيمًا عبر جميع المستويات التعليمية وقطاعات الأعمال.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "JOE MI",
+                "url": "/uploads/joe-13/projects/56.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "JOE X",
+            "en": "JOE X"
+        },
+        "slug": "joe-x",
+        "description": {
+            "en": "A specialized app for managing merchandisers and promoters, offering attendance tracking, sales monitoring, stock management, and GPS-based location tracking for streamlined operations and transparency",
+            "ar": "تطبيق متخصص لإدارة المسوقين والمروجين، حيث يوفر تتبع الحضور ومراقبة المبيعات وإدارة المخزون وتتبع الموقع عبر GPS لتبسيط العمليات وضمان الشفافية."
+        },
+        "meta_title": "JOE X",
+        "meta_description": "تطبيق متخصص لإدارة المسوقين والمروجين، حيث يوفر تتبع الحضور ومراقبة المبيعات وإدارة المخزون وتتبع الموقع عبر GPS لتبسيط العمليات وضمان الشفافية.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "JOE X",
+                "url": "/uploads/joe-13/projects/57.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "NosWazeefa",
+            "en": "NosWazeefa"
+        },
+        "slug": "noswazeefa",
+        "description": {
+            "en": "Specialized platform focusing on part-time job opportunities in the Saudi market. It connects employers and job seekers, offering a streamlined process for finding flexible roles and hiring suitable talent efficiently.",
+            "ar": "منصة متخصصة تركز على فرص العمل بدوام جزئي في السوق السعودي. تربط بين أصحاب العمل والباحثين عن عمل، وتوفر عملية مبسطة للعثور على أدوار مرنة وتوظيف المواهب المناسبة بكفاءة."
+        },
+        "meta_title": "NosWazeefa",
+        "meta_description": "منصة متخصصة تركز على فرص العمل بدوام جزئي في السوق السعودي. تربط بين أصحاب العمل والباحثين عن عمل، وتوفر عملية مبسطة للعثور على أدوار مرنة وتوظيف المواهب المناسبة بكفاءة.",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "NosWazeefa",
+                "url": "/uploads/joe-13/projects/58.png"
+            }
+        ],
+        "department": 1
+    },
+    {
+        "name": {
+            "ar": "مشروع جديد",
+            "en": "test pro"
+        },
+        "slug": "test-pro",
+        "description": {
+            "en": "new project  new project  new project  new project  new project  new project  new project  new project  new project  new project  new project",
+            "ar": "مشروع جديد مشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديد"
+        },
+        "meta_title": "test pro",
+        "meta_description": "مشروع جديد مشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديدمشروع جديد",
+        "meta_keywords": [],
+        "images": [
+            {
+                "id": 1,
+                "alt": "test pro",
+                "url": "/uploads/joe-13/projects/59.png"
+            },
+            {
+                "id": 2,
+                "alt": "test pro",
+                "url": "/uploads/joe-13/projects/60.png"
+            }
+        ],
+        "department": 7
+    }
+]
 
     const fullData = projectData.map((project, i) => ({
       ...project,
-      images: [
-        { id: 1, url: `/upload/project-${i + 1}-1.png`, alt: 'Project visual' },
-      ],
       department: departments[i % departments.length],
     }));
 
-    await this.projectRepo.clear(); // Clears the table
+    await this.projectRepo.query('TRUNCATE TABLE "projects" RESTART IDENTITY CASCADE');
     const projects = this.projectRepo.create(fullData as any);
     await this.projectRepo.save(projects);
   }
@@ -1890,36 +2876,4 @@ export class Seeder {
     await this.offersReop.save(entity);
   }
 
-  private async seedPartners() {
-    const partners = [
-      {
-        name: { en: 'Tech Vision', ar: 'رؤية التقنية' },
-        logo_url: '/uploads/tech-vision-logo.png',
-        logo_alt: 'Tech Vision Logo',
-        website_url: 'https://techvision.com',
-      },
-      {
-        name: { en: 'Green Web', ar: 'الويب الأخضر' },
-        logo_url: '/uploads/green-web-logo.png',
-        logo_alt: 'Green Web Logo',
-        website_url: 'https://greenweb.org',
-      },
-      {
-        name: { en: 'Next Soft', ar: 'نكست سوفت' },
-        logo_url: '/uploads/next-soft-logo.png',
-        logo_alt: 'Next Soft Logo',
-        website_url: 'https://nextsoft.io',
-      },
-      {
-        name: { en: 'Cloudy Co.', ar: 'شركة كلاودي' },
-        logo_url: '/uploads/cloudy-logo.png',
-        logo_alt: 'Cloudy Logo',
-        website_url: 'https://cloudyco.com',
-      },
-    ];
-
-    await this.partnerRepository.clear(); // Clears the table
-    const data = this.partnerRepository.create(partners);
-    await this.partnerRepository.save(data);
-  }
 }

@@ -165,29 +165,9 @@ export class BaseService<T> {
     const [data, total] = (await query.getManyAndCount()) as any;
 
 
-    //! =============== Return the base url with the  ==================
-    const modifiedData = data.map(item => {
-      if (item.image_url) {
-        return {
-          ...item,
-          image_url: `http://localhost:8081/${item.image_url.startsWith('/') ? item.image_url.slice(1) : item.image_url}`,
-        };
-      }
-
-      if (item.images) {
-        const modifiedImages = item.images.map(image => ({
-          ...image,
-          url: `http://localhost:8081/${image.url.startsWith('/') ? image.url.slice(1) : image.url}`,
-        }));
-    
-        return { ...item, images: modifiedImages, };
-      }
-
-      return item;
-    });
     
 
-    return { limit: limitNumber, countRecored: total, page: pageNumber, data:modifiedData };
+    return { limit: limitNumber, countRecored: total, page: pageNumber, data };
   }
 
   async findOne(id: any, relations?: string[]) {
@@ -198,24 +178,24 @@ export class BaseService<T> {
     }
   
     // Modify image_url if present
-    const modifiedEntity = {
-      ...entity,
-      image_url: entity.image_url
-        ? entity.image_url.startsWith('http')
-          ? entity.image_url
-          : `http://localhost:8081/${entity.image_url}`
-        : null,
-    };
+    // const modifiedEntity = {
+    //   ...entity,
+    //   image_url: entity.image_url
+    //     ? entity.image_url.startsWith('http')
+    //       ? entity.image_url
+    //       : `http://localhost:8081/${entity.image_url}`
+    //     : null,
+    // };
   
-    // Modify images array if present
-    if (modifiedEntity.images) {
-      modifiedEntity.images = modifiedEntity.images.map((image) => ({
-        ...image,
-        url: `http://localhost:8081/${image.url.startsWith('/') ? image.url.slice(1) : image.url}`,
-      }));
-    }
+    // // Modify images array if present
+    // if (modifiedEntity.images) {
+    //   modifiedEntity.images = modifiedEntity.images.map((image) => ({
+    //     ...image,
+    //     url: `http://localhost:8081/${image.url.startsWith('/') ? image.url.slice(1) : image.url}`,
+    //   }));
+    // }
   
-    return modifiedEntity;
+    return entity;
   }
   
 

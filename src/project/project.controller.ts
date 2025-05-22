@@ -72,6 +72,7 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
 
     const currentDto = {
       name: dto.name,
+      slug: dto.slug,
       description: dto.description,
       meta_title: dto.meta_title,
       meta_description: dto.meta_description,
@@ -79,6 +80,7 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
       department_id: department,
       images: dto.images,
     };
+
 
     const data = await this.projctRepository.create({...currentDto , department});
     const savedProject = await this.projctRepository.save(data);
@@ -150,6 +152,7 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
 
     const DTO = {
       name: dto.name,
+      slug: dto.slug,
       description: dto.description,
       meta_title: dto.meta_title,
       meta_description: dto.meta_description,
