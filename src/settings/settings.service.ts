@@ -13,4 +13,15 @@ export class SettingsService extends BaseService<Setting> {
     super(settingRepo)
   }
 
+
+
+
+
+   async findBySlug() {
+    const settings = await this.settingRepo.findOne({
+      where: { slug : "settings" }});
+
+    return settings;
+  }
+
 }

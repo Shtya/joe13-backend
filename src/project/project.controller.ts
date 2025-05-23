@@ -117,6 +117,13 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
     return this.projectsService.findOne(+id);
   }
 
+  // projects.controller.ts
+  @Get('slug/:slug')
+  findOneBySlug(@Param('slug') slug: string) {
+    return this.projectsService.findOneBySlug(slug);
+  }
+
+
   @Patch(':id')
   @UseInterceptors(FilesInterceptor('files', 10, multerOptions))
   async update( @Param('id') id: number, @Body() dto: any, @UploadedFiles() files: any[], ) {

@@ -1,14 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Department } from './departments.entity';
+
+export enum BlogStatus {
+  DRAFT = 'draft',
+  PUBLISHED = 'published',
+  ARCHIVED = 'archived',
+}
 
 @Entity('blogs')
 export class Blog {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  type_blog: string;
-
-  @Column()
+  @Column({unique : true})
   slug: string;
 
   @Column('jsonb', { nullable: true })
@@ -17,15 +29,38 @@ export class Blog {
   @Column('jsonb', { nullable: true })
   content: { en: string; ar: string };
 
-  @Column('jsonb', { nullable: true })
-  meta_title: { en: string; ar: string };
+  @Column()
+  meta_title: string;
 
-  @Column('jsonb', { nullable: true })
-  meta_description: { en: string; ar: string };
+  @Column()
+  meta_description: string;
 
-  @Column('jsonb', { nullable: true })
-  meta_keywords: { en: string; ar: string };
+  @Column()
+  author?: string;
 
+  @Column({
+    type: 'enum',
+    enum: BlogStatus,
+    default: BlogStatus.DRAFT,
+  })
+  status: BlogStatus;
+
+  @Column({ nullable: true, type: 'timestamp' })
+  published_at?: Date;
+
+  // Tags array for flexible tagging (optional)
+  @Column('text', { array: true, nullable: true })
+  tags?: string[];
+
+  @Column({ default: 0 })
+  views_count: number;
+
+  @Column('text', { array: true })
+  meta_keywords: string[];
+
+  @ManyToOne(() => Department, (department) => department.projects)
+  @JoinColumn({ name: 'department_id' })
+  department: Department;
 
   @Column()
   image_url: string;
@@ -33,13 +68,9 @@ export class Blog {
   @Column()
   image_alt: string;
 
-
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 }
-
-
-

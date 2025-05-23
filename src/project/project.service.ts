@@ -15,6 +15,13 @@ export class ProjectService extends BaseService<Project> {
 
 
 
+  // projects.service.ts
+async findOneBySlug(slug: string) {
+  return this.projectRepo.findOne({ where: { slug } , relations : ['department'] })
+}
+
+
+
   async removeImageById(projectId: number, imageId: number) {
     const project = await this.projectRepo.findOne({ where: { id: projectId } });
   

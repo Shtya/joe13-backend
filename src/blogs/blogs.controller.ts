@@ -27,15 +27,16 @@ export class BlogsController {
   async create(@Body() dto: CreateBlogDto, @UploadedFile() file: any) {
     if (file) {
       dto.image_url = `/uploads/${file.filename}`;
-      dto.image_alt = dto.title?.en || dto.title?.ar;
+      dto.image_alt = dto.image_alt ;
     }
 
-    return this.blogsService.create(dto);
+    return this.blogsService.createCustom(dto);
   }
 
   @Get()
   async findAll(@Req() @Query() query) {
-    const { page, limit, search, sortBy, sortOrder, ...restQueryParams } = query;
+    const { page, limit, search, sortBy, sortOrder, ...restQueryParams } =
+      query;
 
     return this.blogsService.findAll(
       'blogs',
@@ -45,7 +46,7 @@ export class BlogsController {
       sortBy,
       sortOrder,
       [], // exclude some fields
-      [], // Relations
+      ['department'], // Relations
       ['name'], // search parameters
       restQueryParams, // search with fields
     );
@@ -54,6 +55,11 @@ export class BlogsController {
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return this.blogsService.findOne(id);
+  }
+
+  @Get('slug/:slug')
+  findOneBySlug(@Param('slug') slug: string) {
+    return this.blogsService.findOneBySlug(slug);
   }
 
   @Patch(':id')
@@ -76,3 +82,10 @@ export class BlogsController {
     return this.blogsService.remove(+id);
   }
 }
+
+
+
+
+
+
+

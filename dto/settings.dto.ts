@@ -1,47 +1,101 @@
-import { IsString, IsEmail, IsObject } from 'class-validator';
+import { IsString, IsOptional, IsArray, IsObject, ValidateNested, IsUrl, IsNotEmpty } from 'class-validator';
+import { Type } from 'class-transformer';
+
+class LocaleText  {
+  @IsString()
+  @IsNotEmpty()
+  en: string;
+
+  @IsString()
+  @IsNotEmpty()
+  ar: string;
+}
+
+class ImageDto {
+  url: string;
+
+  alt: string;
+}
+
+class MetaData {
+  @IsOptional()
+  @IsString({ message: 'Meta title must be a string' })
+  title?: string;
+
+  @IsOptional()
+  @IsString({ message: 'Meta description must be a string' })
+  description?: string;
+
+  @IsOptional()
+  @IsArray({ message: 'Keywords must be an array of strings' })
+  @IsString({ each: true, message: 'Each keyword must be a string' })
+  keywords?: string[];
+
+  @IsOptional()
+  @IsObject({ message: 'Custom scripts must be an object with head and body' })
+  custom_scripts?: {
+    head: string;
+    body: string;
+  };
+}
+
+class UrlObject {
+  url: string;
+
+  @IsString({ message: 'Alt text is required' })
+  alt: string;
+}
 
 export class CreateSettingDto {
-  @IsObject()
-  site_name: { en: string; ar: string };
+  @IsOptional()
+  @IsString({ message: 'Slug must be a string' })
+  slug?: string;
 
-  site_logo_url: any;
+  @ValidateNested()
+  @Type(() => LocaleText)
+  site_name: LocaleText;
 
-  @IsString()
-  site_logo_alt: string;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => UrlObject)
+  site_logo?: UrlObject;
 
-  favicon_url: any;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => UrlObject)
+  favicon?: UrlObject;
 
-  @IsString()
-  favicon_alt: string;
+  @IsOptional()
+  @IsObject({ message: 'Social media must be an object' })
+  social_media?: SocialMedia;
 
-  @IsString()
-  facebook_url: string;
+  @IsOptional()
+  @IsObject({ message: 'Contact us must be an object' })
+  contact_us?: ContactUs;
 
-  @IsString()
-  instagram_url: string;
+  @IsOptional()
+  @IsObject({ message: 'Branch must contain Arabic and English arrays' })
+  branch?: {
+    en: string[];
+    ar: string[];
+  };
 
-  @IsString()
-  twitter_url: string;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => MetaData)
+  meta?: MetaData;
 
-  @IsString()
-  linkedin_url: string;
+  @ValidateNested()
+  @Type(() => LocaleText)
+  copyright: LocaleText;
 
-  @IsObject()
-  address: { en: string; ar: string };
-
-  @IsString()
-  phone: string;
-
-  @IsEmail()
-  email: string;
-
-  @IsString()
-  working_hours: string;
-
-  @IsObject()
-  about_us_footer: { en: string; ar: string };
+  @ValidateNested()
+  @Type(() => LocaleText)
+  about_us_footer: LocaleText;
 }
 
 
+
 import { PartialType } from '@nestjs/mapped-types';
+import { ContactUs, SocialMedia } from 'entities/settings.entity';
 export class UpdateSettingDto extends PartialType(CreateSettingDto) {}
