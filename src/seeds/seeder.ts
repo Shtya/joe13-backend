@@ -1230,7 +1230,6 @@ export class Seeder {
       department: departments?.find((e) => e.id == project.department_id),
     }));
 
-    fullData;
 
     await this.blogRepository.clear(); // Clears the table
     const dataEntities = this.blogRepository.create(fullData as any);

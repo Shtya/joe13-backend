@@ -95,8 +95,7 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
 
   @Get()
   async findAll(@Query() query) {
-    const { page, limit, search, sortBy, sortOrder, ...restQueryParams } =
-      query;
+    const { page, limit, search, sortBy, sortOrder, ...restQueryParams } = query;
 
     return this.projectsService.findAll(
       'projects',
