@@ -30,4 +30,7 @@ export class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+
+
 }

@@ -14,11 +14,19 @@ export class ProjectService extends BaseService<Project> {
   }
 
 
-
-  // projects.service.ts
 async findOneBySlug(slug: string) {
-  return this.projectRepo.findOne({ where: { slug } , relations : ['department'] })
+  const project = await this.projectRepo.findOne({
+    where: { slug },
+    relations: ['department'],
+  });
+
+  if (!project) {
+    throw new NotFoundException(`Project with slug '${slug}' not found`);
+  }
+
+  return project;
 }
+
 
 
 

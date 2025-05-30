@@ -28,6 +28,7 @@ async function bootstrap() {
 
   const loggingValidationPipe = app.get(LoggingValidationPipe);
   app.useGlobalPipes(loggingValidationPipe);
+
   app.useGlobalPipes(new ValidationPipe({ 
     disableErrorMessages: false , 
     transform: true,
@@ -38,7 +39,7 @@ async function bootstrap() {
         }));
         return new BadRequestException({
           statusCode: 400,
-          message: 'Validation failed',
+          message: 'Validation failed 2',
           errors: formattedErrors,
         });
       },

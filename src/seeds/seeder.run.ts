@@ -14,6 +14,7 @@ import { Partner } from 'entities/partners.entity';
 import { PageMeta } from 'entities/page-meta.entity';
 import { Page } from 'entities/pages.entity';
 import { Setting } from 'entities/settings.entity';
+import { Service } from 'entities/services.entity';
 
 
 async function run() {
@@ -27,7 +28,7 @@ async function run() {
     username: "postgres.sghvszzxubiyocwhfczj",
     password: "ahmedshtya-083",
     database: "joe13",
-    entities: [Blog , Career , Setting , PageMeta , TeamMember , Section , Department , Project  , Image , Contact , OffersEntity , Partner , Page ],
+    entities: [Blog , Career , Setting , PageMeta ,Service , TeamMember , Section , Department , Project  , Image , Contact , OffersEntity , Partner , Page ],
     synchronize: true,
     logging: true,
   });

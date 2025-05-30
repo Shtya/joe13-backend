@@ -13,9 +13,11 @@ import { Partner } from 'entities/partners.entity';
 import { PageMeta } from 'entities/page-meta.entity';
 import { Page } from 'entities/pages.entity';
 import { Setting } from 'entities/settings.entity';
+import { Service } from 'entities/services.entity';
 
 export class Seeder {
   private blogRepository: Repository<Blog>;
+  private servRepository: Repository<Service>;
   private SettingRepo: Repository<Setting>;
   private pageRepository: Repository<Page>;
   private careerRepository: Repository<Career>;
@@ -31,6 +33,7 @@ export class Seeder {
 
   constructor(private dataSource: DataSource) {
     this.blogRepository = this.dataSource.getRepository(Blog);
+    this.servRepository = this.dataSource.getRepository(Service);
     this.SettingRepo = this.dataSource.getRepository(Setting);
     this.pageRepository = this.dataSource.getRepository(Page);
     this.careerRepository = this.dataSource.getRepository(Career);
@@ -51,13 +54,261 @@ export class Seeder {
   async run() {
     // await this.seedCareers();
     // await this.seedContacts();
-    // await this.seedPages();
+    await this.seedPages();
     // await this.seedteamMembers();
     // await this.seedDepartments();
     // await this.seedBlogs();
     // await this.seedOffers();
     // await this.seedProjects();
-    await this.seedSettings();
+    // await this.seedSettings();
+    // await this.seedServics();
+  }
+
+  private async seedServics() {
+    const data = [
+      {
+        slug: 'manpower-hr-solutions',
+        title: {
+          en: 'Manpower & HR Solutions',
+          ar: 'حلول الموارد البشرية والتوظيف',
+        },
+        subTitle: {
+          en: 'Empowering your business with the right talent — tailored HR and recruitment solutions for the tech and marketing industries',
+          ar: 'نُمكِّن عملك من خلال المواهب المناسبة - حلول موارد بشرية وتوظيف مخصصة لقطاعي التقنية والتسويق',
+        },
+        image: { url: '/uploads/joe-13/services/hero.jpg', alt: '' },
+        hero: {
+          serviceName: {
+            en: 'Manpower & HR Solutions',
+            ar: 'حلول الموارد البشرية والتوظيف',
+          },
+          title: {
+            en: 'We are not your typical digital marketing agency',
+            ar: 'لسنا وكالة تسويق رقمية تقليدية',
+          },
+          images: [
+            '/uploads/joe-13/services/1.png',
+            '/uploads/joe-13/services/2.png',
+            '/uploads/joe-13/services/3.png',
+          ],
+          attr: [
+            {
+              key: {
+                en: 'Specialized Talent Acquisition',
+                ar: 'اكتساب المواهب المتخصصة',
+              },
+              value: {
+                en: 'We source top-tier professionals in tech and marketing — fast, precise, and aligned with your culture',
+                ar: 'نقوم بجلب محترفين من أعلى المستويات في مجالي التقنية والتسويق — بسرعة ودقة وبتوافق مع ثقافة شركتك',
+              },
+            },
+            {
+              key: {
+                en: 'Scalable Hiring Solutions',
+                ar: 'حلول توظيف قابلة للتوسع',
+              },
+              value: {
+                en: "Whether you're building a small team or scaling fast, our solutions grow with your business needs.",
+                ar: 'سواء كنت تبني فريقًا صغيرًا أو تنمو بسرعة، فإن حلولنا تتطور مع احتياجات عملك.',
+              },
+            },
+            {
+              key: {
+                en: 'End-to-End HR Management',
+                ar: 'إدارة موارد بشرية شاملة',
+              },
+              value: {
+                en: 'From onboarding to performance tracking, we handle the full HR cycle so you can focus on growth.',
+                ar: 'من الانضمام إلى تتبع الأداء، ندير دورة الموارد البشرية الكاملة حتى تتمكن من التركيز على النمو.',
+              },
+            },
+            {
+              key: {
+                en: 'Compliance & Localization Expertise',
+                ar: 'الامتثال والخبرة المحلية',
+              },
+              value: {
+                en: 'We ensure your team is hired and managed in full alignment with Saudi labor laws and market best practices.',
+                ar: 'نضمن أن يتم توظيف وإدارة فريقك بما يتماشى تمامًا مع قوانين العمل السعودية وأفضل ممارسات السوق.',
+              },
+            },
+          ],
+        },
+        partners: [
+          { url: '/uploads/joe-13/brands/1.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/2.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/3.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/4.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/5.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/6.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/7.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/8.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/9.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/10.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/11.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/12.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/13.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/14.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/15.png', alt: 'Partner One' },
+          { url: '/uploads/joe-13/brands/16.png', alt: 'Partner One' },
+        ],
+        benefits: {
+          title: {
+            en: 'The Benefits of Manpower & HR Solutions',
+            ar: 'فوائد حلول الموارد البشرية والتوظيف',
+          },
+          subTitle: {
+            en: 'Get instant check-ins and updates from your workforce, helping HR and operations teams track attendance, activity, and performance in real-time.',
+            ar: 'احصل على تحديثات فورية من موظفيك لمساعدة فرق الموارد البشرية والعمليات على تتبع الحضور والنشاط والأداء في الوقت الحقيقي.',
+          },
+          feature: [
+            {
+              en: 'Performance & Compliance Tracking',
+              ar: 'تتبع الأداء والامتثال',
+            },
+            {
+              en: 'Real-Time Staff Monitoring',
+              ar: 'مراقبة الموظفين في الوقت الحقيقي',
+            },
+            {
+              en: 'Error-Free HR Workflows',
+              ar: 'سير عمل موارد بشرية خالٍ من الأخطاء',
+            },
+            { en: 'Faster Recruitment & Onboarding', ar: 'توظيف وانضمام أسرع' },
+            { en: 'Cost Optimization', ar: 'تحسين التكاليف' },
+            { en: 'Full Visibility & Control', ar: 'رؤية وتحكم كامل' },
+          ],
+          image: {
+            url: '/uploads/joe-13/services/4.png',
+            alt: '',
+          },
+        },
+        impact: {
+          title: {
+            en: 'Numbers Don’t Lie – Joe13 Impact in Action',
+            ar: 'الأرقام لا تكذب – تأثير جو 13 في الواقع',
+          },
+          subTitle: {
+            en: 'Our success isn’t just a claim—it’s backed by real numbers. From skyrocketing engagement rates to high-performing campaigns, our work speaks for itself.',
+            ar: 'نجاحنا ليس مجرد ادعاء – إنه مدعوم بأرقام حقيقية. من ارتفاع معدلات التفاعل إلى الحملات عالية الأداء، أعمالنا تتحدث عنا.',
+          },
+          statics: [
+            {
+              name: { en: 'Top Talent Hired', ar: 'توظيف أفضل المواهب' },
+              count: '+450',
+              desc: {
+                en: "We've helped companies across Saudi Arabia hire highly qualified tech and marketing specialists.",
+                ar: 'ساعدنا الشركات في جميع أنحاء السعودية على توظيف متخصصين مؤهلين في التقنية والتسويق.',
+              },
+            },
+            {
+              name: { en: 'Hiring Speed Increased', ar: 'زيادة سرعة التوظيف' },
+              count: '+45%',
+              desc: {
+                en: 'We streamline the recruitment process, reducing hiring time and securing the right talent faster.',
+                ar: 'نُبسط عملية التوظيف لتقليل الوقت وتأمين المواهب المناسبة بسرعة أكبر.',
+              },
+            },
+            {
+              name: {
+                en: 'Retention Rate Boosted',
+                ar: 'زيادة معدل الاحتفاظ بالموظفين',
+              },
+              count: '+92%',
+              desc: {
+                en: 'Our strategic HR planning has helped businesses retain top talent and reduce turnover',
+                ar: 'ساهم تخطيطنا الاستراتيجي للموارد البشرية في احتفاظ الشركات بالمواهب وتقليل معدل الدوران.',
+              },
+            },
+            {
+              name: {
+                en: 'HR Systems Implemented',
+                ar: 'تنفيذ أنظمة الموارد البشرية',
+              },
+              count: '+25',
+              desc: {
+                en: 'We’ve designed and implemented tailored HR systems for companies to scale efficiently.',
+                ar: 'قمنا بتصميم وتنفيذ أنظمة موارد بشرية مخصصة لمساعدة الشركات على التوسع بكفاءة.',
+              },
+            },
+          ],
+        },
+        faqs: {
+          title: {
+            en: "Got Questions ? We've got answers",
+            ar: 'هل لديك أسئلة؟ لدينا الإجابات',
+          },
+          subTitle: {
+            en: 'We’ve gathered the most frequently asked questions to help you understand our services better ',
+            ar: 'جمعنا الأسئلة الأكثر شيوعًا لمساعدتك على فهم خدماتنا بشكل أفضل',
+          },
+          list: [
+            {
+              question: {
+                en: '1- What is Joe X ?',
+                ar: '١- ما هو جو X؟',
+              },
+              answer: {
+                en: 'It is a comprehensive digital platform designed specifically for merchandisers, enabling them to efficiently manage their daily tasks, track product placements, report issues, and communicate seamlessly with supervisors — all from one place. The platform aims to simplify operations, boost productivity, and ensure that every merchandising activity is executed with precision and ease',
+                ar: 'هي منصة رقمية شاملة مصممة خصيصًا للمندوبين، تتيح لهم إدارة مهامهم اليومية بكفاءة، وتتبع أماكن المنتجات، والإبلاغ عن المشكلات، والتواصل بسلاسة مع المشرفين – كل ذلك من مكان واحد. تهدف المنصة إلى تبسيط العمليات، وزيادة الإنتاجية، وضمان تنفيذ كل نشاط تسويقي بدقة وسهولة.',
+              },
+            },
+            {
+              question: {
+                en: '1- What is Joe X ?',
+                ar: '١- ما هو جو X؟',
+              },
+              answer: {
+                en: 'It is a comprehensive digital platform designed specifically for merchandisers, enabling them to efficiently manage their daily tasks, track product placements, report issues, and communicate seamlessly with supervisors — all from one place. The platform aims to simplify operations, boost productivity, and ensure that every merchandising activity is executed with precision and ease',
+                ar: 'هي منصة رقمية شاملة مصممة خصيصًا للمندوبين، تتيح لهم إدارة مهامهم اليومية بكفاءة، وتتبع أماكن المنتجات، والإبلاغ عن المشكلات، والتواصل بسلاسة مع المشرفين – كل ذلك من مكان واحد. تهدف المنصة إلى تبسيط العمليات، وزيادة الإنتاجية، وضمان تنفيذ كل نشاط تسويقي بدقة وسهولة.',
+              },
+            },
+            {
+              question: {
+                en: '1- What is Joe X ?',
+                ar: '١- ما هو جو X؟',
+              },
+              answer: {
+                en: 'It is a comprehensive digital platform designed specifically for merchandisers, enabling them to efficiently manage their daily tasks, track product placements, report issues, and communicate seamlessly with supervisors — all from one place. The platform aims to simplify operations, boost productivity, and ensure that every merchandising activity is executed with precision and ease',
+                ar: 'هي منصة رقمية شاملة مصممة خصيصًا للمندوبين، تتيح لهم إدارة مهامهم اليومية بكفاءة، وتتبع أماكن المنتجات، والإبلاغ عن المشكلات، والتواصل بسلاسة مع المشرفين – كل ذلك من مكان واحد. تهدف المنصة إلى تبسيط العمليات، وزيادة الإنتاجية، وضمان تنفيذ كل نشاط تسويقي بدقة وسهولة.',
+              },
+            },
+            {
+              question: {
+                en: '1- What is Joe X ?',
+                ar: '١- ما هو جو X؟',
+              },
+              answer: {
+                en: 'It is a comprehensive digital platform designed specifically for merchandisers, enabling them to efficiently manage their daily tasks, track product placements, report issues, and communicate seamlessly with supervisors — all from one place. The platform aims to simplify operations, boost productivity, and ensure that every merchandising activity is executed with precision and ease',
+                ar: 'هي منصة رقمية شاملة مصممة خصيصًا للمندوبين، تتيح لهم إدارة مهامهم اليومية بكفاءة، وتتبع أماكن المنتجات، والإبلاغ عن المشكلات، والتواصل بسلاسة مع المشرفين – كل ذلك من مكان واحد. تهدف المنصة إلى تبسيط العمليات، وزيادة الإنتاجية، وضمان تنفيذ كل نشاط تسويقي بدقة وسهولة.',
+              },
+            },
+          ],
+        },
+        call: {
+          title: {
+            en: 'Ready to Transform Your Workforce?',
+            ar: 'هل أنت مستعد لتحويل قوة عملك؟',
+          },
+          subTitle: {
+            en: 'Let us handle the operations while you focus on growing your business , From smarter scheduling to seamless team tracking — our HR solutions are built to scale with your goals.',
+            ar: 'دعنا نتولى العمليات بينما تركز على تنمية عملك. من الجدولة الذكية إلى تتبع الفريق بسلاسة — تم تصميم حلول الموارد البشرية لدينا لتتماشى مع أهدافك.',
+          },
+          content: {
+            en: 'Let’s Talk – Get Your Custom HR Plan Today',
+            ar: 'دعنا نتحدث – احصل على خطة موارد بشرية مخصصة اليوم',
+          },
+          image: {
+            url: '/uploads/joe-13/services/map.png',
+            alt: '',
+          },
+        },
+      },
+    ];
+
+    await this.servRepository.clear();
+    const dataEntities = this.servRepository.create(data as any);
+    await this.servRepository.save(dataEntities);
   }
 
   private async seedSettings() {
@@ -85,21 +336,21 @@ export class Seeder {
         twitter: 'https://x.com/joe13ksa?t=DhxUu2XNItuJNGBAAAnLEA&s=09',
       },
       contact_us: {
-          address: {
-            en: 'Head Office Bawadi District, Madinah Road',
-            ar: 'المكتب الرئيسي، حي البوادي، طريق المدينة',
-          },
-          email: 'info@joe13.com',
-          main_branch: {
-            en: 'Jeddah Headquarters',
-            ar: 'المقر الرئيسي بجدة',
-          },
-          phone: '+966570002013',
+        address: {
+          en: 'Head Office Bawadi District, Madinah Road',
+          ar: 'المكتب الرئيسي، حي البوادي، طريق المدينة',
         },
-        branch: {
-          en: ['Jeddah', 'Egypt', 'Riyadh', 'Makkah', 'Dammam'],
-          ar: ['جدة', 'مصر', 'الرياض', 'مكة', 'الدمام'],
+        email: 'info@joe13.com',
+        main_branch: {
+          en: 'Jeddah Headquarters',
+          ar: 'المقر الرئيسي بجدة',
         },
+        phone: '+966570002013',
+      },
+      branch: {
+        en: ['Jeddah', 'Egypt', 'Riyadh', 'Makkah', 'Dammam'],
+        ar: ['جدة', 'مصر', 'الرياض', 'مكة', 'الدمام'],
+      },
       meta: {
         title: {
           en: 'Joe13 - 360° Business Solutions with 11+ Years of Impact',
@@ -129,9 +380,9 @@ export class Seeder {
         },
       },
       about_us_footer: {
-  en: 'Joe13 delivers smart solutions with 11+ years of experience, 180+ projects, and 100+ clients across 47 cities.',
-  ar: 'جو 13 تقدم حلولًا ذكية بخبرة 11+ عامًا، و180+ مشروعًا، و100+ عميل في 47 مدينة.',
-},
+        en: 'Joe13 delivers smart solutions with 11+ years of experience, 180+ projects, and 100+ clients across 47 cities.',
+        ar: 'جو 13 تقدم حلولًا ذكية بخبرة 11+ عامًا، و180+ مشروعًا، و100+ عميل في 47 مدينة.',
+      },
 
       copyright: {
         en: '© 2024 Joe13. All Rights Reserved.',
@@ -144,8 +395,6 @@ export class Seeder {
     await this.SettingRepo.save(dataEntities);
   }
 
-
-  
   private async seedPages() {
     const data = [
       {
@@ -974,6 +1223,66 @@ export class Seeder {
           },
         ],
       },
+      {
+        slug: 'contact-us',
+        title: 'contact-us',
+        meta: {
+          title: 'Contact Us | Joe13',
+          description:
+            'Get in touch with Joe13. Our team is here to support you with any questions or inquiries you may have.',
+          keywords: [
+            'Join Joe13',
+            'Careers',
+            'Jobs at Joe13',
+            'Work Culture',
+            'HR',
+            'Innovation',
+            'Teamwork',
+            'Flexible Work',
+          ],
+          canonicalUrl: 'https://yourdomain.com/contact-us',
+          ogTitle: "Contact Joe13 – We're Here to Help",
+          ogDescription:
+            "Reach out to Joe13 with any inquiries, feedback, or support needs. We're ready to assist you.",
+          ogImage: {
+            url: '/uploads/joe-13/logo.png',
+            alt: 'Joe13 Logo',
+          },
+          ogUrl: 'https://yourdomain.com/contact-us',
+          ogType: 'website',
+          structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Joe13',
+            url: 'https://yourdomain.com/contact-us',
+          },
+          headScript: "<script>console.log('Head script loaded');</script>",
+          bodyScript: "<script>console.log('Body script loaded');</script>",
+        },
+
+        sections: [
+          {
+            id: 'sec1',
+            image: {
+              url: '/uploads/joe-13/contactus.png',
+              alt: 'Contact Us Image',
+            },
+            title: {
+              en: 'Contact Us',
+              ar: 'تواصل معنا',
+            },
+            content: {
+              en: 'Stay Connected – We’re Here to Help!',
+              ar: 'ابقَ على تواصل – نحن هنا لمساعدتك!',
+            },
+            list: [],
+            objectData: {},
+            list_Object: {},
+            position: 1,
+            visible: true,
+          },
+        ],
+      },
     ];
 
     await this.pageRepository.clear();
@@ -1229,7 +1538,6 @@ export class Seeder {
       ...project,
       department: departments?.find((e) => e.id == project.department_id),
     }));
-
 
     await this.blogRepository.clear(); // Clears the table
     const dataEntities = this.blogRepository.create(fullData as any);

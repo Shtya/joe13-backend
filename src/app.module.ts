@@ -30,6 +30,7 @@ import { PartnersModule } from './partners/partners.module';
 import { SettingsModule } from './settings/settings.module';
 import { PageMetaModule } from './page-meta/page-meta.module';
 import { PagesModule } from './pages/pages.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
   imports: [
@@ -73,6 +74,7 @@ import { PagesModule } from './pages/pages.module';
     SettingsModule,
     PageMetaModule,
     PagesModule,
+    ServicesModule,
   ],
   controllers: [AppController],
   providers: [AppService, LoggingValidationPipe , QueryFailedErrorFilter ],

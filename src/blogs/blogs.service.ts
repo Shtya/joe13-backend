@@ -31,7 +31,7 @@ export class BlogsService extends BaseService<Blog> {
       blog.department = department;
     }
 
-    console.log(blog)
+    console.log(blog);
 
     return this.blogRepository.save(blog);
   }
@@ -44,7 +44,7 @@ export class BlogsService extends BaseService<Blog> {
     });
 
     if (!blog) {
-      return null; // or throw an error if preferred
+      throw new NotFoundException(`Blogs with slug '${slug}' not found`);
     }
 
     blog.views_count += 1;
