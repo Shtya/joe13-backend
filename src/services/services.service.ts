@@ -8,8 +8,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class ServicesService extends BaseService<Service> {
   constructor(
-    @InjectRepository(Service)
-    private readonly serviceRepository: Repository<Service>,
+    @InjectRepository(Service) private readonly serviceRepository: Repository<Service>,
   ) {
     super(serviceRepository)
   }

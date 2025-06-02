@@ -6,37 +6,16 @@ import {
   IsUrl,
   ArrayMinSize,
   ArrayMaxSize,
+  IsObject,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
-// === Reusable types ===
-class LocalizedDto {
-  @IsString()
-  @IsNotEmpty()
-  en: string;
 
-  @IsString()
-  @IsNotEmpty()
-  ar: string;
-}
-
-class ImageDto {
-  @IsUrl()
-  url: string;
-
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  alt: LocalizedDto;
-}
 
 class HeroAttrDto {
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  key: LocalizedDto;
+  key: {en:string , ar:string} ;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  value: LocalizedDto;
+  value: {en:string , ar:string} ;
 }
 
 class PartnerDto {
@@ -47,37 +26,22 @@ class PartnerDto {
   alt: string;
 }
 
-class BenefitImageDto {
-  @IsUrl()
-  url: string;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  alt: LocalizedDto;
-}
 
 class ImpactStatDto {
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  name: LocalizedDto;
+  name: {en:string , ar:string} ;
 
   @IsString()
   @IsNotEmpty()
   count: string;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  desc: LocalizedDto;
+  desc: {en:string , ar:string} ;
 }
 
 class FaqItemDto {
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  question: LocalizedDto;
+  question: {en:string , ar:string} ;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  answer: LocalizedDto;
+  answer: {en:string , ar:string} ;
 }
 
 class CallImageDto {
@@ -91,13 +55,10 @@ class CallImageDto {
 // === Nested Sections ===
 
 class HeroDto {
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  serviceName: LocalizedDto;
+  serviceName: {en:string , ar:string};
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  title: LocalizedDto;
+  @IsNotEmpty() @IsObject()
+  title: {en:string , ar:string} ;
 
   @IsArray()
   @ArrayMinSize(3)
@@ -112,28 +73,26 @@ class HeroDto {
 }
 
 class BenefitsDto {
-  @ValidateNested()
-  title: any;
+  @IsNotEmpty() @IsObject()
+  title: {ar:string , en:string};
 
-  @ValidateNested()
-  subTitle: any;
+  @IsNotEmpty() @IsObject()
+  subTitle: {ar:string , en:string};
 
   @IsArray()
   @ValidateNested({ each: true })
   feature: any[];
 
-  @ValidateNested()
   image: any;
 }
 
 class ImpactDto {
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  title: LocalizedDto;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  subTitle: LocalizedDto;
+  @IsNotEmpty() @IsObject()
+  title: {en:string , ar:string} ;
+
+  @IsNotEmpty() @IsObject()
+  subTitle: {en:string , ar:string} ;
 
   @IsArray()
   @ValidateNested({ each: true })
@@ -142,13 +101,12 @@ class ImpactDto {
 }
 
 class FaqsDto {
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  title: LocalizedDto;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  subTitle: LocalizedDto;
+  @IsNotEmpty() @IsObject()
+  title: {en:string , ar:string} ;
+
+  @IsNotEmpty() @IsObject()
+  subTitle: {en:string , ar:string} ;
 
   @IsArray()
   @ValidateNested({ each: true })
@@ -157,24 +115,21 @@ class FaqsDto {
 }
 
 class CallDto {
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  title: LocalizedDto;
+  @IsNotEmpty() @IsObject()
+  title: {en:string , ar:string} ;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  subTitle: LocalizedDto;
+  @IsNotEmpty() @IsObject()
+  subTitle: {en:string , ar:string} ;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  content: LocalizedDto;
+  @IsNotEmpty() @IsObject()
+  content: {en:string , ar:string} ;
 
-  @ValidateNested()
   @Type(() => CallImageDto)
   image: CallImageDto;
 }
 
 class MetaDto {
+  
   @IsString() title: string;
   @IsString() description: string;
   @IsArray() @IsString({ each: true }) keywords: string[];
@@ -195,21 +150,18 @@ export class CreateServicesDto {
   @IsNotEmpty()
   slug: string;
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  title: LocalizedDto;
+
+  @IsNotEmpty() @IsObject()
+  title: {en:string , ar:string} ;
 
   image: any
 
-  @ValidateNested()
-  @Type(() => LocalizedDto)
-  subTitle: LocalizedDto;
+  @IsNotEmpty() @IsObject()
+  subTitle: {en:string , ar:string} ;
 
-  @ValidateNested()
   @Type(() => MetaDto)
   meta: MetaDto;
 
-  @ValidateNested()
   @Type(() => HeroDto)
   hero: HeroDto;
 
@@ -223,15 +175,12 @@ export class CreateServicesDto {
   @Type(() => BenefitsDto)
   benefits: any;
 
-  @ValidateNested()
   @Type(() => ImpactDto)
   impact: ImpactDto;
 
-  @ValidateNested()
   @Type(() => FaqsDto)
   faqs: FaqsDto;
 
-  @ValidateNested()
   @Type(() => CallDto)
   call: CallDto;
 }

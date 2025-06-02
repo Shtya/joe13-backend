@@ -54,14 +54,14 @@ export class Seeder {
   async run() {
     // await this.seedCareers();
     // await this.seedContacts();
-    await this.seedPages();
+    // await this.seedPages();
     // await this.seedteamMembers();
     // await this.seedDepartments();
     // await this.seedBlogs();
     // await this.seedOffers();
     // await this.seedProjects();
     // await this.seedSettings();
-    // await this.seedServics();
+    await this.seedServics();
   }
 
   private async seedServics() {
