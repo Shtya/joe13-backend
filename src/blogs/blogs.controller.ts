@@ -47,7 +47,7 @@ export class BlogsController {
       sortOrder,
       [], // exclude some fields
       ['department'], // Relations
-      ['name'], // search parameters
+      ['title' , 'content'], // search parameters
       restQueryParams, // search with fields
     );
   }

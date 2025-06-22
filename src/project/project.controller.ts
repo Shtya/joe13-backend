@@ -28,16 +28,18 @@ import { Department } from 'entities/departments.entity';
 export class ProjectsController {
   constructor(
     private readonly projectsService: ProjectService,
-    @InjectRepository(Department) private departmentRepository: Repository<Department>,
+    @InjectRepository(Department)
+    private departmentRepository: Repository<Department>,
     @InjectRepository(Project) private projctRepository: Repository<Project>,
   ) {}
 
-
-
   @Post(':id/images')
   @UseInterceptors(FilesInterceptor('files', 10, multerOptions))
-  async uploadImages( @Param('id') id: number, @UploadedFiles() files: any[], @Body() body: any, ) {
-
+  async uploadImages(
+    @Param('id') id: number,
+    @UploadedFiles() files: any[],
+    @Body() body: any,
+  ) {
     const images = (files || []).map((file, i) => ({
       url: `/uploads/${file.filename}`,
       alt: body[`alt${i}`] || `Image ${i + 1}`,
@@ -46,22 +48,24 @@ export class ProjectsController {
     return this.projectsService.addImages(+id, images);
   }
 
-
   @Delete(':id/images')
-async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number) {
-  return this.projectsService.removeImageById(+id, +imageId);
-}
-
-
-
-
+  async deleteImageById(
+    @Param('id') id: number,
+    @Body('imageId') imageId: number,
+  ) {
+    return this.projectsService.removeImageById(+id, +imageId);
+  }
 
   @Post()
   @UseInterceptors(FilesInterceptor('files', 10, multerOptions)) // 'files' matches the form-data field name
   async create(@Body() dto: any, @UploadedFiles() files: any[]) {
-    const department = await this.departmentRepository.findOne({ where: { id: dto.department_id }, });
-    if (!department) throw new BadRequestException( `Department with id ${dto.department_id} does not exist`, );
-    
+    const department = await this.departmentRepository.findOne({
+      where: { id: dto.department_id },
+    });
+    if (!department)
+      throw new BadRequestException(
+        `Department with id ${dto.department_id} does not exist`,
+      );
 
     // Process uploaded files and map them to the correct image format
     dto.images = await (files || []).map((file, i) => ({
@@ -81,13 +85,15 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
       images: dto.images,
     };
 
-
-    const data = await this.projctRepository.create({...currentDto , department});
+    const data = await this.projctRepository.create({
+      ...currentDto,
+      department,
+    });
     const savedProject = await this.projctRepository.save(data);
 
     savedProject.images = savedProject.images.map((image, i) => ({
       ...image,
-      id: image.id || i + 1, 
+      id: image.id || i + 1,
     }));
 
     return savedProject;
@@ -95,7 +101,8 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
 
   @Get()
   async findAll(@Query() query) {
-    const { page, limit, search, sortBy, sortOrder, ...restQueryParams } = query;
+    const { page, limit, search, sortBy, sortOrder, ...restQueryParams } =
+      query;
 
     return this.projectsService.findAll(
       'projects',
@@ -105,7 +112,7 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
       sortBy,
       sortOrder,
       [], // exclude some fields
-      ["department"], // Relations
+      ['department'], // Relations
       ['name'], // search parameters
       restQueryParams, // search with fields
     );
@@ -122,17 +129,24 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
     return this.projectsService.findOneBySlug(slug);
   }
 
-
   @Patch(':id')
   @UseInterceptors(FilesInterceptor('files', 10, multerOptions))
-  async update( @Param('id') id: number, @Body() dto: any, @UploadedFiles() files: any[], ) {
+  async update(
+    @Param('id') id: number,
+    @Body() dto: any,
+    @UploadedFiles() files: any[],
+  ) {
     const project = await this.projctRepository.findOne({ where: { id } });
-    if (!project) throw new NotFoundException(`Project with id ${id} not found`);
+    if (!project)
+      throw new NotFoundException(`Project with id ${id} not found`);
 
-    const department = await this.departmentRepository.findOne({ where: { id: dto.department_id }, });
-    if (!department) throw new BadRequestException( `Department with id ${dto.department_id} does not exist`, );
-    
-    
+    const department = await this.departmentRepository.findOne({
+      where: { id: dto.department_id },
+    });
+    if (!department)
+      throw new BadRequestException(
+        `Department with id ${dto.department_id} does not exist`,
+      );
 
     // Parse existing images if sent as JSON string (optional if using Postman/form-data)
     let existingImages = [];
@@ -148,13 +162,25 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
 
     // Add newly uploaded images
     const newImages = (files || []).map((file, i) => ({
-      id: i+1, 
+      id: i + 1,
       url: `/uploads/${file.filename}`,
       alt: dto?.alt[`${i}`],
     }));
 
     const updatedImages = [...existingImages, ...newImages];
 
+    function normalizeKeywords(input: any): string[] {
+      if (Array.isArray(input)) return input;
+      if (typeof input === 'string')
+        return input.split(',').map((str) => str.trim());
+      if (typeof input === 'object' && input !== null) {
+        // Handle multilingual keywords object
+        return Object.values(input).flatMap((val: any) =>
+          val.split(',').map((v) => v.trim()),
+        );
+      }
+      return [];
+    }
 
     const DTO = {
       name: dto.name,
@@ -162,16 +188,17 @@ async deleteImageById(@Param('id') id: number, @Body('imageId') imageId: number)
       description: dto.description,
       meta_title: dto.meta_title,
       meta_description: dto.meta_description,
-      meta_keywords: dto.meta_keywords,
+      meta_keywords: normalizeKeywords(dto.meta_keywords),
       department: department,
     };
 
-    if(updatedImages?.length > 1) DTO['images'] = updatedImages
-
+    if (updatedImages?.length > 1) DTO['images'] = updatedImages;
 
     // Save updates
     await this.projctRepository.update(id, DTO);
-    const updatedProject = await this.projctRepository.findOne({ where: { id }, });
+    const updatedProject = await this.projctRepository.findOne({
+      where: { id },
+    });
     // updatedProject.images = (updatedProject.images || []).map((img, i) => ({ id: img.id || i + 1, alt: img.alt, url: img.url }));
 
     return updatedProject;
