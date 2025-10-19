@@ -6,11 +6,17 @@ import { Contact } from 'entities/contact-us.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class ContactsService extends BaseService<Contact>  {
-  constructor(@InjectRepository(Contact) private contactsRepo: Repository<Contact>) {
-    super(contactsRepo)
+export class ContactsService extends BaseService<Contact> {
+  constructor(
+    @InjectRepository(Contact)
+    private contactsRepo: Repository<Contact>,
+  ) {
+    super(contactsRepo);
   }
 
-  
+  async getAllContacts(): Promise<Contact[]> {
+    return this.contactsRepo.find({
+      order: { created_at: 'DESC' },
+    });
+  }
 }
-

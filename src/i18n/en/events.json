@@ -1,30 +1,28 @@
 {
-  "equipment" : {
-    "not_found_for_venue" :"equipment with ID {serviceId} not found for venue with ID {venueId}",
-    "updated" : "updated successfully"
+  "equipment": {
+    "not_found_for_venue": "equipment with ID {serviceId} not found for venue with ID {venueId}",
+    "updated": "updated successfully"
   },
   "period_already_reserved": "The selected period on {date} is already reserved.",
-  "updated" : "updated successfully",
+  "updated": "updated successfully",
   "otp_valid": "OTP is valid.",
   "price_must_be_Number": "The price must be a valid number.",
   "refresh_token_required": "Refresh token is required.",
   "code_must_be_unique": "The code must be unique.",
   "website_settings_not_found": "Website settings with ID {id} not found.",
   "service_not_exist": "The service does not exist.",
-  "check_your_email_for_verification" : "Please check your email to verify your account.",
+  "check_your_email_for_verification": "Please check your email to verify your account.",
   "success": "Registration successful!",
-  "some_policies_not_found" : "Some policies not found in the list of policies",
+  "some_policies_not_found": "Some policies not found in the list of policies",
 
-
-    "otp_sent2": "OTP sent to email, please verify your account",
-    "user_not_found": "User not found!",
-    "user_already_verified": "User already verified!",
-    "invalid_or_expired_otp": "Invalid or expired OTP!",
-    "account_verified_successfully": "Account verified successfully. You can now sign in.",
-    "user_not_found_repeat": "User not found!",
-    "user_already_verified_or_invalid_request": "User already verified or the request is invalid!",
-    "new_otp_sent": "New OTP sent to your email. Please verify your account.",  
-
+  "otp_sent2": "OTP sent to email, please verify your account",
+  "user_not_found": "User not found!",
+  "user_already_verified": "User already verified!",
+  "invalid_or_expired_otp": "Invalid or expired OTP!",
+  "account_verified_successfully": "Account verified successfully. You can now sign in.",
+  "user_not_found_repeat": "User not found!",
+  "user_already_verified_or_invalid_request": "User already verified or the request is invalid!",
+  "new_otp_sent": "New OTP sent to your email. Please verify your account.",
 
   "startDateRequired": "Start date is required.",
   "startDateMustBeDate": "Start date must be a valid date.",
@@ -106,7 +104,10 @@
   "events.icon_media_id_invalid": "Icon media ID must be an integer.",
   "events.feature_id_required": "Feature ID is required.",
   "events.feature_id_invalid": "Feature ID must be an integer.",
-
+  "events": {
+    "invalid_city_value": "Invalid city value provided",
+    "invalid_position_value": "Invalid position value provided"
+  },
   "policy_not_found": "Policy with ID {policy_id} not found.",
   "policy_not_found_for_venue": "Policy with ID {policyId} not found for venue with ID {venueId}.",
   "policy_removed_from_venue": "Policy with ID {policyId} has been removed from venue with ID {venueId}.",
