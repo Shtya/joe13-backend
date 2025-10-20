@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('contacts')
 export class Contact {
@@ -28,6 +34,9 @@ export class Contact {
 
   @Column({ nullable: true })
   career_file?: string;
+
+  @Column({ nullable: true })
+  personal_photo?: string;
 
   @Column()
   type: 'general' | 'career' | 'offers';

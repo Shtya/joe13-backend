@@ -12,30 +12,59 @@ import {
   BadRequestException,
   Query,
   Res,
+  UploadedFiles,
 } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from 'dto/contacts.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express';
 import { multerOptionsPdf } from 'common/multer.config';
 import { Response } from 'express';
 import * as ExcelJS from 'exceljs';
 import * as fs from 'fs';
 import * as path from 'path';
+import { careerMixedUploadOptions } from './career-mixed-upload.config';
 @Controller('contacts')
 export class ContactsController {
   constructor(private readonly service: ContactsService) {}
 
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'file', maxCount: 1 }, // CV (PDF)
+        { name: 'personal_photo', maxCount: 1 }, // صورة
+      ],
+      careerMixedUploadOptions,
+    ),
+  )
   @Post()
-  @UseInterceptors(FileInterceptor('file', multerOptionsPdf))
-  async create(@Body() dto: CreateContactDto, @UploadedFile() file: any) {
+  async create(
+    @Body() dto: CreateContactDto,
+    @UploadedFiles()
+    files: {
+      file?: any[];
+      personal_photo?: any[];
+    },
+  ) {
     if (dto.type === 'career') {
-      if (!file)
-        throw new BadRequestException(
-          'Career file is required for contact type "career".',
-        );
-      dto.career_file = `/uploads/careers/${file.filename}`;
-    }
+      const cv = files?.file?.[0];
+      const photo = files?.personal_photo?.[0];
 
+      if (!cv)
+        throw new BadRequestException(
+          'Career file (PDF) is required for contact type "career".',
+        );
+      dto.career_file = `/uploads/careers/${cv.filename}`;
+
+      // ✅ Make personal photo optional
+      if (photo) {
+        dto.personal_photo = `/uploads/photos/${photo.filename}`;
+      } else {
+        dto.personal_photo = null; // or just omit this line
+      }
+    }
     return this.service.create(dto);
   }
 
@@ -61,7 +90,7 @@ export class ContactsController {
       sortOrder,
       [],
       [],
-      ['name', 'email', 'phone'], // search fields
+      ['name'], // search fields
       { address, offers_name, ...restQueryParams }, // Pass address and offers_name as specificSearchFields
     );
   }

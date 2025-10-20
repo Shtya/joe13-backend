@@ -1,4 +1,10 @@
-import { IsEmail, IsIn, IsNotEmpty, IsOptional, IsNumber, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsIn,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateContactDto {
   @IsNotEmpty({ message: 'Name is required' })
@@ -13,22 +19,27 @@ export class CreateContactDto {
   @IsNotEmpty({ message: 'Phone is required' })
   phone: string;
 
-  @IsIn(['general', 'career', 'offers'], { message: 'Type must be one of: general, career, offers' })
+  @IsIn(['general', 'career', 'offers'], {
+    message: 'Type must be one of: general, career, offers',
+  })
   type: 'general' | 'career' | 'offers';
 
   // General
   @IsOptional()
   message?: string;
 
-  // Career
+  // Offers
   @IsOptional()
   offers_name?: string;
 
   @IsOptional()
-  @IsString({ message: 'Offer price must be a string' })
   offers_price?: string;
 
-  // Offers
+  // Career
   @IsOptional()
   career_file?: string;
+
+  // ✅ new field for photo upload
+  @IsOptional()
+  personal_photo?: string;
 }

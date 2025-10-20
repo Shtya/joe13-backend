@@ -140,48 +140,45 @@ export class BaseService<T> {
     if (search && searchFields?.length >= 1) {
       query.andWhere(
         new Brackets((qb) => {
-          searchFields.forEach((field) => {
+          for (const field of searchFields) {
             const columnMetadata = this.repository.metadata.columns.find(
               (col) => col.propertyName === field,
             );
 
-            if (columnMetadata?.type === 'jsonb') {
-              qb.orWhere(
-                `LOWER(${entityName}.${field}::text) LIKE LOWER(:search)`,
-                { search: `%${search}%` },
-              );
-            } else if (
-              columnMetadata?.type === String ||
-              columnMetadata?.type == 'text'
-            ) {
-              qb.orWhere(`LOWER(${entityName}.${field}) LIKE LOWER(:search)`, {
+            if (!columnMetadata) continue;
+
+            const fieldPath = `${entityName}.${field}`;
+
+            // ✅ Handle JSONB column (stringify + LIKE)
+            if (columnMetadata.type === 'jsonb') {
+              qb.orWhere(`LOWER(${fieldPath}::text) LIKE LOWER(:search)`, {
                 search: `%${search}%`,
               });
-            } else if (
-              ['decimal', 'float'].includes(columnMetadata?.type as any)
+            }
+            // ✅ Handle string-based columns (varchar, text, String)
+            else if (
+              columnMetadata.type === String ||
+              typeof columnMetadata.type === 'function' ||
+              ['varchar', 'character varying', 'text', 'citext'].includes(
+                String(columnMetadata.type).toLowerCase(),
+              )
+            ) {
+              qb.orWhere(`LOWER(${fieldPath}) LIKE LOWER(:search)`, {
+                search: `%${search}%`,
+              });
+            }
+            // ✅ Handle numeric
+            else if (
+              ['decimal', 'float', 'int', 'integer', 'numeric'].includes(
+                String(columnMetadata.type),
+              )
             ) {
               const numericSearch = parseFloat(search);
-              if (!isNaN(numericSearch))
-                qb.orWhere(`${entityName}.${field} = :numericSearch`, {
-                  numericSearch,
-                });
-            } else if (columnMetadata?.type === 'enum') {
-              const enumValues = columnMetadata.enum;
-              if (enumValues.includes(search)) {
-                qb.orWhere(`${entityName}.${field} = :value`, {
-                  value: search,
-                });
-              } else {
-                throw new BadRequestException(
-                  this.i18n.t('events.invalid_enum_value', {
-                    args: { field, values: enumValues.join(', ') },
-                  }),
-                );
+              if (!isNaN(numericSearch)) {
+                qb.orWhere(`${fieldPath} = :numericSearch`, { numericSearch });
               }
-            } else {
-              qb.orWhere(`${entityName}.${field} = :search`, { search });
             }
-          });
+          }
         }),
       );
     }
