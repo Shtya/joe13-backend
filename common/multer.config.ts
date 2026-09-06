@@ -25,8 +25,8 @@ export const multerOptions = {
   }),
 
   fileFilter: (req, file, cb) => {
-    if (file.mimetype.match(/\/(jpg|jpeg|png|svg\+xml)$/)) {
-      cb(null, true); // Allow only specific file types
+    if (file.mimetype.match(/\/(jpg|jpeg|png|gif|webp|svg\+xml|avif)$/)) {
+      cb(null, true);
     } else {
       cb(new Error('Unsupported file type'), false);
     }

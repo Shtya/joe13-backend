@@ -19,28 +19,23 @@ export class Page {
   @Column()
   title: string;
 
-  // SEO meta data
+  // SEO meta data (legacy flat fields + bilingual en/ar)
   @Column({ type: 'jsonb', nullable: true })
   meta: {
-    // SEO Basics
     title?: string;
     description?: string;
     keywords?: string[];
     canonicalUrl?: string;
-
-    // Open Graph
     ogTitle?: string;
     ogDescription?: string;
-    ogImage?: string;
+    ogImage?: any;
     ogUrl?: string;
     ogType?: string;
-
-    // Structured Data / Schema.org
     structuredData?: any;
-
-    // Custom Scripts
     headScript?: string;
     bodyScript?: string;
+    en?: Record<string, any>;
+    ar?: Record<string, any>;
   };
 
   // Sections of the page
@@ -63,6 +58,10 @@ export class Page {
       en?: any[];
     };
     objectData?: {
+      ar?: Record<string, any>;
+      en?: Record<string, any>;
+    };
+    ui?: {
       ar?: Record<string, any>;
       en?: Record<string, any>;
     };

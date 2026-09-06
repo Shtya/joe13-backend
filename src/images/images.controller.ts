@@ -2,20 +2,18 @@ import {
   Controller,
   Get,
   Post,
-  Put,
   Delete,
   Param,
   Body,
   ParseIntPipe,
   UseInterceptors,
-  UploadedFile,
   UploadedFiles,
   Query,
+  BadRequestException,
 } from '@nestjs/common';
-import { CreateImageDto, UpdateImageDto } from 'dto/images.dto';
-import { Image } from 'entities/images.entity';
+import { CreateImageDto } from 'dto/images.dto';
 import ImageService from './images.service';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'common/multer.config';
 
 @Controller('images')
@@ -47,12 +45,23 @@ export class ImageController {
 
   @Post('')
   @UseInterceptors(FilesInterceptor('files', 10, multerOptions))
-  async uploadImages( @UploadedFiles() files: any[], @Body() dto: any, ) {
+  async uploadImages(@UploadedFiles() files: any[], @Body() dto: any) {
+    if (!files?.length) {
+      throw new BadRequestException('At least one image file is required');
+    }
 
-    const images: CreateImageDto[] = (files || []).map((file, i) => ({
+    const altList = Array.isArray(dto?.alt)
+      ? dto.alt
+      : dto?.alt && typeof dto.alt === 'object'
+        ? Object.values(dto.alt)
+        : dto?.alt
+          ? [dto.alt]
+          : [];
+
+    const images: CreateImageDto[] = files.map((file, i) => ({
       url: `/uploads/${file.filename}`,
-      name: file.originalname,
-      alt: dto?.alt?.[i] || `Image ${i + 1}`,
+      name: dto?.name || file.originalname,
+      alt: String(altList[i] || dto?.name || `Image ${i + 1}`),
     }));
 
     return this.imageService.createMany(images);
