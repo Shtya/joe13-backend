@@ -55,14 +55,15 @@ export class ServicesController {
     );
   }
 
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<Service> {
-    return this.servicesService.findOne(id);
-  }
-
+  // Declare slug route before :id so `/services/slug/:slug` is not eaten by ParseIntPipe
   @Get('slug/:slug')
   findOneBySlug(@Param('slug') slug: string): Promise<Service> {
     return this.servicesService.findOneBySlug(slug);
+  }
+
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Service> {
+    return this.servicesService.findOne(id);
   }
 
   @Patch(':id')

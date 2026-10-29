@@ -20,11 +20,16 @@ class MetaDto {
   @IsOptional() @IsNumber() ogImage?: number | any;
   @IsOptional() @IsString() ogUrl?: string;
   @IsOptional() @IsString() ogType?: string;
+  @IsOptional() @IsString() robots?: string;
+  @IsOptional() noIndex?: boolean;
 
   @IsOptional() @IsObject() structuredData?: any;
 
   @IsOptional() @IsString() headScript?: string;
   @IsOptional() @IsString() bodyScript?: string;
+
+  @IsOptional() @IsObject() en?: Record<string, any>;
+  @IsOptional() @IsObject() ar?: Record<string, any>;
 }
 
 

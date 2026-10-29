@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'common/base/base.service';
+import { mergeSeoMeta } from 'common/merge-seo-meta';
 import { CreatePageDto } from 'dto/pages.dto';
 import { Image } from 'entities/images.entity';
 import { Page } from 'entities/pages.entity';
@@ -82,5 +83,28 @@ export class PageService extends BaseService<Page> {
     });
 
     return this.pageRepository.save(page);
+  }
+
+  async update(id: any, dto: any) {
+    const page = await this.pageRepository.findOne({ where: { id } });
+    if (!page) throw new NotFoundException(`Page ${id} not found`);
+
+    if (dto.meta) {
+      dto.meta = mergeSeoMeta(page.meta || {}, dto.meta);
+      dto.meta = await this.resolveOgImage(dto.meta);
+    }
+
+    return super.update(id, dto);
+  }
+
+  private async resolveOgImage(meta: any) {
+    if (!meta) return meta;
+    if (meta.ogImage && typeof meta.ogImage === 'number') {
+      const image = await this.imageRepository.findOneBy({ id: meta.ogImage });
+      if (image) {
+        meta.ogImage = { id: image.id, url: image.url, alt: image.alt, name: image.name };
+      }
+    }
+    return meta;
   }
 }
